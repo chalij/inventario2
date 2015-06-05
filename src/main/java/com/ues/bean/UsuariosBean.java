@@ -4,6 +4,7 @@ import com.ues.dao.UsuariosDao;
 import com.ues.exception.DAOException;
 import com.ues.model.TipoUsuario;
 import com.ues.model.Usuario;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -32,6 +33,7 @@ public class UsuariosBean {
             miLista = usuariosDao.listaUsuarios();
         } catch (Exception e) {
             e.printStackTrace();
+            miLista = new ArrayList();
         }
         return miLista;
     }
