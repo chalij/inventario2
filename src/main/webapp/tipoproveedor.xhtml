@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view>
+        <h:head>
+            <title>Ejemplo JSF 2.0, Spring 3, Hibernate 3</title>
+            <style type="text/css">
+                .celda {
+                    border: 1px;
+                    background-color: #eee;
+                }
+                .tabla {
+                    background-color: #ccc;
+                    width: 400px;
+                    font-family: "Arial";
+                }
+            </style>
+        </h:head>
+        <h:body>
+            <br/>
+            <h3>Ejemplo de JSF 2.0, Spring 3, Hibernate 3, MySQL</h3>
+            <h4>Lista de Tipos de Proveedores del sistema</h4>            
+        <h:form>
+            <p:dataTable id="tbl" var="tipoproveedor" value="#{tipoproveedorBean.miLista}"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
+                         paginator="true" rows="10" style="margin-bottom:20px">
+
+
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Id" />
+                    </f:facet>
+                    <h:outputText value="#{tipoproveedor.idTipoProveedor}" />
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Year"/>
+                    </f:facet>
+                    <h:outputText value="#{tipoproveedor.nombre}" />
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Brand" />
+                    </f:facet>
+                    <h:outputText value="#{tipoproveedor.descripcion}" />
+                </p:column>
+            </p:dataTable>
+
+
+        </h:form>
+        </h:body>
+    </f:view>
+</html>

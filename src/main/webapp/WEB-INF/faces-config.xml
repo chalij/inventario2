@@ -22,9 +22,19 @@
         </managed-property>
     </managed-bean>
     
+    <managed-bean>
+        <managed-bean-name>bodegaBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.BodegaBean</managed-bean-class>
     
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>bodegaDao</property-name>
+            <property-class>com.ues.dao.BodegaDao</property-class>
+            <value>#{bodegaDao}</value>
+        </managed-property>
+    </managed-bean>
     
-     <managed-bean>
+    <managed-bean>
         <managed-bean-name>personasBean</managed-bean-name>
         <managed-bean-class>com.ues.bean.PersonasBean</managed-bean-class>
     
@@ -36,4 +46,25 @@
         </managed-property>
     </managed-bean>
     
+    <managed-bean>
+        <managed-bean-name>tipoproveedorBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.TipoProveedorBean</managed-bean-class>    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>tipoproveedorDao</property-name>
+            <property-class>com.ues.dao.TipoProveedorDao</property-class>
+            <value>#{tipoproveedorDao}</value>
+        </managed-property>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>tipoproveedorBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.ProveedorBean</managed-bean-class>    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>proveedorDao</property-name>
+            <property-class>com.ues.dao.ProveedorDao</property-class>
+            <value>#{proveedorDao}</value>
+        </managed-property>
+    </managed-bean>    
 </faces-config>

@@ -7,7 +7,7 @@
 
     <bean id="dataSource" destroy-method="close" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
-        <property name="url" value="jdbc:oracle:thin:@localhost:1522:XE" /> 
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE" /> 
         <property name="username" value="inventario"/>
         <property name="password" value="inventario"/>
     </bean>
@@ -68,14 +68,25 @@ commit;
         
     </bean>
     
+    <bean id="bodegaDao" class="com.ues.dao.impl.BodegaDaoHibImpl">
+        <property name="sessionFactory" ref="mySessionFactory"/>
+    </bean>
+     
     <bean id="usuariosDao" class="com.ues.dao.impl.UsuariosDaoHibImpl">
         <property name="sessionFactory" ref="mySessionFactory"/>
     </bean>
-   
     
     
-     <bean id="personasDao" class="com.ues.dao.impl.PersonasDaoHibImpl">
+    <bean id="personasDao" class="com.ues.dao.impl.PersonasDaoHibImpl">
         <property name="sessionFactory" ref="mySessionFactory"/>
     </bean>
     
+    <bean id="tipoproveedorDao" class="com.ues.dao.impl.TipoProveedorDaoHibImpl">
+        <property name="sessionFactory" ref="mySessionFactory"/>
+    </bean>
+    
+    <bean id="proveedorDao" class="com.ues.dao.impl.ProveedorDaoHibImpl">
+        <property name="sessionFactory" ref="mySessionFactory"/>
+    </bean>
+       
 </beans>
