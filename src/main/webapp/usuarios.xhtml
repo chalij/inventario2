@@ -8,17 +8,7 @@
     <f:view>
         <h:head>
             <title>Ejemplo JSF 2.0, Spring 3, Hibernate 3</title>
-            <style type="text/css">
-                .celda {
-                    border: 1px;
-                    background-color: #eee;
-                }
-                .tabla {
-                    background-color: #ccc;
-                    width: 400px;
-                    font-family: "Arial";
-                }
-            </style>
+
         </h:head>
         <h:body>
             <br/>
@@ -26,36 +16,6 @@
             <h4>Lista de usuarios del sistema</h4>
 
 
-
-            <h:form id="formInsertar">
-                <p:panelGrid columns="2">
-                    <p:outputLabel for="console" value="Basic:" />
-                    <p:selectOneMenu id="console" value="sdfgds" style="width:125px">
-                        <f:selectItem itemLabel="Select One" itemValue="" />
-                        <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
-                        <f:selectItem itemLabel="PS4" itemValue="PS4" />
-                        <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
-                    </p:selectOneMenu>
-
-                    <p:outputLabel value="Id del usuario" />
-                    <p:inputText value="#{usuariosBean.usuario.idUsuario}"/>
-
-                    <p:outputLabel value="Nombre del usuario" />
-                    <p:inputText value="#{usuariosBean.usuario.nombreUsuario}"/>
-
-                    <p:outputLabel value="Contraseña" />
-                    <p:inputText value="#{usuariosBean.usuario.contrasena}"/>
-
-                    <p:outputLabel value="Tipo Usuario" />
-                    <p:inputText value="#{usuariosBean.tipoUsuarioT}"/>
-
-
-                </p:panelGrid>
-
-                <p:growl id="growl2" life="2000" />
-                <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{usuariosBean.addUsuario}" value="Ingresar Usuario" styleClass="ui-priority-primary" />
-
-            </h:form>
 
 
             <h:form id="formTable">
@@ -82,14 +42,14 @@
 
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="Year"/>
+                            <h:outputText value="Nombre"/>
                         </f:facet>
                         <h:outputText value="#{usuario.nombreUsuario}" />
                     </p:column>
 
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="Brand" />
+                            <h:outputText value="Contraseña" />
                         </f:facet>
                         <h:outputText value="#{usuario.contrasena}" />
                     </p:column>
@@ -109,9 +69,9 @@
                     <f:facet name="footer">
                         <div class="footer-section">
 
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="crear" />
+                            <p:commandButton update=":formTable" oncomplete="PF('dlg8').show()"   icon="ui-icon-plus"  style="width:40px;height:40px"   />
                             <p:commandButton update=":formTable" oncomplete="PF('dlg6').show()"   icon="ui-icon-pencil"  style="width:40px;height:40px"  />
-                            <p:commandButton  update=":formTable" oncomplete="PF('dlg6').show()"   icon="ui-icon-trash"  style="width:40px;height:40px" actionListener="#{usuariosBean.eliminarUSI}"  />
+                            <p:commandButton  update=":formTable" oncomplete="PF('dlg7').show()"   icon="ui-icon-trash"  style="width:40px;height:40px" actionListener="#{usuariosBean.eliminarUSI}"  />
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="ver"/>
 
                         </div>
@@ -123,8 +83,8 @@
             <h:form>
                 <p:dialog header="Modificar" widgetVar="dlg6" modal="true"
                           resizable="false">
-                    <h:panelGrid id="modificar" columns="1"
-                                 cellpadding="4">
+                    <h:panelGrid id="modificar" columns="2"
+                                 cellpadding="2">
 
                         <p:outputLabel value="Id del usuario" />
                         <p:inputText value="#{usuariosBean.usuario.idUsuario}"/>
@@ -140,14 +100,53 @@
 
 
 
-                        <p:growl id="growl3" life="2000" />
-                        <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{usuariosBean.addUsuario}" value="Ingresar Usuario" styleClass="ui-priority-primary" />
-
                     </h:panelGrid>
+                    <p:growl id="growl3" life="5000" />
+                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{usuariosBean.addUsuario}" value="Ingresar Usuario" styleClass="ui-priority-primary" />
+
                 </p:dialog>
 
             </h:form>
-            
+
+
+
+            <h:form id="formInsertar">
+                <p:dialog header="Insertar" widgetVar="dlg8" modal="true"
+                          resizable="false">
+                    <h:panelGrid  columns="2"
+                                 cellpadding="2">
+                        <p:outputLabel for="console" value="Basic:" />
+                        <p:selectOneMenu id="console" value="sdfgds" style="width:125px">
+                            <f:selectItem itemLabel="Select One" itemValue="" />
+                            <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+                            <f:selectItem itemLabel="PS4" itemValue="PS4" />
+                            <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Id del usuario" />
+                        <p:inputText value="#{usuariosBean.usuario.idUsuario}"/>
+                        <p:outputLabel value="Nombre del usuario" />
+                        <p:inputText value="#{usuariosBean.usuario.nombreUsuario}"/>
+                        <p:outputLabel value="Contraseña" />
+                        <p:inputText value="#{usuariosBean.usuario.contrasena}"/>
+                        <p:outputLabel value="Tipo Usuario" />
+                        <p:inputText value="#{usuariosBean.tipoUsuarioT}"/>
+                    </h:panelGrid>
+                    <p:growl id="growl2" life="5000" />
+                    <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{usuariosBean.addUsuario}" value="Ingresar Usuario" styleClass="ui-priority-primary" />
+                </p:dialog>
+            </h:form>
+
+
+            <h:form >
+                <p:dialog header="Eliminar" widgetVar="dlg7" modal="true"
+                          resizable="false">
+                    <h:panelGrid columns="2">
+                    </h:panelGrid>
+                    <p:growl id="growl2" life="5000" />
+                    <p:commandButton id="ajax" update="growl2,:formTable"  value="Eliminar Usuario" styleClass="ui-priority-primary" />
+                </p:dialog>
+            </h:form>
+
 
 
 
