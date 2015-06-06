@@ -1,6 +1,7 @@
 package com.ues.bean;
 
 import com.ues.dao.UsuariosDao;
+import com.ues.dao.impl.UsuariosDaoHibImpl;
 import com.ues.exception.DAOException;
 import com.ues.model.TipoUsuario;
 import com.ues.model.Usuario;
@@ -19,13 +20,14 @@ import javax.faces.event.ActionEvent;
  */
 public class UsuariosBean {
 
-    private Usuario usuario = new Usuario();
+    private Usuario usuario=new Usuario();
+    private int idUsuarioV;
     private int tipoUsuarioT;
     private List<Usuario> miLista;
     private UsuariosDao usuariosDao;
-    private int eliminarU;
 
     public UsuariosBean() {
+        usuario = new Usuario();
     }
 
     public List<Usuario> getMiLista() {
@@ -38,11 +40,7 @@ public class UsuariosBean {
         return miLista;
     }
 
-    public void destroyWorld(ActionEvent actionEvent){  
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "System Error",  "Please try again later.");  
-          
-        FacesContext.getCurrentInstance().addMessage(null, message);  
-    }  
+
     public void addUsuario(ActionEvent actionEvent) {
         try {
             Usuario us = new Usuario();
@@ -54,41 +52,36 @@ public class UsuariosBean {
             us.setFechaCreacion(new Date());
             us.setTipoUsuario(tus);
             usuariosDao.crearUsuario(us);
+            usuario = new Usuario();
             addMessage("Insertado Id:!!" + usuario.getIdUsuario());
         } catch (Exception e) {
-            addMessage("Error Id:!!" + usuario.getIdUsuario()+" "+ e.getMessage());
+            addMessage("Error Id:!!" + usuario.getIdUsuario() + " " + e.getMessage());
             e.printStackTrace();
         }
 
     }
-    public void eliminarUSI()
-    {
-        
+
+    
+
+    public void eliminar() {
+
         try {
-           /* Usuario us = new Usuario();
-            us.setIdUsuario(eliminarU);
-            TipoUsuario tp=new TipoUsuario();
-            us.setNombreUsuario("sdfs");
-            us.setFechaCreacion(new Date());
-            us.setContrasena("sdfsd");
-            tp.setIdTipoUsuario(1);
-            us.setTipoUsuario(tp);*/
             Usuario us = new Usuario();
-            TipoUsuario tus = new TipoUsuario();
-            tus.setIdTipoUsuario(usuario.getTipoUsuario().getIdTipoUsuario());
             us.setIdUsuario(usuario.getIdUsuario());
             us.setNombreUsuario(usuario.getNombreUsuario());
             us.setContrasena(usuario.getContrasena());
-            us.setFechaCreacion(new Date());
+            us.setFechaCreacion(usuario.getFechaCreacion());
+            TipoUsuario tus = new TipoUsuario();
+            tus.setIdTipoUsuario(usuario.getTipoUsuario().getIdTipoUsuario());
             us.setTipoUsuario(tus);
             usuariosDao.borrarUsuario(us);
-            addMessage("Eliminado Id:!!" + usuario.getIdUsuario());
+            usuario = new Usuario();
+            addMessage("Eliminado Id:!!");
         } catch (Exception e) {
-            addMessage("Error Id:!!" + usuario.getIdUsuario()+" "+ e.getMessage());
+            addMessage("Error Id:!!");
             e.printStackTrace();
         }
     }
-            
 
     public void setMiLista(List<Usuario> miLista) {
         this.miLista = miLista;
@@ -136,17 +129,18 @@ public class UsuariosBean {
     }
 
     /**
-     * @return the eliminarU
+     * @return the idUsuarioV
      */
-    public int getEliminarU() {
-        return eliminarU;
+    public int getIdUsuarioV() {
+        return idUsuarioV;
     }
 
     /**
-     * @param eliminarU the eliminarU to set
+     * @param idUsuarioV the idUsuarioV to set
      */
-    public void setEliminarU(int eliminarU) {
-        this.eliminarU = eliminarU;
+    public void setIdUsuarioV(int idUsuarioV) {
+        this.idUsuarioV = idUsuarioV;
     }
+
 
 }

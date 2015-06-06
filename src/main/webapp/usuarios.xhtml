@@ -19,7 +19,7 @@
 
 
             <h:form id="formTable">
-                <p:dataTable id="tbl" var="usuario" value="#{usuariosBean.miLista}"
+                <p:dataTable id="tbl" var="usu" value="#{usuariosBean.miLista}"
                              paginator="true" 
                              rows="5"  
                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"  
@@ -28,7 +28,7 @@
                              resizableColumns="true"  
                              selectionMode="single"
                              selection="#{usuariosBean.usuario}"
-                             rowKey="#{usuariosBean.eliminarU}" 
+                             rowKey="#{usuariosBean.idUsuarioV}" 
                              paginatorPosition="bottom">
 
 
@@ -37,84 +37,79 @@
                         <f:facet name="header">
                             <h:outputText value="Id" />
                         </f:facet>
-                        <h:outputText value="#{usuario.idUsuario}" />
+                        <h:outputText value="#{usu.idUsuario}" />
                     </p:column>
 
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Nombre"/>
                         </f:facet>
-                        <h:outputText value="#{usuario.nombreUsuario}" />
+                        <h:outputText value="#{usu.nombreUsuario}" />
                     </p:column>
 
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Contraseña" />
                         </f:facet>
-                        <h:outputText value="#{usuario.contrasena}" />
+                        <h:outputText value="#{usu.contrasena}" />
                     </p:column>
 
 
-
-                    <p:column headerText="Modificar">
-                        <p:commandButton value=""  update=":formTable"   icon="ui-icon-disk"  style="width:40px;height:40px" actionListener="#{usuariosBean.eliminarUSI}">
+                    <p:column headerText="">
+                        <p:commandButton value="" icon="ui-icon-pencil"   style="width:40px;height:40px" onclick="PF('dlgmodificar').show();" >
+                            <f:setPropertyActionListener target="#{usuariosBean.usuario}" value="#{usu}"/>
                         </p:commandButton>
                     </p:column>
 
-                    <p:column headerText="Eliminar">
-                        <p:commandButton value=""  update=":formTable"  icon="ui-icon-close" style="width:40px;height:40px"  actionListener="#{usuariosBean.eliminarUSI}">
+                    <p:column headerText="">
+                        <p:commandButton value="" icon="ui-icon-trash"   style="width:40px;height:40px" onclick="PF('dlgeliminar').show();" >
+                            <f:setPropertyActionListener target="#{usuariosBean.usuario}" value="#{usu}"/>
                         </p:commandButton>
                     </p:column>
 
                     <f:facet name="footer">
                         <div class="footer-section">
 
-                            <p:commandButton update=":formTable" oncomplete="PF('dlg8').show()"   icon="ui-icon-plus"  style="width:40px;height:40px"   />
-                            <p:commandButton update=":formTable" oncomplete="PF('dlg6').show()"   icon="ui-icon-pencil"  style="width:40px;height:40px"  />
-                            <p:commandButton  update=":formTable" oncomplete="PF('dlg7').show()"   icon="ui-icon-trash"  style="width:40px;height:40px" actionListener="#{usuariosBean.eliminarUSI}"  />
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="ver"/>
+                            <p:commandButton update=":formTable" oncomplete="PF('dlginsertar').show()"   icon="ui-icon-plus"  style="width:40px;height:40px"   />
 
                         </div>
                     </f:facet>
                 </p:dataTable>
-
             </h:form>
 
-            <h:form>
-                <p:dialog header="Modificar" widgetVar="dlg6" modal="true"
-                          resizable="false">
-                    <h:panelGrid id="modificar" columns="2"
-                                 cellpadding="2">
 
+            <p:dialog id="dlg2" header="Eliminar Persona" showEffect="explode" hideEffect="explode" widgetVar="dlgeliminar" modal="true" resizable="false" minWidth="200">
+                <h:form id="formEliminar">
+                    <p:outputLabel value="¿Desea eliminar al Usuario?" />
+                    <p:commandButton actionListener="#{usuariosBean.eliminar}" value="Si" update=":formTable" onclick="PF('dlgeliminar').hide();"/>
+                    <p:commandButton  value="No" onclick="PF('dlg2').hide();"/>
+                </h:form>
+            </p:dialog>
+
+            <h:form>
+                <p:dialog header="Modificar" widgetVar="dlgmodificar" modal="true" resizable="false">
+                    <h:panelGrid id="modificar" columns="2" cellpadding="2">
                         <p:outputLabel value="Id del usuario" />
                         <p:inputText value="#{usuariosBean.usuario.idUsuario}"/>
-
                         <p:outputLabel value="Nombre del usuario" />
                         <p:inputText value="#{usuariosBean.usuario.nombreUsuario}"/>
-
                         <p:outputLabel value="Contraseña" />
                         <p:inputText value="#{usuariosBean.usuario.contrasena}"/>
-
                         <p:outputLabel value="Tipo Usuario" />
                         <p:inputText value="#{usuariosBean.tipoUsuarioT}"/>
-
-
-
                     </h:panelGrid>
                     <p:growl id="growl3" life="5000" />
                     <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{usuariosBean.addUsuario}" value="Ingresar Usuario" styleClass="ui-priority-primary" />
-
                 </p:dialog>
-
             </h:form>
 
 
 
             <h:form id="formInsertar">
-                <p:dialog header="Insertar" widgetVar="dlg8" modal="true"
+                <p:dialog header="Insertar" widgetVar="dlginsertar" modal="true"
                           resizable="false">
                     <h:panelGrid  columns="2"
-                                 cellpadding="2">
+                                  cellpadding="2">
                         <p:outputLabel for="console" value="Basic:" />
                         <p:selectOneMenu id="console" value="sdfgds" style="width:125px">
                             <f:selectItem itemLabel="Select One" itemValue="" />
@@ -137,32 +132,6 @@
             </h:form>
 
 
-            <h:form >
-                <p:dialog header="Eliminar" widgetVar="dlg7" modal="true"
-                          resizable="false">
-                    <h:panelGrid columns="2">
-                    </h:panelGrid>
-                    <p:growl id="growl2" life="5000" />
-                    <p:commandButton id="ajax" update="growl2,:formTable"  value="Eliminar Usuario" styleClass="ui-priority-primary" />
-                </p:dialog>
-            </h:form>
-
-
-
-
-            <h:form id="formInsertar3">
-                <p:panelGrid columns="2">
-
-                    <p:outputLabel value="Eliminar Id del usuario" />
-                    <p:inputText value="#{usuariosBean.eliminarU}"/>
-
-
-                </p:panelGrid>
-
-                <p:growl id="growl2" life="2000" />
-                <p:commandButton id="ajax"  update="growl2,:formTable" onsuccess=":formTable"  actionListener="#{usuariosBean.eliminarUSI}" value="Eliminar Usuario" styleClass="ui-priority-primary" />
-
-            </h:form>
         </h:body>
     </f:view>
 </html>
