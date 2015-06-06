@@ -16,16 +16,15 @@ import org.hibernate.Session;
  */
 public class UsuariosDaoHibImpl extends CustomHibernateDaoSupport implements UsuariosDao {
 
-    
     @Override
     public void crearUsuario(Usuario usuario) throws DAOException {
         usuario.setFechaCreacion(new Date());
-        getHibernateTemplate().saveOrUpdate(usuario);
+        getHibernateTemplate().save(usuario);
     }
 
     @Override
     public Usuario buscaUsuario(String nombreUsuario) throws DAOException {
-        List list = getHibernateTemplate().find(" from Usuario WHERE nombreUsuario=?",nombreUsuario);
+        List list = getHibernateTemplate().find(" from Usuario WHERE nombreUsuario=?", nombreUsuario);
         return (Usuario) list.get(0);
     }
 
@@ -35,98 +34,14 @@ public class UsuariosDaoHibImpl extends CustomHibernateDaoSupport implements Usu
         return lista;
     }
 
-   /* public void modificarUsuario(Usuario usuario) throws DAOException {
+    @Override
+    public void modificarUsuario(Usuario usuario) throws DAOException {
         usuario.setFechaModificacion(new Date());
-        getHibernateTemplate().update(usuario);*/
+        getHibernateTemplate().update(usuario);
+    }
 
     @Override
     public void borrarUsuario(Usuario usuario) throws DAOException {
         getHibernateTemplate().delete(usuario);
     }
-
-    @Override
-    public List<Usuario> mostrarUsuarios() throws DAOException {
-      Session session=null;
-      List<Usuario> lista=null;
-        try {
-            session= getHibernateTemplate().getSessionFactory().openSession();
-            Query query=session.createQuery("from Usuario");
-            lista=(List<Usuario>) query.list();
-        } catch (HibernateException e) {
-            System.out.println(e.getMessage());
-        }finally{
-        
-        if(session!=null){
-            session.close();
-        }
-        }
-        return lista;
-    }
-
-    @Override
-    public void insertarUsuario(Usuario usuario) throws DAOException {
-        Session session=null;
-      
-        try {
-            session=  getHibernateTemplate().getSessionFactory().openSession();
-            session.beginTransaction();
-            session.save(usuario);
-            session.getTransaction().commit();
-            
-        } catch (HibernateException e) {
-            System.out.println(e.getMessage());
-            session.getTransaction().rollback();
-        }finally{
-        
-        if(session!=null){
-            session.close();
-        }
-        }
-       
-    }
-
-    @Override
-    public void modificarUsuario(Usuario usuario) throws DAOException {
-       Session session=null;
-      
-        try {
-            session= getHibernateTemplate().getSessionFactory().openSession();
-            session.beginTransaction();
-            session.update(usuario);
-            session.getTransaction().commit();
-            
-        } catch (HibernateException e) {
-            System.out.println(e.getMessage());
-            session.getTransaction().rollback();
-        }finally{
-        
-        if(session!=null){
-            session.close();
-        }
-        }
-    }
-
-    @Override
-    public void eliminarUsuario(Usuario usuario) throws DAOException {
-        Session session=null;
-      
-        try {
-            session= getHibernateTemplate().getSessionFactory().openSession();
-            session.beginTransaction();
-            session.delete(usuario);
-            session.getTransaction().commit();
-            
-        } catch (HibernateException e) {
-            System.out.println(e.getMessage());
-            session.getTransaction().rollback();
-        }finally{
-        
-        if(session!=null){
-            session.close();
-        }
-        }
-    }
-
-    
-
 }

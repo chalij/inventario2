@@ -56,7 +56,7 @@
 
 
                     <p:column headerText="">
-                        <p:commandButton value="" icon="ui-icon-pencil"   style="width:40px;height:40px" onclick="PF('dlgmodificar').show();" >
+                        <p:commandButton value="" icon="ui-icon-pencil"   style="width:40px;height:40px" onclick="PF('dlgmodificar').show();"  update=":formModificar">
                             <f:setPropertyActionListener target="#{usuariosBean.usuario}" value="#{usu}"/>
                         </p:commandButton>
                     </p:column>
@@ -86,8 +86,8 @@
                 </h:form>
             </p:dialog>
 
-            <h:form>
-                <p:dialog header="Modificar" widgetVar="dlgmodificar" modal="true" resizable="false">
+            <p:dialog header="Modificar" widgetVar="dlgmodificar" modal="true" resizable="false">
+                <h:form id="formModificar">
                     <h:panelGrid id="modificar" columns="2" cellpadding="2">
                         <p:outputLabel value="Id del usuario" />
                         <p:inputText value="#{usuariosBean.usuario.idUsuario}"/>
@@ -99,15 +99,14 @@
                         <p:inputText value="#{usuariosBean.tipoUsuarioT}"/>
                     </h:panelGrid>
                     <p:growl id="growl3" life="5000" />
-                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{usuariosBean.addUsuario}" value="Ingresar Usuario" styleClass="ui-priority-primary" />
-                </p:dialog>
-            </h:form>
+                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{usuariosBean.updateUsuario}" value="Ingresar Usuario" styleClass="ui-priority-primary" />
+                </h:form>
+            </p:dialog>
 
 
 
-            <h:form id="formInsertar">
-                <p:dialog header="Insertar" widgetVar="dlginsertar" modal="true"
-                          resizable="false">
+            <p:dialog header="Insertar" widgetVar="dlginsertar" modal="true" resizable="false">
+                <h:form id="formInsertar">
                     <h:panelGrid  columns="2"
                                   cellpadding="2">
                         <p:outputLabel for="console" value="Basic:" />
@@ -128,8 +127,8 @@
                     </h:panelGrid>
                     <p:growl id="growl2" life="5000" />
                     <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{usuariosBean.addUsuario}" value="Ingresar Usuario" styleClass="ui-priority-primary" />
-                </p:dialog>
-            </h:form>
+                </h:form>
+            </p:dialog>
 
 
         </h:body>

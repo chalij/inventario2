@@ -53,15 +53,36 @@ public class UsuariosBean {
             us.setTipoUsuario(tus);
             usuariosDao.crearUsuario(us);
             usuario = new Usuario();
-            addMessage("Insertado Id:!!" + usuario.getIdUsuario());
+            addMessage("Insertado Id:!!" + us.getIdUsuario());
         } catch (Exception e) {
-            addMessage("Error Id:!!" + usuario.getIdUsuario() + " " + e.getMessage());
+            addMessage("Error Id:!!"  + e.getMessage());
             e.printStackTrace();
         }
 
     }
 
     
+
+    public void updateUsuario(ActionEvent actionEvent) {
+        try {
+            Usuario us = new Usuario();
+            TipoUsuario tus = new TipoUsuario();
+            tus.setIdTipoUsuario(tipoUsuarioT);
+            us.setIdUsuario(usuario.getIdUsuario());
+            us.setNombreUsuario(usuario.getNombreUsuario());
+            us.setContrasena(usuario.getContrasena());
+            us.setFechaCreacion(usuario.getFechaCreacion());
+            us.setFechaModificacion(new Date());
+            us.setTipoUsuario(tus);
+            usuariosDao.modificarUsuario(us);
+            usuario = new Usuario();
+            addMessage("Actualizado Id:!!" + us.getIdUsuario());
+        } catch (Exception e) {
+            addMessage("Error Id:!!"  + e.getMessage());
+            e.printStackTrace();
+        }
+
+    }
 
     public void eliminar() {
 
@@ -141,6 +162,7 @@ public class UsuariosBean {
     public void setIdUsuarioV(int idUsuarioV) {
         this.idUsuarioV = idUsuarioV;
     }
+
 
 
 }
