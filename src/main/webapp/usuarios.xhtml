@@ -54,9 +54,16 @@
                         <h:outputText value="#{usu.contrasena}" />
                     </p:column>
 
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tipo de Usuario" />
+                        </f:facet>
+                        <h:outputText value="#{usu.tipoUsuario.nombre}" />
+                    </p:column>
+
 
                     <p:column headerText="">
-                        <p:commandButton value=""  update=":formModificar,:formInsertar" icon="ui-icon-pencil"   style="width:40px;height:40px"  onsuccess="PF('dlgmodificar').show();" >
+                        <p:commandButton value=""  update=":formModificar" icon="ui-icon-pencil"   style="width:40px;height:40px"  onsuccess="PF('dlgmodificar').show();" >
                             <f:setPropertyActionListener target="#{usuariosBean.usuario}" value="#{usu}"/>
                         </p:commandButton>
                     </p:column>
@@ -97,9 +104,13 @@
                         <p:inputText value="#{usuariosBean.usuario.contrasena}"/>
                         <p:outputLabel value="Tipo Usuario" />
                         <p:inputText value="#{usuariosBean.usuario.tipoUsuario.idTipoUsuario}"/>
+                        <p:outputLabel for="tipoUsuario" value="Tipo de Usuario:" />
+                        <p:selectOneMenu id="tipoUsuario" value="#{usuariosBean.tipoUsuarioT}" style="width:125px">
+                            <f:selectItems  value="#{usuariosBean.listaUsu}" />
+                        </p:selectOneMenu>
                     </h:panelGrid>
                     <p:growl id="growl3" life="5000" />
-                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{usuariosBean.updateUsuario}" value="Ingresar Usuario" styleClass="ui-priority-primary" />
+                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{usuariosBean.updateUsuario}" value="Ingresar Usuario" styleClass="ui-priority-primary"  onsuccess="PF('dlgmodificar').hide();"/>
                 </h:form>
             </p:dialog>
 
@@ -109,21 +120,19 @@
                 <h:form id="formInsertar">
                     <h:panelGrid  columns="2"
                                   cellpadding="2">
-                        <p:outputLabel for="console" value="Basic:" />
-                        <p:selectOneMenu id="console" value="sdfgds" style="width:125px">
-                            <f:selectItems  value="#{usuariosBean.listaUsu}" />
-                        </p:selectOneMenu>
                         <p:outputLabel value="Id del usuario" />
                         <p:inputText value="#{usuariosBean.usuario.idUsuario}"/>
                         <p:outputLabel value="Nombre del usuario" />
                         <p:inputText value="#{usuariosBean.usuario.nombreUsuario}"/>
                         <p:outputLabel value="Contraseña" />
                         <p:inputText value="#{usuariosBean.usuario.contrasena}"/>
-                        <p:outputLabel value="Tipo Usuario" />
-                        <p:inputText value="#{usuariosBean.tipoUsuarioT}"/>
+                        <p:outputLabel for="console" value="Tipo de Usuario:" />
+                        <p:selectOneMenu id="console" value="#{usuariosBean.tipoUsuarioT}" style="width:125px">
+                            <f:selectItems  value="#{usuariosBean.listaUsu}" />
+                        </p:selectOneMenu>
                     </h:panelGrid>
                     <p:growl id="growl2" life="5000" />
-                    <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{usuariosBean.addUsuario}" value="Ingresar Usuario" styleClass="ui-priority-primary" />
+                    <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{usuariosBean.addUsuario}" value="Ingresar Usuario" styleClass="ui-priority-primary" onsuccess="PF('dlginsertar').hide();"/>
                 </h:form>
             </p:dialog>
 
