@@ -13,6 +13,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.faces.model.SelectItem;
+import javax.faces.model.SelectItemGroup;
 
 /**
  *
@@ -20,11 +22,13 @@ import javax.faces.event.ActionEvent;
  */
 public class UsuariosBean {
 
-    private Usuario usuario=new Usuario();
+    private Usuario usuario = new Usuario();
     private int idUsuarioV;
     private int tipoUsuarioT;
     private List<Usuario> miLista;
+    private List<TipoUsuario> listaTipoU;
     private UsuariosDao usuariosDao;
+    private List<SelectItem> listaUsu = new ArrayList<SelectItem>();
 
     public UsuariosBean() {
         usuario = new Usuario();
@@ -33,13 +37,21 @@ public class UsuariosBean {
     public List<Usuario> getMiLista() {
         try {
             miLista = usuariosDao.listaUsuarios();
+            listaUsu.clear();
+             SelectItemGroup g2 = new SelectItemGroup("Usarios");
+            SelectItem[] asi = new SelectItem[miLista.size()];
+            for (int i = 0; i < miLista.size(); i++) {
+                Usuario usAux = (Usuario) miLista.get(i);
+                asi[i] = new SelectItem(usAux.getIdUsuario(), usAux.getNombreUsuario());
+            }
+            g2.setSelectItems(asi);
+            listaUsu.add(g2);
         } catch (Exception e) {
             e.printStackTrace();
             miLista = new ArrayList();
         }
         return miLista;
     }
-
 
     public void addUsuario(ActionEvent actionEvent) {
         try {
@@ -55,13 +67,11 @@ public class UsuariosBean {
             usuario = new Usuario();
             addMessage("Insertado Id:!!" + us.getIdUsuario());
         } catch (Exception e) {
-            addMessage("Error Id:!!"  + e.getMessage());
+            addMessage("Error Id:!!" + e.getMessage());
             e.printStackTrace();
         }
 
     }
-
-    
 
     public void updateUsuario(ActionEvent actionEvent) {
         try {
@@ -78,7 +88,7 @@ public class UsuariosBean {
             usuario = new Usuario();
             addMessage("Actualizado Id:!!" + us.getIdUsuario());
         } catch (Exception e) {
-            addMessage("Error Id:!!"  + e.getMessage());
+            addMessage("Error Id:!!" + e.getMessage());
             e.printStackTrace();
         }
 
@@ -163,6 +173,18 @@ public class UsuariosBean {
         this.idUsuarioV = idUsuarioV;
     }
 
+    /**
+     * @return the listaUsu
+     */
+    public List<SelectItem> getListaUsu() {
+        return listaUsu;
+    }
 
+    /**
+     * @param listaUsu the listaUsu to set
+     */
+    public void setListaUsu(List<SelectItem> listaUsu) {
+        this.listaUsu = listaUsu;
+    }
 
 }

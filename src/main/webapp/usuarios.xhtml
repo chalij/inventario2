@@ -56,7 +56,7 @@
 
 
                     <p:column headerText="">
-                        <p:commandButton value="" icon="ui-icon-pencil"   style="width:40px;height:40px" onclick="PF('dlgmodificar').show();"  update=":formModificar">
+                        <p:commandButton value=""  update=":formModificar" icon="ui-icon-pencil"   style="width:40px;height:40px"  onsuccess="PF('dlgmodificar').show();" >
                             <f:setPropertyActionListener target="#{usuariosBean.usuario}" value="#{usu}"/>
                         </p:commandButton>
                     </p:column>
@@ -111,10 +111,7 @@
                                   cellpadding="2">
                         <p:outputLabel for="console" value="Basic:" />
                         <p:selectOneMenu id="console" value="sdfgds" style="width:125px">
-                            <f:selectItem itemLabel="Select One" itemValue="" />
-                            <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
-                            <f:selectItem itemLabel="PS4" itemValue="PS4" />
-                            <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+                            <f:selectItems  value="#{usuariosBean.listaUsu}" />
                         </p:selectOneMenu>
                         <p:outputLabel value="Id del usuario" />
                         <p:inputText value="#{usuariosBean.usuario.idUsuario}"/>
