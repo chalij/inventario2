@@ -37,18 +37,9 @@ public class UsuariosBean {
     public List<Usuario> getMiLista() {
         try {
             miLista = usuariosDao.listaUsuarios();
-            listaUsu.clear();
-             SelectItemGroup g2 = new SelectItemGroup("Usarios");
-            SelectItem[] asi = new SelectItem[miLista.size()];
-            for (int i = 0; i < miLista.size(); i++) {
-                Usuario usAux = (Usuario) miLista.get(i);
-                asi[i] = new SelectItem(usAux.getIdUsuario(), usAux.getNombreUsuario());
-            }
-            g2.setSelectItems(asi);
-            listaUsu.add(g2);
         } catch (Exception e) {
             e.printStackTrace();
-            miLista = new ArrayList();
+            miLista = new ArrayList<Usuario>();
         }
         return miLista;
     }
@@ -57,7 +48,7 @@ public class UsuariosBean {
         try {
             Usuario us = new Usuario();
             TipoUsuario tus = new TipoUsuario();
-            tus.setIdTipoUsuario(tipoUsuarioT);
+            tus.setIdTipoUsuario(usuario.getTipoUsuario().getIdTipoUsuario());
             us.setIdUsuario(usuario.getIdUsuario());
             us.setNombreUsuario(usuario.getNombreUsuario());
             us.setContrasena(usuario.getContrasena());
@@ -177,6 +168,22 @@ public class UsuariosBean {
      * @return the listaUsu
      */
     public List<SelectItem> getListaUsu() {
+        
+        try {
+            listaTipoU = usuariosDao.listaTipoUsuarios();
+            listaUsu.clear();
+             SelectItemGroup g2 = new SelectItemGroup("Usarios");
+            SelectItem[] asi = new SelectItem[listaTipoU.size()];
+            for (int i = 0; i < listaTipoU.size(); i++) {
+                TipoUsuario usAux = (TipoUsuario) listaTipoU.get(i);
+                asi[i] = new SelectItem(usAux.getIdTipoUsuario(), usAux.getNombre());
+            }
+            g2.setSelectItems(asi);
+            listaUsu.add(g2); 
+        } catch (Exception e) {
+            e.printStackTrace();
+            listaUsu = new ArrayList<SelectItem>();
+        }
         return listaUsu;
     }
 

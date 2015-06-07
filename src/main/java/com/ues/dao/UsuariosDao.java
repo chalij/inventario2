@@ -1,6 +1,7 @@
 package com.ues.dao;
 
 import com.ues.exception.DAOException;
+import com.ues.model.TipoUsuario;
 import com.ues.model.Usuario;
 import java.util.List;
 
@@ -15,6 +16,8 @@ public interface UsuariosDao {
     public Usuario buscaUsuario(String username) throws DAOException;
 
     public List<Usuario> listaUsuarios() throws DAOException;
+    
+    public List<TipoUsuario> listaTipoUsuarios() throws DAOException;
 
     public void borrarUsuario(Usuario usuario) throws DAOException;
 

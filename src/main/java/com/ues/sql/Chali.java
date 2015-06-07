@@ -10,5 +10,13 @@ package com.ues.sql;
  * @author Administrador
  */
 public class Chali {
-    
+     /* 
+    -----------------Tipo Usuario--------------------
+     INSERT INTO tipo_usuario VALUES (2,'administrador',null);
+     INSERT INTO tipo_usuario VALUES (3,'empleado',null);
+     COMMIT;
+
+    -------------------Usuario------------------------
+     
+     */
 }

@@ -3,6 +3,7 @@ package com.ues.dao.impl;
 import com.ues.model.CustomHibernateDaoSupport;
 import com.ues.dao.UsuariosDao;
 import com.ues.exception.DAOException;
+import com.ues.model.TipoUsuario;
 import com.ues.model.Usuario;
 import java.util.Date;
 import java.util.List;
@@ -28,9 +29,23 @@ public class UsuariosDaoHibImpl extends CustomHibernateDaoSupport implements Usu
         return (Usuario) list.get(0);
     }
 
+    
+    
+            
+    @Override
+    public List<TipoUsuario> listaTipoUsuarios() throws DAOException{
+        List<TipoUsuario> lista = getHibernateTemplate().find("from TipoUsuario tp order by tp.idTipoUsuario");
+        
+        return lista;
+    }
+            
+            
+            
+            
     @Override
     public List<Usuario> listaUsuarios() throws DAOException {
-        List<Usuario> lista = getHibernateTemplate().find("from Usuario order by idUsuario");
+        List<Usuario> lista = getHibernateTemplate().find("from Usuario u  inner join fetch u.tipoUsuario order by u.idUsuario");
+        
         return lista;
     }
 
