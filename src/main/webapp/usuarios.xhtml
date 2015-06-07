@@ -56,7 +56,7 @@
 
 
                     <p:column headerText="">
-                        <p:commandButton value=""  update=":formModificar" icon="ui-icon-pencil"   style="width:40px;height:40px"  onsuccess="PF('dlgmodificar').show();" >
+                        <p:commandButton value=""  update=":formModificar,:formInsertar" icon="ui-icon-pencil"   style="width:40px;height:40px"  onsuccess="PF('dlgmodificar').show();" >
                             <f:setPropertyActionListener target="#{usuariosBean.usuario}" value="#{usu}"/>
                         </p:commandButton>
                     </p:column>
