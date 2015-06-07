@@ -47,18 +47,18 @@
     </managed-bean>
     
     <managed-bean>
-        <managed-bean-name>tipoproveedorBean</managed-bean-name>
+        <managed-bean-name>tipoProveedorBean</managed-bean-name>
         <managed-bean-class>com.ues.bean.TipoProveedorBean</managed-bean-class>    
         <managed-bean-scope>session</managed-bean-scope>
         <managed-property>
-            <property-name>tipoproveedorDao</property-name>
+            <property-name>tipoProveedorDao</property-name>
             <property-class>com.ues.dao.TipoProveedorDao</property-class>
-            <value>#{tipoproveedorDao}</value>
+            <value>#{tipoProveedorDao}</value>
         </managed-property>
     </managed-bean>
     
     <managed-bean>
-        <managed-bean-name>tipoproveedorBean</managed-bean-name>
+        <managed-bean-name>proveedorBean</managed-bean-name>
         <managed-bean-class>com.ues.bean.ProveedorBean</managed-bean-class>    
         <managed-bean-scope>session</managed-bean-scope>
         <managed-property>

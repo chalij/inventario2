@@ -12,8 +12,8 @@ public class ProveedorBean {
     private List<Proveedor> miLista;
     private ProveedorDao proveedorDao;
     
-    public ProveedorBean(){}
-    
+    public ProveedorBean() { }
+
     public List<Proveedor> getMiLista() {
         try {
             miLista = proveedorDao.listaProveedor();
@@ -22,13 +22,17 @@ public class ProveedorBean {
         }
         return miLista;
     }
+
+    public ProveedorDao getProveedorDao() {
+        return proveedorDao;
+    }
+
     public void setMiLista(List<Proveedor> miLista) {
         this.miLista = miLista;
     }
-    public ProveedorDao gettipoproveedorDao() {
-        return proveedorDao;
+
+    public void setProveedorDao(ProveedorDao proveedorDao) {
+        this.proveedorDao = proveedorDao;
     }
-    public void settipoproveedorDao(ProveedorDao provDao) {
-        this.proveedorDao = provDao;
-    }
+    
 }

@@ -81,7 +81,7 @@ commit;
         <property name="sessionFactory" ref="mySessionFactory"/>
     </bean>
     
-    <bean id="tipoproveedorDao" class="com.ues.dao.impl.TipoProveedorDaoHibImpl">
+    <bean id="tipoProveedorDao" class="com.ues.dao.impl.TipoProveedorDaoHibImpl">
         <property name="sessionFactory" ref="mySessionFactory"/>
     </bean>
     

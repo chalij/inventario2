@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
@@ -38,39 +37,39 @@
 
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Year"/>
+                        <h:outputText value="Nombre"/>
                     </f:facet>
-                    <h:outputText value="#{proveedor.persona}" />
+                    <h:outputText value="#{proveedor.nombre}" />
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Year"/>
+                        <h:outputText value="Correo"/>
                     </f:facet>
-                    <h:outputText value="#{bodega.estantesPorPasillo}" />
+                    <h:outputText value="#{proveedor.correo}" />
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Brand" />
+                        <h:outputText value="Nit" />
                     </f:facet>
-                    <h:outputText value="#{bodega.nombre2}" />
+                    <h:outputText value="#{proveedor.nit}" />
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Brand" />
+                        <h:outputText value="Giro" />
                     </f:facet>
-                    <h:outputText value="#{bodega.catidadEstante}" />
+                    <h:outputText value="#{proveedor.giro}" />
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Brand" />
+                        <h:outputText value="NRC" />
                     </f:facet>
-                    <h:outputText value="#{bodega.productoPorEstante}" />
+                    <h:outputText value="#{proveedor.nrc}" />
                 </p:column>
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Brand" />
+                        <h:outputText value="Tipo de Proveedor" />
                     </f:facet>
-                    <h:outputText value="#{bodega.ubicacion}" />
+                    <h:outputText value="#{proveedor.tipoProveedor.nombre.toString}" />
                 </p:column>
             </p:dataTable>
 

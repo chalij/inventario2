@@ -11,30 +11,29 @@ import java.util.List;
 public class TipoProveedorBean {
 
     private List<TipoProveedor> miLista;
-    private TipoProveedorDao tipoproveedorDao;
+    private TipoProveedorDao tipoProveedorDao;
     
-    public TipoProveedorBean() {
+    public TipoProveedorBean() {        
     }
 
     public List<TipoProveedor> getMiLista() {
         try {
-            miLista = tipoproveedorDao.listaTipoProveedor();
+            miLista = getTipoProveedorDao().listaTipoProveedor();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return miLista;
     }
 
-    public TipoProveedorDao getTipoproveedorDao() {
-        return tipoproveedorDao;
+    public TipoProveedorDao getTipoProveedorDao() {
+        return tipoProveedorDao;
     }
 
     public void setMiLista(List<TipoProveedor> miLista) {
         this.miLista = miLista;
     }
 
-    public void setTipoproveedorDao(TipoProveedorDao tipoproveedorDao) {
-        this.tipoproveedorDao = tipoproveedorDao;
+    public void setTipoProveedorDao(TipoProveedorDao tipoProveedorDao) {
+        this.tipoProveedorDao = tipoProveedorDao;
     }
-    
 }

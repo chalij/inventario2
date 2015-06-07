@@ -26,7 +26,7 @@
             <h3>Ejemplo de JSF 2.0, Spring 3, Hibernate 3, MySQL</h3>
             <h4>Lista de Tipos de Proveedores del sistema</h4>            
         <h:form>
-            <p:dataTable id="tbl" var="tipoproveedor" value="#{tipoproveedorBean.miLista}"
+            <p:dataTable id="tbl" var="tipoProveedor" value="#{tipoProveedorBean.miLista}"
                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
                          paginator="true" rows="10" style="margin-bottom:20px">
 
@@ -36,21 +36,21 @@
                     <f:facet name="header">
                         <h:outputText value="Id" />
                     </f:facet>
-                    <h:outputText value="#{tipoproveedor.idTipoProveedor}" />
+                    <h:outputText value="#{tipoProveedor.idTipoProveedor}" />
                 </p:column>
 
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Year"/>
+                        <h:outputText value="Tipo de Proveedor"/>
                     </f:facet>
-                    <h:outputText value="#{tipoproveedor.nombre}" />
+                    <h:outputText value="#{tipoProveedor.nombre}" />
                 </p:column>
 
                 <p:column>
                     <f:facet name="header">
-                        <h:outputText value="Brand" />
+                        <h:outputText value="Descripcion" />
                     </f:facet>
-                    <h:outputText value="#{tipoproveedor.descripcion}" />
+                    <h:outputText value="#{tipoProveedor.descripcion}" />
                 </p:column>
             </p:dataTable>
 
