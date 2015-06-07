@@ -30,7 +30,8 @@ public class UsuariosDaoHibImpl extends CustomHibernateDaoSupport implements Usu
 
     @Override
     public List<Usuario> listaUsuarios() throws DAOException {
-        List<Usuario> lista = getHibernateTemplate().find("from Usuario order by idUsuario");
+        List<Usuario> lista = getHibernateTemplate().find("from Usuario u  inner join fetch u.tipoUsuario order by u.idUsuario");
+        
         return lista;
     }
 
