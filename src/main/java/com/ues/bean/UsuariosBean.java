@@ -41,14 +41,16 @@ public class UsuariosBean {
             e.printStackTrace();
             miLista = new ArrayList<Usuario>();
         }
+        usuario = new Usuario();
         return miLista;
     }
+
 
     public void addUsuario(ActionEvent actionEvent) {
         try {
             Usuario us = new Usuario();
             TipoUsuario tus = new TipoUsuario();
-            tus.setIdTipoUsuario(usuario.getTipoUsuario().getIdTipoUsuario());
+            tus.setIdTipoUsuario(tipoUsuarioT);
             us.setIdUsuario(usuario.getIdUsuario());
             us.setNombreUsuario(usuario.getNombreUsuario());
             us.setContrasena(usuario.getContrasena());
@@ -128,6 +130,7 @@ public class UsuariosBean {
      * @param usuario the usuario to set
      */
     public void setUsuario(Usuario usuario) {
+        this.tipoUsuarioT = usuario.getTipoUsuario().getIdTipoUsuario();
         this.usuario = usuario;
     }
 
@@ -168,18 +171,18 @@ public class UsuariosBean {
      * @return the listaUsu
      */
     public List<SelectItem> getListaUsu() {
-        
+
         try {
             listaTipoU = usuariosDao.listaTipoUsuarios();
             listaUsu.clear();
-             SelectItemGroup g2 = new SelectItemGroup("Usarios");
+            SelectItemGroup g2 = new SelectItemGroup("Usarios");
             SelectItem[] asi = new SelectItem[listaTipoU.size()];
             for (int i = 0; i < listaTipoU.size(); i++) {
                 TipoUsuario usAux = (TipoUsuario) listaTipoU.get(i);
                 asi[i] = new SelectItem(usAux.getIdTipoUsuario(), usAux.getNombre());
             }
             g2.setSelectItems(asi);
-            listaUsu.add(g2); 
+            listaUsu.add(g2);
         } catch (Exception e) {
             e.printStackTrace();
             listaUsu = new ArrayList<SelectItem>();
