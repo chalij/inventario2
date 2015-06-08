@@ -45,14 +45,6 @@ public class UsuariosBean {
         return miLista;
     }
 
-    public void clear() {
-        usuario.setIdUsuario(0);
-        usuario.setNombreUsuario("");
-        usuario.setFechaCreacion(null);
-        usuario.setFechaModificacion(null);
-        usuario.setTipoUsuario(null);
-        usuario.setContrasena("");
-    }
 
     public void addUsuario(ActionEvent actionEvent) {
         try {
