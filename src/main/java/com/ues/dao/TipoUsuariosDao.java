@@ -12,7 +12,7 @@ import com.ues.model.TipoUsuario;
  *
  * @author Administrador
  */
-public interface TipoUsuarioDao {
+public interface TipoUsuariosDao {
     public List<TipoUsuario> mostrarTipoUsuario();
     public void insertarTipoUsuario(TipoUsuario tipoUsuario);
     public void modificarTipoUsuario(TipoUsuario tipoUsuario);

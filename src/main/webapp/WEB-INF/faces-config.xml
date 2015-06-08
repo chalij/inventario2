@@ -36,4 +36,17 @@
         </managed-property>
     </managed-bean>
     
+    
+     <managed-bean>
+        <managed-bean-name>tipoUsuariosBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.TipoUsuariosBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>tipoUsuariosDao</property-name>
+            <property-class>com.ues.dao.TipoUsuariosDao</property-class>
+            <value>#{tipoUsuariosDao}</value>
+        </managed-property>
+    </managed-bean>
+    
 </faces-config>

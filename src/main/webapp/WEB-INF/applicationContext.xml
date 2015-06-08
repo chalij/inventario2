@@ -78,4 +78,9 @@ commit;
         <property name="sessionFactory" ref="mySessionFactory"/>
     </bean>
     
+    
+     <bean id="tipoUsuariosDao" class="com.ues.dao.impl.TipoUsuariosDaoHibImpl">
+        <property name="sessionFactory" ref="mySessionFactory"/>
+    </bean>
+    
 </beans>
