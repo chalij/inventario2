@@ -8,69 +8,79 @@
       xmlns:p="http://primefaces.org/ui">
     <f:view>
         <h:head>
-            <title>Ejemplo JSF 2.0, Spring 3, Hibernate 3</title>
-            <style type="text/css">
-                .celda {
-                    border: 1px;
-                    background-color: #eee;
-                }
-                .tabla {
-                    background-color: #ccc;
-                    width: 400px;
-                    font-family: "Arial";
-                }
-            </style>
+            <title>Proveedor Info.</title>
         </h:head>
         <h:body>
             <br/>
             <h1>Lista de Proveedores en el Sistema</h1>            
         <h:form>
-            <p:dataTable id="tbl" var="proveedor" value="#{proveedorBean.miLista}"
-                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
-                         paginator="true" rows="10" style="margin-bottom:20px">
+            <p:dataTable id="tbl" var="prov" value="#{proveedorBean.miLista}"
+                             paginator="true" 
+                             rows="5"  
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"  
+                             rowsPerPageTemplate="5,10,15" 
+                             lazy="true"
+                             resizableColumns="true"  
+                             selectionMode="single"
+                             selection="#{proveedorBean.proveedor}"
+                             rowKey="#{proveedorBean.idProveedorV}" 
+                             paginatorPosition="bottom">
                 <p:column>
                     <f:facet name="header">
                         <h:outputText value="Id" />
                     </f:facet>
-                    <h:outputText value="#{proveedor.idProveedor}" />
+                    <h:outputText value="#{prov.idProveedor}" />
                 </p:column>
 
                 <p:column>
                     <f:facet name="header">
                         <h:outputText value="Nombre"/>
                     </f:facet>
-                    <h:outputText value="#{proveedor.nombre}" />
+                    <h:outputText value="#{prov.nombre}" />
                 </p:column>
                 <p:column>
                     <f:facet name="header">
                         <h:outputText value="Correo"/>
                     </f:facet>
-                    <h:outputText value="#{proveedor.correo}" />
+                    <h:outputText value="#{prov.correo}" />
                 </p:column>
                 <p:column>
                     <f:facet name="header">
                         <h:outputText value="Nit" />
                     </f:facet>
-                    <h:outputText value="#{proveedor.nit}" />
+                    <h:outputText value="#{prov.nit}" />
                 </p:column>
                 <p:column>
                     <f:facet name="header">
                         <h:outputText value="Giro" />
                     </f:facet>
-                    <h:outputText value="#{proveedor.giro}" />
+                    <h:outputText value="#{prov.giro}" />
                 </p:column>
                 <p:column>
                     <f:facet name="header">
                         <h:outputText value="NRC" />
                     </f:facet>
-                    <h:outputText value="#{proveedor.nrc}" />
+                    <h:outputText value="#{prov.nrc}" />
                 </p:column>
                 <p:column>
                     <f:facet name="header">
                         <h:outputText value="Tipo de Proveedor" />
                     </f:facet>
-                    <h:outputText value="#{proveedor.tipoProveedor.nombre.toString}" />
+                    <h:outputText value="#{prov.tipoProveedor.nombre}" />
                 </p:column>
+                
+                <p:column headerText="">
+                        <p:commandButton value=""  update=":formModificar" icon="ui-icon-pencil"   style="width:40px;height:40px"  onsuccess="PF('dlgmodificar').show();" >
+                            <f:setPropertyActionListener target="#{proveedorBean.proveedor}" value="#{prov}"/>
+                        </p:commandButton>
+                    </p:column>
+
+                    <p:column headerText="">
+                        <p:commandButton value="" icon="ui-icon-trash"   style="width:40px;height:40px" onclick="PF('dlgeliminar').show();" >
+                            <f:setPropertyActionListener target="#{proveedorBean.proveedor}" value="#{prov}"/>
+                        </p:commandButton>
+                    </p:column>
+                
             </p:dataTable>
 
 

@@ -4,6 +4,7 @@ import com.ues.dao.ProveedorDao;
 import com.ues.exception.DAOException;
 import com.ues.model.CustomHibernateDaoSupport;
 import com.ues.model.Proveedor;
+import com.ues.model.TipoProveedor;
 import java.util.List;
 /**
  *
@@ -37,5 +38,11 @@ public class ProveedorDaoHibImpl extends CustomHibernateDaoSupport implements Pr
     public void borrarProveedor(Proveedor borraProveedor) throws DAOException {
         getHibernateTemplate().delete(borraProveedor);
     }
+
+    @Override
+    public List<TipoProveedor> listaTipoProveedor() throws DAOException {
+        List<TipoProveedor> lista = getHibernateTemplate().find("from Proveedor u  inner join fetch u.tipoUsuario order by u.idUsuario");
+        return lista;
+    } //arreglar el parametro sql de este metodo!!
     
 }
