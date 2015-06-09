@@ -79,7 +79,7 @@ public class UsuariosBean {
             us.setTipoUsuario(tus);
             usuariosDao.modificarUsuario(us);
             usuario = new Usuario();
-            addMessage("Actualizado Id:!!" + us.getIdUsuario());
+            addMessage("Modificado Id:!!" + us.getIdUsuario());
         } catch (Exception e) {
             addMessage("Error Id:!!" + e.getMessage());
             e.printStackTrace();

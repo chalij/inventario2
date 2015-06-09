@@ -75,4 +75,16 @@
         </managed-property>
     </managed-bean>
     
+    
+     <managed-bean>
+        <managed-bean-name>recursosBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.RecursosBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>recursosDao</property-name>
+            <property-class>com.ues.dao.RecursosDao</property-class>
+            <value>#{recursosDao}</value>
+        </managed-property>
+    </managed-bean>
 </faces-config>

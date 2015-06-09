@@ -83,7 +83,7 @@ public class TipoUsuariosBean {
             tus.setDescripcion(tipoUsuario.getDescripcion());
             tipoUsuariosDao.modificarTipoUsuario(tus);
             tipoUsuario = new TipoUsuario();
-            addMessage("Insertado Id:!!" + tus.getIdTipoUsuario());
+            addMessage("Modificado Id:!!" + tus.getIdTipoUsuario());
         } catch (Exception e) {
             addMessage("Error Id:!!" + e.getMessage());
             e.printStackTrace();

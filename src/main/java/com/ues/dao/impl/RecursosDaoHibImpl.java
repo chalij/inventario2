@@ -41,7 +41,7 @@ public class RecursosDaoHibImpl extends CustomHibernateDaoSupport implements Rec
 
     @Override
     public List<Recursos> listaRecursos() throws DAOException {
-        List<Recursos> lista = getHibernateTemplate().find("from Recursos u  inner join fetch u.tipoUsuario order by u.idRecursos");
+        List<Recursos> lista = getHibernateTemplate().find("from Recursos u  inner join fetch u.tipoUsuario order by u.idRecurso");
         
         return lista;
     }

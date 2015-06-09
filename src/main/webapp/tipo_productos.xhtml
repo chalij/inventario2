@@ -80,9 +80,9 @@
 
 
 
-            <p:dialog id="dlg2" header="Eliminar Persona" showEffect="explode" hideEffect="explode" widgetVar="dlgeliminar" modal="true" resizable="false" minWidth="200">
+            <p:dialog id="dlg2" header="Eliminar Tipo Producto" showEffect="explode" hideEffect="explode" widgetVar="dlgeliminar" modal="true" resizable="false" minWidth="200">
                 <h:form id="formEliminar">
-                    <p:outputLabel value="¿Desea eliminar?" />
+                    <p:outputLabel value="¿Desea Eliminar Tipo Producto?" />
                     <p:commandButton actionListener="#{tipoProductosBean.eliminar}" value="Si" update=":formTable" onclick="PF('dlgeliminar').hide();"/>
                     <p:commandButton  value="No" onclick="PF('dlg2').hide();"/>
                 </h:form>
@@ -93,7 +93,7 @@
                     <h:panelGrid id="modificar" columns="2" cellpadding="2">
                         <p:outputLabel value="Id" />
                         <p:inputText value="#{tipoProductosBean.tipoProducto.idTipoProducto}"/>
-                        <p:outputLabel value="Nombre" />
+                        <p:outputLabel value="Tipo Producto" />
                         <p:inputText value="#{tipoProductosBean.tipoProducto.nombre}"/>
                         <p:outputLabel value="Descripcion" />
                         <p:inputText value="#{tipoProductosBean.tipoProducto.descripcion}"/>
@@ -110,7 +110,7 @@
                     <h:panelGrid  columns="2" cellpadding="2">
                         <p:outputLabel value="Id" />
                         <p:inputText value="#{tipoProductosBean.tipoProducto.idTipoProducto}"/>
-                        <p:outputLabel value="Nombre" />
+                        <p:outputLabel value="Tipo Producto" />
                         <p:inputText value="#{tipoProductosBean.tipoProducto.nombre}"/>
                         <p:outputLabel value="Descripcion" />
                         <p:inputText value="#{tipoProductosBean.tipoProducto.descripcion}"/>
