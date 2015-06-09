@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -68,4 +69,74 @@
         </h:form>
         </h:body>
     </f:view>
+=======
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view>
+        <h:head>
+            <title>Ejemplo JSF 2.0, Spring 3, Hibernate 3, MySQL</title>
+            <style type="text/css">
+                .liga {
+                    border: 1px;
+                    text-decoration: none;
+                    color: darkgray;
+                }
+            </style>
+        </h:head>
+        <h:body>
+            <br/>
+            <h3>Ejemplo de JSF 2.0, Spring 3, Hibernate 3, MySQL</h3>
+         ver : <h:outputLink id="link1" value="usuarios.jsf" styleClass="liga"><h:outputText value="usuarios" /></h:outputLink>
+         ver : <h:outputLink id="link2" value="personas.jsf" styleClass="liga"><h:outputText value="personas" /></h:outputLink>
+         ver : <h:outputLink id="link3" value="tipo_usuarios.jsf" styleClass="liga"><h:outputText value="tipo usuarios" /></h:outputLink>
+        
+            
+            
+        <h:form>
+            <p:dataTable id="tbl" var="car" value="fghfgh"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                         paginator="true" rows="10" style="margin-bottom:20px">
+
+
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Id" />
+                    </f:facet>
+                    <h:outputText value="fghfghf" />
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Year"/>
+                    </f:facet>
+                    <h:outputText value="fghgfhfh" />
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Brand" />
+                    </f:facet>
+                    <h:outputText value="fghgfh" />
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Color" />
+                    </f:facet>
+                    <h:outputText value="fghfh" />
+                </p:column>
+            </p:dataTable>
+
+
+        </h:form>
+        </h:body>
+    </f:view>
+>>>>>>> 36b92f9eec3d7bf135be4ea859bdd299618f7e2c
 </html>

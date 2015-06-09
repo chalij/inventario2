@@ -81,6 +81,7 @@ commit;
         <property name="sessionFactory" ref="mySessionFactory"/>
     </bean>
     
+<<<<<<< HEAD
     <bean id="tipoProveedorDao" class="com.ues.dao.impl.TipoProveedorDaoHibImpl">
         <property name="sessionFactory" ref="mySessionFactory"/>
     </bean>
@@ -90,3 +91,11 @@ commit;
     </bean>
        
 </beans>
+=======
+    
+     <bean id="tipoUsuariosDao" class="com.ues.dao.impl.TipoUsuariosDaoHibImpl">
+        <property name="sessionFactory" ref="mySessionFactory"/>
+    </bean>
+    
+</beans>
+>>>>>>> 36b92f9eec3d7bf135be4ea859bdd299618f7e2c

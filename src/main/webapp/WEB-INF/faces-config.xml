@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version='1.0' encoding='UTF-8'?>
 <faces-config xmlns="http://java.sun.com/xml/ns/javaee" version="2.0">
     <application>
@@ -67,4 +68,57 @@
             <value>#{proveedorDao}</value>
         </managed-property>
     </managed-bean>    
+=======
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee" version="2.0">
+    <application>
+        
+        <el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+
+        <locale-config>
+            <default-locale>es_MX</default-locale>
+            <supported-locale>es_MX</supported-locale>
+        </locale-config>
+    </application>
+
+    <managed-bean>
+        <managed-bean-name>usuariosBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.UsuariosBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>usuariosDao</property-name>
+            <property-class>com.ues.dao.UsuariosDao</property-class>
+            <value>#{usuariosDao}</value>
+        </managed-property>
+    </managed-bean>
+    
+    
+    
+     <managed-bean>
+        <managed-bean-name>personasBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.PersonasBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>personasDao</property-name>
+            <property-class>com.ues.dao.PersonasDao</property-class>
+            <value>#{personasDao}</value>
+        </managed-property>
+    </managed-bean>
+    
+    
+     <managed-bean>
+        <managed-bean-name>tipoUsuariosBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.TipoUsuariosBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>tipoUsuariosDao</property-name>
+            <property-class>com.ues.dao.TipoUsuariosDao</property-class>
+            <value>#{tipoUsuariosDao}</value>
+        </managed-property>
+    </managed-bean>
+    
+>>>>>>> 36b92f9eec3d7bf135be4ea859bdd299618f7e2c
 </faces-config>
