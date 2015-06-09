@@ -53,6 +53,7 @@ public class TipoUsuariosBean {
             e.printStackTrace();
             tipoUsuarioLista = new ArrayList<TipoUsuario>();
         }
+        tipoUsuario=new TipoUsuario();
         return tipoUsuarioLista;
     }
     

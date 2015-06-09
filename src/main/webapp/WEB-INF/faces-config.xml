@@ -49,4 +49,30 @@
         </managed-property>
     </managed-bean>
     
+    
+     <managed-bean>
+        <managed-bean-name>tipoProductosBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.TipoProductosBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>tipoProductosDao</property-name>
+            <property-class>com.ues.dao.TipoProductosDao</property-class>
+            <value>#{tipoProductosDao}</value>
+        </managed-property>
+    </managed-bean>
+    
+    
+     <managed-bean>
+        <managed-bean-name>tipoDevolucionesBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.TipoDevolucionesBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>tipoDevolucionesDao</property-name>
+            <property-class>com.ues.dao.TipoDevolucionesDao</property-class>
+            <value>#{tipoDevolucionesDao}</value>
+        </managed-property>
+    </managed-bean>
+    
 </faces-config>

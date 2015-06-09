@@ -13,13 +13,13 @@
         <h:body>
             <br/>
             <h3>Ejemplo de JSF 2.0, Spring 3, Hibernate 3, MySQL</h3>
-            <h4>Lista Tipos de Usuarios</h4>
+            <h4>Lista de Tipos de Producto</h4>
 
 
 
 
             <h:form id="formTable">
-                <p:dataTable id="tbl" var="tusu" value="#{tipoUsuariosBean.tipoUsuarioLista}"
+                <p:dataTable id="tbl" var="tprod" value="#{tipoProductosBean.tipoProductoLista}"
                              paginator="true" 
                              rows="5"  
                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"  
@@ -27,8 +27,8 @@
                              lazy="true"
                              resizableColumns="true"  
                              selectionMode="single"
-                             selection="#{tipoUsuariosBean.tipoUsuario}"
-                             rowKey="#{tipoUsuariosBean.idTipoUsuarioV}" 
+                             selection="#{tipoProductosBean.tipoProducto}"
+                             rowKey="#{tipoProductosBean.idTipoProductoV}" 
                              paginatorPosition="bottom">
 
 
@@ -37,33 +37,33 @@
                         <f:facet name="header">
                             <h:outputText value="Id" />
                         </f:facet>
-                        <h:outputText value="#{tusu.idTipoUsuario}" />
+                        <h:outputText value="#{tprod.idTipoProducto}" />
                     </p:column>
 
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="Tipo Usuario"/>
+                            <h:outputText value="Tipo Producto"/>
                         </f:facet>
-                        <h:outputText value="#{tusu.nombre}" />
+                        <h:outputText value="#{tprod.nombre}" />
                     </p:column>
 
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Descripcion" />
                         </f:facet>
-                        <h:outputText value="#{tusu.descripcion}" />
+                        <h:outputText value="#{tprod.descripcion}" />
                     </p:column>
 
 
                     <p:column headerText="">
                         <p:commandButton value=""  update=":formModificar" icon="ui-icon-pencil"   style="width:40px;height:40px"  onsuccess="PF('dlgmodificar').show();" >
-                            <f:setPropertyActionListener target="#{tipoUsuariosBean.tipoUsuario}" value="#{tusu}"/>
+                            <f:setPropertyActionListener target="#{tipoProductosBean.tipoProducto}" value="#{tprod}"/>
                         </p:commandButton>
                     </p:column>
 
                     <p:column headerText="">
                         <p:commandButton value="" icon="ui-icon-trash"   style="width:40px;height:40px" onclick="PF('dlgeliminar').show();" >
-                            <f:setPropertyActionListener target="#{tipoUsuariosBean.tipoUsuario}" value="#{tusu}"/>
+                            <f:setPropertyActionListener target="#{tipoProductosBean.tipoProducto}" value="#{tprod}"/>
                         </p:commandButton>
                     </p:column>
 
@@ -82,8 +82,8 @@
 
             <p:dialog id="dlg2" header="Eliminar Persona" showEffect="explode" hideEffect="explode" widgetVar="dlgeliminar" modal="true" resizable="false" minWidth="200">
                 <h:form id="formEliminar">
-                    <p:outputLabel value="¿Desea eliminar al Usuario?" />
-                    <p:commandButton actionListener="#{tipoUsuariosBean.eliminar}" value="Si" update=":formTable" onclick="PF('dlgeliminar').hide();"/>
+                    <p:outputLabel value="¿Desea eliminar?" />
+                    <p:commandButton actionListener="#{tipoProductosBean.eliminar}" value="Si" update=":formTable" onclick="PF('dlgeliminar').hide();"/>
                     <p:commandButton  value="No" onclick="PF('dlg2').hide();"/>
                 </h:form>
             </p:dialog>
@@ -91,15 +91,15 @@
             <p:dialog header="Modificar" widgetVar="dlgmodificar" modal="true" resizable="false">
                 <h:form id="formModificar">
                     <h:panelGrid id="modificar" columns="2" cellpadding="2">
-                        <p:outputLabel value="Id Tipo Usuario" />
-                        <p:inputText value="#{tipoUsuariosBean.tipoUsuario.idTipoUsuario}"/>
+                        <p:outputLabel value="Id" />
+                        <p:inputText value="#{tipoProductosBean.tipoProducto.idTipoProducto}"/>
                         <p:outputLabel value="Nombre" />
-                        <p:inputText value="#{tipoUsuariosBean.tipoUsuario.nombre}"/>
+                        <p:inputText value="#{tipoProductosBean.tipoProducto.nombre}"/>
                         <p:outputLabel value="Descripcion" />
-                        <p:inputText value="#{tipoUsuariosBean.tipoUsuario.descripcion}"/>
+                        <p:inputText value="#{tipoProductosBean.tipoProducto.descripcion}"/>
                     </h:panelGrid>
                     <p:growl id="growl3" life="5000" />
-                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{tipoUsuariosBean.updateTipoUsuario}" value="Modificar Tipo Usuario" styleClass="ui-priority-primary"  onsuccess="PF('dlgmodificar').hide();"/>
+                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{tipoProductosBean.updateTipoProducto}" value="Modificar Tipo Producto" styleClass="ui-priority-primary"  onsuccess="PF('dlgmodificar').hide();"/>
                 </h:form>
             </p:dialog>
 
@@ -108,15 +108,15 @@
             <p:dialog header="Insertar" widgetVar="dlginsertar" modal="true" resizable="false">
                 <h:form id="formInsertar">
                     <h:panelGrid  columns="2" cellpadding="2">
-                        <p:outputLabel value="Id Tipo Usuario" />
-                        <p:inputText value="#{tipoUsuariosBean.tipoUsuario.idTipoUsuario}"/>
+                        <p:outputLabel value="Id" />
+                        <p:inputText value="#{tipoProductosBean.tipoProducto.idTipoProducto}"/>
                         <p:outputLabel value="Nombre" />
-                        <p:inputText value="#{tipoUsuariosBean.tipoUsuario.nombre}"/>
+                        <p:inputText value="#{tipoProductosBean.tipoProducto.nombre}"/>
                         <p:outputLabel value="Descripcion" />
-                        <p:inputText value="#{tipoUsuariosBean.tipoUsuario.descripcion}"/>
+                        <p:inputText value="#{tipoProductosBean.tipoProducto.descripcion}"/>
                     </h:panelGrid>
                     <p:growl id="growl2" life="5000" />
-                    <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{tipoUsuariosBean.addTipoUsuario}" value="Insertar Tipo Usuario" styleClass="ui-priority-primary" onsuccess="PF('dlginsertar').hide();" >
+                    <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{tipoProductosBean.addTipoProducto}" value="Insertar Tipo Producto" styleClass="ui-priority-primary" onsuccess="PF('dlginsertar').hide();" >
                     </p:commandButton>
                 </h:form>
             </p:dialog>
