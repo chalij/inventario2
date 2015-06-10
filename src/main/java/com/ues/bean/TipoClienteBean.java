@@ -38,8 +38,10 @@ public class TipoClienteBean {
             miLista = getTipoclienteDao().listaTiposCliente();
             
         } catch (Exception e) {
+            miLista =new ArrayList<TipoCliente>();
             e.printStackTrace();
         }
+        tipocliente = new TipoCliente();
         return miLista;
     }
 

@@ -12,7 +12,7 @@
         </h:head>
         <h:body>
             <br/>
-       <h1>Personas</h1>
+            <h1>Personas</h1>
 
 
 
@@ -37,12 +37,12 @@
                         </f:facet>
                         <h:outputText value="#{per.idPersona}" />
                     </p:column>
-                    
-                     <p:column>
+
+                    <p:column>
                         <f:facet name="header">
                             <h:outputText value="Usuario"/>
                         </f:facet>
-                         <h:outputText value="#{per.usuario.nombreUsuario}" />
+                        <h:outputText value="#{per.usuario.nombreUsuario}" />
                     </p:column>
 
                     <p:column>
@@ -59,64 +59,64 @@
                         <h:outputText value="#{per.apellido}" />
                     </p:column>
 
-                    
+
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Género" />
                         </f:facet>
                         <h:outputText value="#{per.genero}" />
                     </p:column>
-                    
+
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="DUI" />
                         </f:facet>
                         <h:outputText value="#{per.dui}" />
                     </p:column>
-                    
+
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="NIT" />
                         </f:facet>
                         <h:outputText value="#{per.nit}" />
                     </p:column>
-                    
+
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Fecha Nac" />
                         </f:facet>
                         <h:outputText value="#{per.fechaNac}" />
                     </p:column>
-                    
+
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Dirección" />
                         </f:facet>
                         <h:outputText value="#{per.direccion}" />
                     </p:column>
-                    
-                    
+
+
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Correo" />
                         </f:facet>
                         <h:outputText value="#{per.correo}" />
                     </p:column>
-                    
-                    
+
+
                     <p:column headerText="">
                         <p:commandButton value=""  update=":formModificar" icon="ui-icon-pencil"   style="width:40px;height:40px"  onsuccess="PF('dlgmodificar').show();" >
                             <f:setPropertyActionListener target="#{personasBean.persona}" value="#{per}"/>
                         </p:commandButton>
                     </p:column>
-                    
+
                     <p:column headerText="">
                         <p:commandButton value="" icon="ui-icon-trash"   style="width:40px;height:40px" onclick="PF('dlgeliminar').show();" >
                             <f:setPropertyActionListener target="#{personasBean.persona}" value="#{per}"/>
                         </p:commandButton>
                     </p:column>
-                    
-                    
+
+
                     <f:facet name="footer">
                         <div class="footer-section">
 
@@ -124,8 +124,8 @@
 
                         </div>
                     </f:facet>
-                    
-                    
+
+
                 </p:dataTable>
             </h:form>
 
@@ -138,18 +138,19 @@
                     <p:commandButton  value="No" onclick="PF('dlg2').hide();"/>
                 </h:form>
             </p:dialog>
-            
-            
-            
+
+
+
             <p:dialog header="Modificar" widgetVar="dlgmodificar" modal="true" resizable="false">
                 <h:form id="formModificar">
                     <h:panelGrid id="modificar" columns="2" cellpadding="2">
                         <p:outputLabel value="Id de la persona" />
                         <p:inputText value="#{personasBean.persona.idPersona}"/>
-                        <!-- <p:outputLabel for="Usuario" value="Usuario:" />
-                         <p:selectOneMenu id="Usuario" value="#{personasBean.idusuarioU}">
-                             <f:selectItems  value="#{personasBean.miListaUsu}" />
-                        </p:selectOneMenu>-->
+                        <p:outputLabel for="Usuario" value="Usuario:" />
+                        <p:selectOneMenu id="Usuario" value="#{personasBean.idusuarioU}">
+                            <f:selectItems  value="#{personasBean.miListaUsu}" />
+                        </p:selectOneMenu>
+
                         <p:outputLabel value="Nombre de la persona" />
                         <p:inputText value="#{personasBean.persona.nombre}"/>
                         <p:outputLabel value="Apellido" />
@@ -160,7 +161,7 @@
                         <p:inputText value="#{personasBean.persona.dui}"/>
                         <p:outputLabel value="NIT" />
                         <p:inputText value="#{personasBean.persona.nit}"/>
-                        
+
                         <p:outputLabel for="button" value="Fecha Nac" />
                         <p:calendar id="button" value="#{personasBean.fecha}" showOn="button" />
                         <p:outputLabel value="Dirección" />
@@ -173,20 +174,17 @@
                 </h:form>
             </p:dialog>
 
-        
+
             <p:dialog header="Insertar" widgetVar="dlginsertar" modal="true" resizable="false">
                 <h:form id="formInsertar">
                     <h:panelGrid  columns="2"
                                   cellpadding="2">
-                        <p:outputLabel for="console" value="Basic:" />
-                        <p:selectOneMenu id="console" value="sdfgds" style="width:125px">
-                            <f:selectItems  value="#{personasBean.miListaUsu}" />
-                        </p:selectOneMenu>
-                       <p:outputLabel value="Id de la persona" />
+
+                        <p:outputLabel value="Id de la persona" />
                         <p:inputText value="#{personasBean.persona.idPersona}"/>
                         <p:outputLabel for="Usuario" value="Usuario:" />
-                         <p:selectOneMenu id="Usuario" value="#{personasBean.idusuarioU}">
-                             <f:selectItems  value="#{personasBean.miListaUsu}" />
+                        <p:selectOneMenu id="Usuario" value="#{personasBean.idusuarioU}">
+                            <f:selectItems  value="#{personasBean.miListaUsu}" />
                         </p:selectOneMenu>
                         <p:outputLabel value="Nombre de la persona" />
                         <p:inputText value="#{personasBean.persona.nombre}"/>
@@ -198,15 +196,15 @@
                         <p:inputText value="#{personasBean.persona.dui}"/>
                         <p:outputLabel value="NIT" />
                         <p:inputText value="#{personasBean.persona.nit}"/>
-                      
+
                         <p:outputLabel for="button" value="Fecha de Nacimiento:" />
                         <p:calendar id="button" value="#{personasBean.fecha}" showOn="button" />
                         <p:outputLabel value="Dirección" />
                         <p:inputText value="#{personasBean.persona.direccion}"/>
                         <p:outputLabel value="Correo Electrónico" />
                         <p:inputText value="#{personasBean.persona.correo}"/>
-                        
-       
+
+
                     </h:panelGrid>
                     <p:growl id="growl2" life="5000" />
                     <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{personasBean.addPersona}" value="Ingresar Persona" onsuccess="PF('dlginsertar').hide()" styleClass="ui-priority-primary" />

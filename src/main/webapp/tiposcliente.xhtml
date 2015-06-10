@@ -92,7 +92,7 @@
                      
                     </h:panelGrid>
                     <p:growl id="growl3" life="5000" />
-                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{tipoclienteBean.updateTipoCliente}" value="Ingresar Usuario" styleClass="ui-priority-primary" />
+                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{tipoclienteBean.updateTipoCliente}" value="Modificar Tipo Cliente" styleClass="ui-priority-primary" />
                 </h:form>
             </p:dialog>
 
@@ -102,10 +102,10 @@
                 <h:form id="formInsertar">
                     <h:panelGrid  columns="2"
                                   cellpadding="2">
-                        <p:outputLabel for="console" value="Basic:" />
-                        <p:selectOneMenu id="console" value="sdfgds" style="width:125px">
+                        
+                    
                             
-                        </p:selectOneMenu>
+                        
                         <p:outputLabel value="Id del Tipo Cliente" />
                         <p:inputText value="#{tipoclienteBean.tipocliente.idTipoCliente}"/>
                         <p:outputLabel value="Nombre" />
@@ -115,7 +115,7 @@
                        
                     </h:panelGrid>
                     <p:growl id="growl2" life="5000" />
-                    <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{tipoclienteBean.addTipoCliente}" value="Ingresar Usuario" styleClass="ui-priority-primary" />
+                    <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{tipoclienteBean.addTipoCliente}" value="Ingresar Tipo Cliente" styleClass="ui-priority-primary" />
                 </h:form>
             </p:dialog>
 

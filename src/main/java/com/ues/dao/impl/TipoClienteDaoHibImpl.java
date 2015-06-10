@@ -15,7 +15,7 @@ public class TipoClienteDaoHibImpl extends CustomHibernateDaoSupport implements 
 
         
     public void crearTipoCliente(TipoCliente tipocliente) throws DAOException {
-        getHibernateTemplate().saveOrUpdate(tipocliente);
+        getHibernateTemplate().save(tipocliente);
     }
 
     public TipoCliente buscaTipoCliente(Integer idTipoCliente) throws DAOException {
@@ -24,7 +24,7 @@ public class TipoClienteDaoHibImpl extends CustomHibernateDaoSupport implements 
     }
 
     public List<TipoCliente> listaTiposCliente() throws DAOException {
-        List<TipoCliente> lista = getHibernateTemplate().find("from TipoCliente");
+        List<TipoCliente> lista = getHibernateTemplate().find("from TipoCliente order by idTipoCliente");
         return lista;
     }
 
