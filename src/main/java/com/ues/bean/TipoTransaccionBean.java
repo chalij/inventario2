@@ -1,6 +1,6 @@
 package com.ues.bean;
 
-import static com.sun.javafx.logging.PulseLogger.addMessage;
+//import static com.sun.javafx.logging.PulseLogger.addMessage;
 import com.ues.dao.TipoTransaccionDao;
 import com.ues.model.TipoTransaccion;
 import java.text.ParseException;
