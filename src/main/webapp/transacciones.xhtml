@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view>
+        <h:head>
+            <title>Sistema de Inventario y Compras</title>
+
+        </h:head>
+        <h:body>
+            <br/>
+            <h1>Transacciones</h1>
+
+
+
+            <h:form id="formTable">
+                <p:dataTable id="tbl" var="tran" value="#{transaccionBean.miLista}"
+                             paginator="true" 
+                             rows="5"  
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"  
+                             rowsPerPageTemplate="5,10,15" 
+                             lazy="true"
+                             resizableColumns="true"  
+                             selectionMode="single"
+                             selection="#{transaccionBean.transaccion}"
+                             rowKey="#{transaccionBean.idTransaccionT}" 
+                             paginatorPosition="bottom">
+
+
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Id Transaccion" />
+                        </f:facet>
+                        <h:outputText value="#{tran.idTransaccion}" />
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Id Inventario"/>
+                        </f:facet>
+                        <h:outputText value="#{tran.inventario.idInventario}" />
+                    </p:column>
+                    
+                        
+                        
+                        
+                        <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Id Tipo Transacción"/>
+                        </f:facet>
+                            <h:outputText value="#{tran.tipoTransaccion.idTipoTransaccion}" />
+                    </p:column>
+                    
+                       
+                        
+                   <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Id Tipo Devolución"/>
+                        </f:facet>
+                       <h:outputText value="#{tran.devolucion.idDevolucion}" />
+                    </p:column>
+                       
+                        
+                        
+                        <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Id Requisición"/>
+                        </f:facet>
+                            <h:outputText value="#{tran.requisicion.idRequisicion}" />
+                    </p:column>
+                       
+                        
+                      <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Id Orden de Compra"/>
+                        </f:facet>
+                          <h:outputText value="#{tran.ordenDeCompra.idOrden}" />
+                    </p:column>
+                            
+                        
+
+                    
+                    <p:column headerText="">
+                        <p:commandButton value=""  update=":formModificar,:formInsertar" icon="ui-icon-pencil"   style="width:40px;height:40px"  onsuccess="PF('dlgmodificar').show();" >
+                            <f:setPropertyActionListener target="#{transaccionBean.transaccion}" value="#{tran}"/>
+                        </p:commandButton>
+                    </p:column>
+
+                    <p:column headerText="">
+                        <p:commandButton value="" icon="ui-icon-trash"   style="width:40px;height:40px" onclick="PF('dlgeliminar').show();" >
+                            <f:setPropertyActionListener target="#{transaccionBean.transaccion}" value="#{tran}"/>
+                        </p:commandButton>
+                    </p:column>
+
+                    <f:facet name="footer">
+                        <div class="footer-section">
+
+                            <p:commandButton update=":formTable" oncomplete="PF('dlginsertar').show()"   icon="ui-icon-plus"  style="width:40px;height:40px"   />
+
+                        </div>
+                    </f:facet>
+                </p:dataTable>
+            </h:form>
+
+            
+             <p:dialog id="dlg2" header="Eliminar Transaccion" showEffect="explode" hideEffect="explode" widgetVar="dlgeliminar" modal="true" resizable="false" minWidth="200">
+                <h:form id="formEliminar">
+                    <p:outputLabel value="¿Desea eliminar la Transacción?" />
+                    <p:commandButton actionListener="#{transaccionBean.eliminar}" value="Si" update=":formTable" onclick="PF('dlgeliminar').hide();"/>
+                    <p:commandButton  value="No" onclick="PF('dlg2').hide();"/>
+                </h:form>
+            </p:dialog>
+
+            <p:dialog header="Modificar" widgetVar="dlgmodificar" modal="true" resizable="false">
+                <h:form id="formModificar">
+                    <h:panelGrid id="modificar" columns="2" cellpadding="2">
+                        
+                        <p:outputLabel value="Id de Transaccion" />
+                        <p:inputText value="#{transaccionBean.transaccion.idTransaccion}"/>
+                        
+                        
+                        <p:outputLabel for="Inventario" value="Inventario:" />
+                        <p:selectOneMenu id="Inventario" value="#{transaccionBean.idInventarioI}">
+                            <f:selectItems  value="#{transaccionBean.listaitemI}" />
+                        </p:selectOneMenu>
+                        
+                        
+                       <p:outputLabel for="TipoTransaccion" value="Tipo Transaccion:" />
+                       <p:selectOneMenu id="TipoTransaccion" value="#{transaccionBean.idTipoTransaccionT}">
+                            <f:selectItems  value="#{transaccionBean.listaitemTT}" />
+                        </p:selectOneMenu>
+                       
+                       
+                       <p:outputLabel for="Devolucion" value="Devolución:" />
+                       <p:selectOneMenu id="Devolucion" value="#{transaccionBean.idDevolucionD}">
+                           <f:selectItems  value="#{transaccionBean.listaitemD}" />
+                        </p:selectOneMenu>
+                        
+                       
+                       <p:outputLabel for="Requisicion" value="Requisición:" />
+                       <p:selectOneMenu id="Requisicion" value="#{transaccionBean.idRequisicionR}">
+                       <f:selectItems  value="#{transaccionBean.listaitemI}" />
+                        </p:selectOneMenu>
+                       
+                        <p:outputLabel for="OrdenDeCompra" value="Órden de Compra:" />
+                        <p:selectOneMenu id="OrdenDeCompra" value="#{transaccionBean.idOrdenO}">
+                            <f:selectItems  value="#{transaccionBean.listaitemI}" />
+                        </p:selectOneMenu>
+                   
+                    </h:panelGrid>
+                    <p:growl id="growl3" life="5000" />
+                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{transaccionBean.updateTransaccion}" value="Modificar Teléfono" styleClass="ui-priority-primary"  onsuccess="PF('dlgmodificar').hide();" />
+                </h:form>
+            </p:dialog>
+            
+            
+            
+            
+            <p:dialog header="Insertar" widgetVar="dlginsertar" modal="true" resizable="false">
+                <h:form id="formInsertar">
+                    <h:panelGrid  columns="2"
+                                  cellpadding="2">
+                        
+                         
+                        <p:outputLabel value="Id de Transaccion" />
+                        <p:inputText value="#{transaccionBean.transaccion.idTransaccion}"/>
+                        
+                        
+                        <p:outputLabel for="Inventario" value="Inventario:" />
+                        <p:selectOneMenu id="Inventario" value="#{transaccionBean.idInventarioI}">
+                            <f:selectItems  value="#{transaccionBean.listaitemI}" />
+                        </p:selectOneMenu>
+                        
+                        
+                       <p:outputLabel for="TipoTransaccion" value="Tipo Transaccion:" />
+                       <p:selectOneMenu id="TipoTransaccion" value="#{transaccionBean.idTipoTransaccionT}">
+                            <f:selectItems  value="#{transaccionBean.listaitemTT}" />
+                        </p:selectOneMenu>
+                       
+                       
+                       <p:outputLabel for="Devolucion" value="Devolución:" />
+                       <p:selectOneMenu id="Devolucion" value="#{transaccionBean.idDevolucionD}">
+                           <f:selectItems  value="#{transaccionBean.listaitemD}" />
+                        </p:selectOneMenu>
+                        
+                       
+                       <p:outputLabel for="Requisicion" value="Requisición:" />
+                       <p:selectOneMenu id="Requisicion" value="#{transaccionBean.idRequisicionR}">
+                       <f:selectItems  value="#{transaccionBean.listaitemI}" />
+                        </p:selectOneMenu>
+                       
+                        <p:outputLabel for="OrdenDeCompra" value="Órden de Compra:" />
+                        <p:selectOneMenu id="OrdenDeCompra" value="#{transaccionBean.idOrdenO}">
+                            <f:selectItems  value="#{transaccionBean.listaitemI}" />
+                        </p:selectOneMenu>
+                   
+                        
+                    </h:panelGrid>
+                    <p:growl id="growl2" life="5000" />
+                    <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{transaccionBean.addTransaccion}" value="Insertar Transaccion" styleClass="ui-priority-primary"  onsuccess="PF('dlginsertar').hide();" />
+                </h:form>
+            </p:dialog>
+
+
+        </h:body>
+    </f:view>
+</html>
+

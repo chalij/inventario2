@@ -87,4 +87,71 @@
             <value>#{recursosDao}</value>
         </managed-property>
     </managed-bean>
+    
+    
+    
+    <managed-bean>
+        <managed-bean-name>tipoclienteBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.TipoClienteBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>tipoclienteDao</property-name>
+            <property-class>com.ues.dao.TipoClienteDao</property-class>
+            <value>#{tipoclienteDao}</value>
+        </managed-property>
+    </managed-bean>
+    
+    
+    
+    <managed-bean>
+        <managed-bean-name>clienteBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.ClienteBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>clienteDao</property-name>
+            <property-class>com.ues.dao.ClienteDao</property-class>
+            <value>#{clienteDao}</value>
+        </managed-property>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>tipotransaccionBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.TipoTransaccionBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>tipotransaccionDao</property-name>
+            <property-class>com.ues.dao.TipoTransaccionDao</property-class>
+            <value>#{tipotransaccionDao}</value>
+        </managed-property>
+    </managed-bean>
+    
+    
+    <managed-bean>
+        <managed-bean-name>telefonoBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.TelefonoBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>telefonoDao</property-name>
+            <property-class>com.ues.dao.TelefonoDao</property-class>
+            <value>#{telefonoDao}</value>
+        </managed-property>
+    </managed-bean>
+    
+    
+    
+     <managed-bean>
+        <managed-bean-name>transaccionBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.TransaccionBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>transaccionDao</property-name>
+            <property-class>com.ues.dao.TransaccionDao</property-class>
+            <value>#{transaccionDao}</value>
+        </managed-property>
+    </managed-bean>
 </faces-config>

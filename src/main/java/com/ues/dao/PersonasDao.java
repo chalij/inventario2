@@ -3,6 +3,7 @@ package com.ues.dao;
 
 import com.ues.exception.DAOException;
 import com.ues.model.Persona;
+import com.ues.model.Usuario;
 import java.util.List;
 
 /**
@@ -15,5 +16,6 @@ public interface PersonasDao {
    public List<Persona> listaPersonas() throws DAOException;
    public void modificarPersona(Persona persona) throws DAOException;
    public void borrarPersona(Persona persona) throws DAOException;
+   public List<Usuario> listaUsuarios() throws DAOException;
     
 }

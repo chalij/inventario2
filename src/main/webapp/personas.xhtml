@@ -4,146 +4,216 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xmlns:p="http://primefaces.org/ui">
     <f:view>
         <h:head>
-            <title>Ejemplo JSF 2.0, Spring 3, Hibernate 3</title>
-            <style type="text/css">
-                .celda {
-                    border: 1px;
-                    background-color: #eee;
-                }
-                .tabla {
-                    background-color: #ccc;
-                    width: 400px;
-                    font-family: "Arial";
-                }
-            </style>
+            <title>Sistema de Inventario y Compras</title>
+
         </h:head>
         <h:body>
             <br/>
-            <h3>Ejemplo de JSF 2.0, Spring 3, Hibernate 3, MySQL</h3>
-            <h4>Lista de personas del sistema</h4>
-            
-            
-            <h:form id="formInsertarPersonas">
-                <p:panelGrid columns="2">
+       <h1>Personas</h1>
 
-                    <p:outputLabel value="Id" />
-                    <p:inputText value="#{personasBean.persona.idPersona}"/>
-                    <p:outputLabel value="Id de Usuario" />
-                    <p:inputText value="#{personasBean.idusuarioU}"/>
 
-                    <p:outputLabel value="Nombre" />
-                    <p:inputText value="#{personasBean.persona.nombre}"/>
 
-                    <p:outputLabel value="Apellido" />
-                    <p:inputText value="#{personasBean.persona.apellido}"/>
+            <h:form id="formTable">
+                <p:dataTable id="tbl" var="per" value="#{personasBean.miLista}"
+                             paginator="true" 
+                             rows="5"  
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"  
+                             rowsPerPageTemplate="5,10,15" 
+                             lazy="true"
+                             resizableColumns="true"  
+                             selectionMode="single"
+                             selection="#{personasBean.persona}"
+                             rowKey="#{personasBean.idpersonaP}" 
+                             paginatorPosition="bottom">
 
-                    <p:outputLabel value="Genero" />
-                    <p:inputText value="#{personasBean.persona.genero}"/>
+
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Id" />
+                        </f:facet>
+                        <h:outputText value="#{per.idPersona}" />
+                    </p:column>
                     
-                    <p:outputLabel value="Dui" />
-                    <p:inputText value="#{personasBean.persona.dui}"/>
-                    
-                    <p:outputLabel value="Nit" />
-                    <p:inputText value="#{personasBean.persona.nit}"/>
-                    
-                    <p:outputLabel value="Dirección" />
-                    <p:inputText value="#{personasBean.persona.direccion}"/>
-                    
-                    <p:outputLabel value="Correo" />
-                    <p:inputText value="#{personasBean.persona.correo}"/>
-                   
-                    <p:outputLabel value="Fecha de Nacimiento" />
-                    <p:inputText value="#{personasBean.fechaV}"/>
+                     <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Usuario"/>
+                        </f:facet>
+                         <h:outputText value="#{per.usuario.nombreUsuario}" />
+                    </p:column>
 
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre"/>
+                        </f:facet>
+                        <h:outputText value="#{per.nombre}" />
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Apellido" />
+                        </f:facet>
+                        <h:outputText value="#{per.apellido}" />
+                    </p:column>
 
                     
-               </p:panelGrid>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Género" />
+                        </f:facet>
+                        <h:outputText value="#{per.genero}" />
+                    </p:column>
+                    
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="DUI" />
+                        </f:facet>
+                        <h:outputText value="#{per.dui}" />
+                    </p:column>
+                    
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="NIT" />
+                        </f:facet>
+                        <h:outputText value="#{per.nit}" />
+                    </p:column>
+                    
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Fecha Nac" />
+                        </f:facet>
+                        <h:outputText value="#{per.fechaNac}" />
+                    </p:column>
+                    
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Dirección" />
+                        </f:facet>
+                        <h:outputText value="#{per.direccion}" />
+                    </p:column>
+                    
+                    
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Correo" />
+                        </f:facet>
+                        <h:outputText value="#{per.correo}" />
+                    </p:column>
+                    
+                    
+                    <p:column headerText="">
+                        <p:commandButton value=""  update=":formModificar" icon="ui-icon-pencil"   style="width:40px;height:40px"  onsuccess="PF('dlgmodificar').show();" >
+                            <f:setPropertyActionListener target="#{personasBean.persona}" value="#{per}"/>
+                        </p:commandButton>
+                    </p:column>
+                    
+                    <p:column headerText="">
+                        <p:commandButton value="" icon="ui-icon-trash"   style="width:40px;height:40px" onclick="PF('dlgeliminar').show();" >
+                            <f:setPropertyActionListener target="#{personasBean.persona}" value="#{per}"/>
+                        </p:commandButton>
+                    </p:column>
+                    
+                    
+                    <f:facet name="footer">
+                        <div class="footer-section">
 
-                <p:growl id="growl2" life="2000" />
-                <p:commandButton id="ajax" update="growl2"  actionListener="#{personasBean.addPersona}" value="Ingresar Persona" styleClass="ui-priority-primary" />
+                            <p:commandButton update=":formTable" oncomplete="PF('dlginsertar').show()"   icon="ui-icon-plus"  style="width:40px;height:40px"   />
 
+                        </div>
+                    </f:facet>
+                    
+                    
+                </p:dataTable>
             </h:form>
-   
-        <h:form>
-            <p:dataTable id="tbl" var="persona" value="#{personasBean.miLista}"
-                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
-                         paginator="true" rows="10" style="margin-bottom:20px">
-                
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Id" />
-                    </f:facet>
-                    <h:outputText value="#{persona.idPersona}" />
-                </p:column>
-
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Nombre"/>
-                    </f:facet>
-                    <h:outputText value="#{persona.nombre}" />
-                </p:column>
-
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Apellido" />
-                    </f:facet>
-                    <h:outputText value="#{persona.apellido}" />
-                </p:column>
-            
 
 
-            
-          <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Genero" />
-                    </f:facet>
-                    <h:outputText value="#{persona.genero}" />
-                </p:column>
 
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="DUI"/>
-                    </f:facet>
-                    <h:outputText value="#{persona.dui}" />
-                </p:column>
-
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="NIT" />
-                    </f:facet>
-                    <h:outputText value="#{persona.nit}" />
-                </p:column>
+            <p:dialog id="dlg2" header="Eliminar Persona" showEffect="explode" hideEffect="explode" widgetVar="dlgeliminar" modal="true" resizable="false" minWidth="200">
+                <h:form id="formEliminar">
+                    <p:outputLabel value="¿Desea eliminar a la Persona?" />
+                    <p:commandButton actionListener="#{personasBean.eliminar}" value="Si" update=":formTable" onclick="PF('dlgeliminar').hide();"/>
+                    <p:commandButton  value="No" onclick="PF('dlg2').hide();"/>
+                </h:form>
+            </p:dialog>
             
             
-            <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Direccion" />
-                    </f:facet>
-                    <h:outputText value="#{persona.direccion}" />
-                </p:column>
+            
+            <p:dialog header="Modificar" widgetVar="dlgmodificar" modal="true" resizable="false">
+                <h:form id="formModificar">
+                    <h:panelGrid id="modificar" columns="2" cellpadding="2">
+                        <p:outputLabel value="Id de la persona" />
+                        <p:inputText value="#{personasBean.persona.idPersona}"/>
+                        <!-- <p:outputLabel for="Usuario" value="Usuario:" />
+                         <p:selectOneMenu id="Usuario" value="#{personasBean.idusuarioU}">
+                             <f:selectItems  value="#{personasBean.miListaUsu}" />
+                        </p:selectOneMenu>-->
+                        <p:outputLabel value="Nombre de la persona" />
+                        <p:inputText value="#{personasBean.persona.nombre}"/>
+                        <p:outputLabel value="Apellido" />
+                        <p:inputText value="#{personasBean.persona.apellido}"/>
+                        <p:outputLabel value="Genero" />
+                        <p:inputText value="#{personasBean.persona.genero}"/>
+                        <p:outputLabel value="DUI" />
+                        <p:inputText value="#{personasBean.persona.dui}"/>
+                        <p:outputLabel value="NIT" />
+                        <p:inputText value="#{personasBean.persona.nit}"/>
+                        
+                        <p:outputLabel for="button" value="Fecha Nac" />
+                        <p:calendar id="button" value="#{personasBean.fecha}" showOn="button" />
+                        <p:outputLabel value="Dirección" />
+                        <p:inputText value="#{personasBean.persona.direccion}"/>
+                        <p:outputLabel value="Correo Electrónico" />
+                        <p:inputText value="#{personasBean.persona.correo}"/>
+                    </h:panelGrid>
+                    <p:growl id="growl3" life="5000" />
+                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{personasBean.updatePersona}" value="Modificar Persona" onsuccess="PF('dlgmodificar').hide();" styleClass="ui-priority-primary" />
+                </h:form>
+            </p:dialog>
 
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Correo"/>
-                    </f:facet>
-                    <h:outputText value="#{persona.correo}" />
-                </p:column>
-                
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Fecha Nacimento"/>
-                    </f:facet>
-                    <h:outputText value="#{persona.fechaNac.day+1}/#{persona.fechaNac.month+1}/#{persona.fechaNac.year}" />
-                </p:column>
+        
+            <p:dialog header="Insertar" widgetVar="dlginsertar" modal="true" resizable="false">
+                <h:form id="formInsertar">
+                    <h:panelGrid  columns="2"
+                                  cellpadding="2">
+                        <p:outputLabel for="console" value="Basic:" />
+                        <p:selectOneMenu id="console" value="sdfgds" style="width:125px">
+                            <f:selectItems  value="#{personasBean.miListaUsu}" />
+                        </p:selectOneMenu>
+                       <p:outputLabel value="Id de la persona" />
+                        <p:inputText value="#{personasBean.persona.idPersona}"/>
+                        <p:outputLabel for="Usuario" value="Usuario:" />
+                         <p:selectOneMenu id="Usuario" value="#{personasBean.idusuarioU}">
+                             <f:selectItems  value="#{personasBean.miListaUsu}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Nombre de la persona" />
+                        <p:inputText value="#{personasBean.persona.nombre}"/>
+                        <p:outputLabel value="Apellido" />
+                        <p:inputText value="#{personasBean.persona.apellido}"/>
+                        <p:outputLabel value="Genero" />
+                        <p:inputText value="#{personasBean.persona.genero}"/>
+                        <p:outputLabel value="DUI" />
+                        <p:inputText value="#{personasBean.persona.dui}"/>
+                        <p:outputLabel value="NIT" />
+                        <p:inputText value="#{personasBean.persona.nit}"/>
+                      
+                        <p:outputLabel for="button" value="Fecha de Nacimiento:" />
+                        <p:calendar id="button" value="#{personasBean.fecha}" showOn="button" />
+                        <p:outputLabel value="Dirección" />
+                        <p:inputText value="#{personasBean.persona.direccion}"/>
+                        <p:outputLabel value="Correo Electrónico" />
+                        <p:inputText value="#{personasBean.persona.correo}"/>
+                        
+       
+                    </h:panelGrid>
+                    <p:growl id="growl2" life="5000" />
+                    <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{personasBean.addPersona}" value="Ingresar Persona" onsuccess="PF('dlginsertar').hide()" styleClass="ui-priority-primary" />
+                </h:form>
+            </p:dialog>
 
-               
-            </p:dataTable>
-              
-        </h:form>
+
         </h:body>
     </f:view>
 </html>
