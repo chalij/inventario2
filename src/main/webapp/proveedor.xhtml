@@ -1,20 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xmlns:p="http://primefaces.org/ui">
     <f:view>
         <h:head>
-            <title>Proveedor Info.</title>
+            <title>Datos de Proveedor</title>
         </h:head>
         <h:body>
             <br/>
-            <h1>Lista de Proveedores en el Sistema</h1>            
-        <h:form>
-            <p:dataTable id="tbl" var="prov" value="#{proveedorBean.miLista}"
+            <h1>Datos de Proveedor</h1>
+            <h:form id="formTable">
+                <p:dataTable id="tbl" var="prov" value="#{proveedorBean.miLista}"
                              paginator="true" 
                              rows="5"  
                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"  
@@ -25,51 +24,58 @@
                              selection="#{proveedorBean.proveedor}"
                              rowKey="#{proveedorBean.idProveedorV}" 
                              paginatorPosition="bottom">
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Id" />
-                    </f:facet>
-                    <h:outputText value="#{prov.idProveedor}" />
-                </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Id" />
+                        </f:facet>
+                        <h:outputText value="#{prov.idProveedor}" />
+                    </p:column>
 
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Nombre"/>
-                    </f:facet>
-                    <h:outputText value="#{prov.nombre}" />
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Correo"/>
-                    </f:facet>
-                    <h:outputText value="#{prov.correo}" />
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Nit" />
-                    </f:facet>
-                    <h:outputText value="#{prov.nit}" />
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Giro" />
-                    </f:facet>
-                    <h:outputText value="#{prov.giro}" />
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="NRC" />
-                    </f:facet>
-                    <h:outputText value="#{prov.nrc}" />
-                </p:column>
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Tipo de Proveedor" />
-                    </f:facet>
-                    <h:outputText value="#{prov.tipoProveedor.nombre}" />
-                </p:column>
-                
-                <p:column headerText="">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre"/>
+                        </f:facet>
+                        <h:outputText value="#{prov.nombre}" />
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Correo"/>
+                        </f:facet>
+                        <h:outputText value="#{prov.correo}" />
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nit" />
+                        </f:facet>
+                        <h:outputText value="#{prov.nit}" />
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Giro" />
+                        </f:facet>
+                        <h:outputText value="#{prov.giro}" />
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="NRC" />
+                        </f:facet>
+                        <h:outputText value="#{prov.nrc}" />
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tipo de Proveedor" />
+                        </f:facet>
+                        <h:outputText value="#{prov.tipoProveedor.nombre}" />
+                    </p:column>
+                    
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tipo de Proveedor" />
+                        </f:facet>
+                        <h:outputText value="#{prov.persona.nombre}" />
+                    </p:column>
+
+                    <p:column headerText="">
                         <p:commandButton value=""  update=":formModificar" icon="ui-icon-pencil"   style="width:40px;height:40px"  onsuccess="PF('dlgmodificar').show();" >
                             <f:setPropertyActionListener target="#{proveedorBean.proveedor}" value="#{prov}"/>
                         </p:commandButton>
@@ -80,11 +86,82 @@
                             <f:setPropertyActionListener target="#{proveedorBean.proveedor}" value="#{prov}"/>
                         </p:commandButton>
                     </p:column>
-                
-            </p:dataTable>
 
+                    <f:facet name="footer">
+                        <div class="footer-section">
 
-        </h:form>
+                            <p:commandButton update=":formInsertar" onsuccess="PF('dlginsertar').show()"  icon="ui-icon-plus"  style="width:40px;height:40px"   />
+
+                        </div>
+                    </f:facet>                
+
+                </p:dataTable>
+            </h:form>
+
+            <p:dialog id="dlg2" header="Eliminar Proveedor" showEffect="explode" hideEffect="explode" widgetVar="dlgeliminar" modal="true" resizable="false" minWidth="200">
+                <h:form id="formEliminar">
+                    <p:outputLabel value="¿Desea eliminar al Proveedor?" />
+                    <p:commandButton actionListener="#{proveedorBean.eliminar}" value="Si" update=":formTable" onclick="PF('dlgeliminar').hide();"/>
+                    <p:commandButton  value="No" onclick="PF('dlg2').hide();"/>
+                </h:form>
+            </p:dialog>
+
+            <p:dialog header="Modificar" widgetVar="dlgmodificar" modal="true" resizable="false">
+                <h:form id="formModificar">
+                    <h:panelGrid id="modificar" columns="2" cellpadding="2">
+                        <p:outputLabel value="Id del Proveedor" />
+                        <p:inputText value="#{proveedorBean.proveedor.idProveedor}"/>
+                        <p:outputLabel value="Tipo de Proveedor" />
+                        <p:selectOneMenu id="tipoProveedor" value="#{proveedorBean.tipoProveedorT}">
+                            <f:selectItems  value="#{proveedorBean.listaProv}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Nombre del Proveedor" />
+                        <p:inputText value="#{proveedorBean.proveedor.nombre}"/>
+                        <p:outputLabel value="Correo" />
+                        <p:inputText value="#{proveedorBean.proveedor.correo}"/>
+                        <p:outputLabel value="Nit" />
+                        <p:inputText value="#{proveedorBean.proveedor.nit}"/>                        
+                        <p:outputLabel value="Giro" />
+                        <p:inputText value="#{proveedorBean.proveedor.giro}"/>
+                        <p:outputLabel value="NRC" />
+                        <p:inputText value="#{proveedorBean.proveedor.nrc}"/>
+                    </h:panelGrid>
+                    <p:growl id="growl3" life="5000" />
+                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{proveedorBean.actualizaProveedor}" value="Modificar Proveedor" styleClass="ui-priority-primary"  onsuccess="PF('dlgmodificar').hide();"/>
+                </h:form>
+            </p:dialog>
+            
+            <p:dialog header="Insertar" widgetVar="dlginsertar" modal="true" resizable="false">
+                <h:form id="formInsertar">
+                    <h:panelGrid  columns="2"
+                                  cellpadding="2">
+                        <p:outputLabel value="Id del Proveedor" />
+                        <p:inputText value="#{proveedorBean.proveedor.idProveedor}"/>
+                        <p:outputLabel value="Tipo de Proveedor" />
+                        <p:selectOneMenu id="tipoProveedor" value="#{proveedorBean.tipoProveedorT}">
+                            <f:selectItems  value="#{proveedorBean.listaProv}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Persona..." />
+                        <p:selectOneMenu id="persona" value="#{proveedorBean.idPersonaP}">
+                            <f:selectItems  value="#{proveedorBean.listaPer}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Nombre del Proveedor" />
+                        <p:inputText value="#{proveedorBean.proveedor.nombre}"/>
+                        <p:outputLabel value="Correo" />
+                        <p:inputText value="#{proveedorBean.proveedor.correo}"/>
+                        <p:outputLabel value="Nit" />
+                        <p:inputText value="#{proveedorBean.proveedor.nit}"/>                        
+                        <p:outputLabel value="Giro" />
+                        <p:inputText value="#{proveedorBean.proveedor.giro}"/>
+                        <p:outputLabel value="NRC" />
+                        <p:inputText value="#{proveedorBean.proveedor.nrc}"/>
+                    </h:panelGrid>
+                    <p:growl id="growl2" life="5000" />
+                    <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{proveedorBean.addProveedor}" value="Ingresar Proveedor" styleClass="ui-priority-primary" onsuccess="PF('dlginsertar').hide();" >
+                    </p:commandButton>
+                </h:form>
+            </p:dialog>
+
         </h:body>
     </f:view>
 </html>

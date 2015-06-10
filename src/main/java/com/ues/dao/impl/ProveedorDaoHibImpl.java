@@ -3,6 +3,7 @@ package com.ues.dao.impl;
 import com.ues.dao.ProveedorDao;
 import com.ues.exception.DAOException;
 import com.ues.model.CustomHibernateDaoSupport;
+import com.ues.model.Persona;
 import com.ues.model.Proveedor;
 import com.ues.model.TipoProveedor;
 import java.util.List;
@@ -18,14 +19,26 @@ public class ProveedorDaoHibImpl extends CustomHibernateDaoSupport implements Pr
     }
 
     @Override
-    public Proveedor buscaProveedor(String buscaProveedor) throws DAOException {
-        List list = getHibernateTemplate().find(" from Proveedor WHERE id_proveedor=?",buscaProveedor);
+    public Proveedor buscaProveedor(int buscaProveedor) throws DAOException {
+        List list = getHibernateTemplate().find(" from Proveedor WHERE idProveedor=?",buscaProveedor);
         return (Proveedor) list.get(0);
     }
-
+    
+    @Override
+    public List<TipoProveedor> listaTipoProveedor() throws DAOException {
+        List<TipoProveedor> listaTp = getHibernateTemplate().find("from TipoProveedor tp order by tp.idTipoProveedor");
+        return listaTp;
+    } //arreglar el parametro sql de este metodo!!
+    
+    @Override
+    public List<Persona> listaPersona() throws DAOException {
+        List<Persona> listaP = getHibernateTemplate().find("from Persona p  order by p.idPersona");
+        return listaP;
+    }
+    
     @Override
     public List<Proveedor> listaProveedor() throws DAOException {
-        List<Proveedor> lista = getHibernateTemplate().find("from Proveedor");
+        List<Proveedor> lista = getHibernateTemplate().find("from Proveedor p inner join fetch p.tipoProveedor inner join fetch p.persona order by p.idProveedor");
         return lista;
     }
 
@@ -38,11 +51,5 @@ public class ProveedorDaoHibImpl extends CustomHibernateDaoSupport implements Pr
     public void borrarProveedor(Proveedor borraProveedor) throws DAOException {
         getHibernateTemplate().delete(borraProveedor);
     }
-
-    @Override
-    public List<TipoProveedor> listaTipoProveedor() throws DAOException {
-        List<TipoProveedor> lista = getHibernateTemplate().find("from Proveedor u  inner join fetch u.tipoUsuario order by u.idUsuario");
-        return lista;
-    } //arreglar el parametro sql de este metodo!!
     
 }

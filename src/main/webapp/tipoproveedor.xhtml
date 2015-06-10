@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xmlns:p="http://primefaces.org/ui">
     <f:view>
         <h:head>
@@ -15,7 +14,7 @@
             <br/>
             <h1>Lista de Tipos de Proveedores del sistema</h1> 
             <h:form id="formTable">
-                <p:dataTable id="tbl" var="tipoProveedor" value="#{tipoProveedorBean.miLista}"
+                <p:dataTable id="tbl" var="tipoPro" value="#{tipoProveedorBean.miLista}"
                              paginator="true"
                              rows="5"
                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"
@@ -23,7 +22,7 @@
                              lazy="true"
                              selectionMode="single"
                              selection="#{tipoProveedorBean.tipoProveedor}"
-                             rowKey="#{tipoProveedorBean.tipoProveedorV}" <!-- Para que sirve este int?-->
+                             rowKey="#{tipoProveedorBean.tipoProveedorV}" 
                              paginatorPosition="bottom">
 
 
@@ -32,38 +31,41 @@
                         <f:facet name="header">
                             <h:outputText value="Id" />
                         </f:facet>
-                        <h:outputText value="#{tipoProveedor.idTipoProveedor}" />
+                        <h:outputText value="#{tipoPro.idTipoProveedor}" />
                     </p:column>
 
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Tipo de Proveedor"/>
                         </f:facet>
-                        <h:outputText value="#{tipoProveedor.nombre}" />
+                        <h:outputText value="#{tipoPro.nombre}" />
                     </p:column>
 
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Descripcion" />
                         </f:facet>
-                        <h:outputText value="#{tipoProveedor.descripcion}" />
+                        <h:outputText value="#{tipoPro.descripcion}" />
                     </p:column>
+                    
                     <p:column headerText="">
                         <p:commandButton value=""  update=":formModificar" icon="ui-icon-pencil"   style="width:40px;height:40px"  onsuccess="PF('dlgmodificar').show();" >
-                            <f:setPropertyActionListener target="#{tipoProveedorBean.tipoProveedor}" value="#{tipoProveedor}"/>
+                            <f:setPropertyActionListener target="#{tipoProveedorBean.tipoProveedor}" value="#{tipoPro}"/>
                         </p:commandButton>
                     </p:column>
 
                     <p:column headerText="">
                         <p:commandButton value="" icon="ui-icon-trash"   style="width:40px;height:40px" onclick="PF('dlgeliminar').show();" >
-                            <f:setPropertyActionListener target="#{tipoProveedorBean.tipoProveedor}" value="#{tipoProveedor}"/>
+                            <f:setPropertyActionListener target="#{tipoProveedorBean.tipoProveedor}" value="#{tipoPro}"/>
                         </p:commandButton>
                     </p:column>
+                    
                     <f:facet name="footer">
                         <div class="footer-section">
-                            <p:commandButton update=":formTable" oncomplete="PF('dlginsertar').show()"   icon="ui-icon-plus"  style="width:40px;height:40px"/>
+                            <p:commandButton update=":formInsertar" oncomplete="PF('dlginsertar').show()"   icon="ui-icon-plus"  style="width:40px;height:40px"/>
                         </div>
                     </f:facet>
+                    
                 </p:dataTable>
             </h:form>
             
@@ -72,7 +74,7 @@
             <p:dialog id="dlg2" header="Eliminar Persona" showEffect="explode" hideEffect="explode" widgetVar="dlgeliminar" modal="true" resizable="false" minWidth="200">
                 <h:form id="formEliminar">
                     <p:outputLabel value="¿Desea eliminar este Tipo de Proveedor?" />
-                    <p:commandButton actionListener="#{tipoProveedorBean.eliminar()}" value="Si" update=":formTable" onclick="PF('dlgeliminar').hide();"/>
+                    <p:commandButton actionListener="#{tipoProveedorBean.eliminar}" value="Si" update=":formTable" onclick="PF('dlgeliminar').hide();"/>
                     <p:commandButton  value="No" onclick="PF('dlg2').hide();"/>
                 </h:form>
             </p:dialog>
@@ -88,7 +90,7 @@
                         <p:inputText value="#{tipoProveedorBean.tipoProveedor.descripcion}"/>
                     </h:panelGrid>
                     <p:growl id="growl3" life="5000" />
-                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{tipoProveedorBean.actualizar(actionEvent)}" value="Ingresar Tipo Proveedor" styleClass="ui-priority-primary"  onsuccess="PF('dlgmodificar').hide();"/>
+                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{tipoProveedorBean.actualizar}" value="Ingresar Tipo Proveedor" styleClass="ui-priority-primary"  onsuccess="PF('dlgmodificar').hide();"/>
                 </h:form>
             </p:dialog>
 
@@ -98,19 +100,16 @@
                 <h:form id="formInsertar">
                     <h:panelGrid  columns="2"
                                   cellpadding="2">
-                        <p:outputLabel value="Id del usuario" />
-                        <p:inputText value="#{usuariosBean.usuario.idUsuario}"/>
+                        <p:outputLabel value="Id del Tipo de Proveedor" />
+                        <p:inputText value="#{tipoProveedorBean.tipoProveedor.idTipoProveedor}"/>
                         <p:outputLabel value="Nombre del usuario" />
-                        <p:inputText value="#{usuariosBean.usuario.nombreUsuario}"/>
+                        <p:inputText value="#{tipoProveedorBean.tipoProveedor.nombre}"/>
                         <p:outputLabel value="Contraseña" />
-                        <p:inputText value="#{usuariosBean.usuario.contrasena}"/>
-                        <p:outputLabel for="console" value="Tipo de Usuario:" />
-                        <p:selectOneMenu id="console" value="#{usuariosBean.tipoUsuarioT}" style="width:125px">
-                            <f:selectItems  value="#{usuariosBean.listaUsu}" />
-                        </p:selectOneMenu>
+                        <p:inputText value="#{tipoProveedorBean.tipoProveedor.descripcion}"/>
                     </h:panelGrid>
                     <p:growl id="growl2" life="5000" />
-                    <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{usuariosBean.addUsuario}" value="Ingresar Usuario" styleClass="ui-priority-primary" onsuccess="PF('dlginsertar').hide();"/>
+                    <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{tipoProveedorBean.addTipoProveedor}" value="Ingresar Tipo de Proveedor" styleClass="ui-priority-primary" onsuccess="PF('dlginsertar').hide();">
+                    </p:commandButton>
                 </h:form>
             </p:dialog>
         </h:body>

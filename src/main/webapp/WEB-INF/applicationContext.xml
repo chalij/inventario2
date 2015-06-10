@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
        http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
@@ -17,14 +17,12 @@
         
         <property name="mappingResources">
             <list>
-    <!--
+                <!--
     Usuario
 INSERT INTO usuario VALUES (2,1,'Joy','123','02-02-2015',null);
 INSERT INTO usuario VALUES (3,1,'Samuel','123','02-02-2015',null);
 commit;
-
 Persona
-
 insert into persona VALUES (1,2,'Ligia','Aguilar','F','514541541','65465464','18/10/1988','Mi casa','ligia.jocelyn@gmail.com');
 commit;
                 -->
@@ -68,20 +66,23 @@ commit;
         
     </bean>
     
-    <bean id="bodegaDao" class="com.ues.dao.impl.BodegaDaoHibImpl">
-        <property name="sessionFactory" ref="mySessionFactory"/>
-    </bean>
-     
     <bean id="usuariosDao" class="com.ues.dao.impl.UsuariosDaoHibImpl">
         <property name="sessionFactory" ref="mySessionFactory"/>
     </bean>
+   
     
     
     <bean id="personasDao" class="com.ues.dao.impl.PersonasDaoHibImpl">
         <property name="sessionFactory" ref="mySessionFactory"/>
     </bean>
     
-<<<<<<< HEAD
+    
+    <bean id="tipoUsuariosDao" class="com.ues.dao.impl.TipoUsuariosDaoHibImpl">
+        <property name="sessionFactory" ref="mySessionFactory"/>
+    </bean>
+    <bean id="bodegaDao" class="com.ues.dao.impl.BodegaDaoHibImpl">
+        <property name="sessionFactory" ref="mySessionFactory"/>
+    </bean>
     <bean id="tipoProveedorDao" class="com.ues.dao.impl.TipoProveedorDaoHibImpl">
         <property name="sessionFactory" ref="mySessionFactory"/>
     </bean>
@@ -89,13 +90,9 @@ commit;
     <bean id="proveedorDao" class="com.ues.dao.impl.ProveedorDaoHibImpl">
         <property name="sessionFactory" ref="mySessionFactory"/>
     </bean>
-       
-</beans>
-=======
     
-     <bean id="tipoUsuariosDao" class="com.ues.dao.impl.TipoUsuariosDaoHibImpl">
+    <bean id="empleadosDao" class="com.ues.dao.impl.EmpleadoDaoHibImpl">
         <property name="sessionFactory" ref="mySessionFactory"/>
     </bean>
-    
+       
 </beans>
->>>>>>> 36b92f9eec3d7bf135be4ea859bdd299618f7e2c

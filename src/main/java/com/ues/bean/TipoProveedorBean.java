@@ -2,6 +2,7 @@ package com.ues.bean;
 
 import com.ues.dao.TipoProveedorDao;
 import com.ues.model.TipoProveedor;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -14,8 +15,8 @@ import javax.faces.event.ActionEvent;
 public class TipoProveedorBean {
 
     private TipoProveedor tipoProveedor = new TipoProveedor();
-    int tipoProveedorV;
-    private List<TipoProveedor> miLista;
+    private int tipoProveedorV;
+    private List<TipoProveedor> miLista = new ArrayList<TipoProveedor>();
     private TipoProveedorDao tipoProveedorDao;
     
     public TipoProveedorBean() {
@@ -40,10 +41,12 @@ public class TipoProveedorBean {
     
     public List<TipoProveedor> getMiLista() {
         try {
-            miLista = getTipoProveedorDao().listaTipoProveedor();
+            miLista = tipoProveedorDao.listaTipoProveedor();
         } catch (Exception e) {
             e.printStackTrace();
+            miLista = new ArrayList<TipoProveedor>();
         }
+        tipoProveedor = new TipoProveedor();
         return miLista;
     }
 
@@ -57,6 +60,22 @@ public class TipoProveedorBean {
 
     public void setTipoProveedorDao(TipoProveedorDao tipoProveedorDao) {
         this.tipoProveedorDao = tipoProveedorDao;
+    }
+    
+    public void addTipoProveedor(ActionEvent actionEvent) {
+        try {
+            TipoProveedor tip = new TipoProveedor();
+            tip.setIdTipoProveedor(tipoProveedor.getIdTipoProveedor());
+            tip.setNombre(tipoProveedor.getNombre());
+            tip.setDescripcion(tipoProveedor.getDescripcion());
+            tipoProveedorDao.crearTipoProveedor(tip);
+            tipoProveedor = new TipoProveedor();
+            addMessage("Insertado: " + tip.getNombre());
+        } catch (Exception e) {
+            addMessage("Error Id:!!" + e.getMessage());
+            e.printStackTrace();
+        }
+
     }
     
     public void eliminar() {

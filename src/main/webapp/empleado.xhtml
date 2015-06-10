@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view>
+        <h:head>
+            <title>Datos empleado</title>
+        </h:head>
+        <h:body>
+            <br/>
+            <h1>Lista de Empleados del sistema</h1>
+            <h:form id="formTable">
+                <p:dataTable id="tbl" var="emp" value="#{empleadoBean.miLista}"
+                             paginator="true" 
+                             rows="5"  
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"  
+                             rowsPerPageTemplate="5,10,15" 
+                             lazy="true"
+                             resizableColumns="true"  
+                             selectionMode="single"
+                             selection="#{empleadoBean.empleado}"
+                             rowKey="#{empleadoBean.idEmpleadoE}" 
+                             paginatorPosition="bottom">
+
+
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Id" />
+                        </f:facet>
+                        <h:outputText value="#{emp.idEmpleado}" />
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Persona Empleado"/>
+                        </f:facet>
+                        <h:outputText value="#{emp.persona.nombre}" />
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Rol" />
+                        </f:facet>
+                        <h:outputText value="#{emp.rol}" />
+                    </p:column>
+
+                    <p:column headerText="">
+                        <p:commandButton value=""  update=":formModificar" icon="ui-icon-pencil"   style="width:40px;height:40px"  onsuccess="PF('dlgmodificar').show();" >
+                            <f:setPropertyActionListener target="#{empleadoBean.empleado}" value="#{emp}"/>
+                        </p:commandButton>
+                    </p:column>
+
+                    <p:column headerText="">
+                        <p:commandButton value="" icon="ui-icon-trash"   style="width:40px;height:40px" onclick="PF('dlgeliminar').show();" >
+                            <f:setPropertyActionListener target="#{empleadoBean.empleado}" value="#{emp}"/>
+                        </p:commandButton>
+                    </p:column>
+
+                    <f:facet name="footer">
+                        <div class="footer-section">
+
+                            <p:commandButton update=":formInsertar" onsuccess="PF('dlginsertar').show()"  icon="ui-icon-plus"  style="width:40px;height:40px"   />
+
+                        </div>
+                    </f:facet>
+                </p:dataTable>
+            </h:form>
+
+
+            <p:dialog id="dlg2" header="Eliminar Empleado" showEffect="explode" hideEffect="explode" widgetVar="dlgeliminar" modal="true" resizable="false" minWidth="200">
+                <h:form id="formEliminar">
+                    <p:outputLabel value="¿Desea eliminar al Empleado?" />
+                    <p:commandButton actionListener="#{empleadoBean.eliminar}" value="Si" update=":formTable" onclick="PF('dlgeliminar').hide();"/>
+                    <p:commandButton  value="No" onclick="PF('dlg2').hide();"/>
+                </h:form>
+            </p:dialog>
+
+            <p:dialog header="Modificar" widgetVar="dlgmodificar" modal="true" resizable="false">
+                <h:form id="formModificar">
+                    <h:panelGrid id="modificar" columns="2" cellpadding="2">
+                        <p:outputLabel value="Id del Empleado" />
+                        <p:inputText value="#{empleadoBean.empleado.idEmpleado}"/>
+                        <p:outputLabel for="empleado" value="Persona Empleado/a:" />
+                        <p:selectOneMenu id="empleado" value="#{empleadoBean.idPersonaP}">
+                            <f:selectItems  value="#{empleadoBean.listaEmp}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Rol" />
+                        <p:inputText value="#{empleadoBean.empleado.rol}"/>
+                    </h:panelGrid>
+                    <p:growl id="growl3" life="5000" />
+                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{empleadoBean.updateUsuario}" value="Modificar Empleado" styleClass="ui-priority-primary"  onsuccess="PF('dlgmodificar').hide();"/>
+                </h:form>
+            </p:dialog>
+
+
+
+            <p:dialog header="Insertar" widgetVar="dlginsertar" modal="true" resizable="false">
+                <h:form id="formInsertar">
+                    <h:panelGrid  columns="2"
+                                  cellpadding="2">
+                        <p:outputLabel value="Id del Empleado" />
+                        <p:inputText value="#{empleadoBean.empleado.idEmpleado}"/>
+                        <p:outputLabel for="empleado" value="Persona Empleado/a:" />
+                        <p:selectOneMenu id="empleado" value="#{empleadoBean.idPersonaP}">
+                            <f:selectItems  value="#{empleadoBean.listaEmp}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Rol" />
+                        <p:inputText value="#{empleadoBean.empleado.rol}"/>
+                    </h:panelGrid>
+                    <p:growl id="growl2" life="5000" />
+                    <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{empleadoBean.addEmpleado}" value="Ingresar Empleado" styleClass="ui-priority-primary" onsuccess="PF('dlginsertar').hide();" >
+                    </p:commandButton>
+                </h:form>
+            </p:dialog>
+
+
+        </h:body>
+    </f:view>
+</html>
