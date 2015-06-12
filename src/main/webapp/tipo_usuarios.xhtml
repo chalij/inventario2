@@ -13,7 +13,7 @@
         <h:body>
             <br/>
             <h3>Ejemplo de JSF 2.0, Spring 3, Hibernate 3, MySQL</h3>
-            <h4>Lista de usuarios del sistema</h4>
+            <h4>Lista Tipos de Usuarios</h4>
 
 
 
@@ -42,14 +42,14 @@
 
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="Nombre"/>
+                            <h:outputText value="Tipo Usuario"/>
                         </f:facet>
                         <h:outputText value="#{tusu.nombre}" />
                     </p:column>
 
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="Contraseña" />
+                            <h:outputText value="Descripcion" />
                         </f:facet>
                         <h:outputText value="#{tusu.descripcion}" />
                     </p:column>
@@ -80,9 +80,9 @@
 
 
 
-            <p:dialog id="dlg2" header="Eliminar Persona" showEffect="explode" hideEffect="explode" widgetVar="dlgeliminar" modal="true" resizable="false" minWidth="200">
+            <p:dialog id="dlg2" header="Eliminar Tipo Usuario" showEffect="explode" hideEffect="explode" widgetVar="dlgeliminar" modal="true" resizable="false" minWidth="200">
                 <h:form id="formEliminar">
-                    <p:outputLabel value="¿Desea eliminar al Usuario?" />
+                    <p:outputLabel value="¿Desea eliminar al Tipo Usuario?" />
                     <p:commandButton actionListener="#{tipoUsuariosBean.eliminar}" value="Si" update=":formTable" onclick="PF('dlgeliminar').hide();"/>
                     <p:commandButton  value="No" onclick="PF('dlg2').hide();"/>
                 </h:form>
@@ -93,7 +93,7 @@
                     <h:panelGrid id="modificar" columns="2" cellpadding="2">
                         <p:outputLabel value="Id Tipo Usuario" />
                         <p:inputText value="#{tipoUsuariosBean.tipoUsuario.idTipoUsuario}"/>
-                        <p:outputLabel value="Nombre" />
+                        <p:outputLabel value="Tipo Usuario" />
                         <p:inputText value="#{tipoUsuariosBean.tipoUsuario.nombre}"/>
                         <p:outputLabel value="Descripcion" />
                         <p:inputText value="#{tipoUsuariosBean.tipoUsuario.descripcion}"/>
@@ -110,13 +110,13 @@
                     <h:panelGrid  columns="2" cellpadding="2">
                         <p:outputLabel value="Id Tipo Usuario" />
                         <p:inputText value="#{tipoUsuariosBean.tipoUsuario.idTipoUsuario}"/>
-                        <p:outputLabel value="Nombre" />
+                        <p:outputLabel value="Tipo Usuario" />
                         <p:inputText value="#{tipoUsuariosBean.tipoUsuario.nombre}"/>
                         <p:outputLabel value="Descripcion" />
                         <p:inputText value="#{tipoUsuariosBean.tipoUsuario.descripcion}"/>
                     </h:panelGrid>
                     <p:growl id="growl2" life="5000" />
-                    <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{tipoUsuariosBean.addTipoUsuario}" value="Modificar Tipo Usuario" styleClass="ui-priority-primary" onsuccess="PF('dlginsertar').hide();" >
+                    <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{tipoUsuariosBean.addTipoUsuario}" value="Insertar Tipo Usuario" styleClass="ui-priority-primary" onsuccess="PF('dlginsertar').hide();" >
                     </p:commandButton>
                 </h:form>
             </p:dialog>

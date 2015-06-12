@@ -22,7 +22,7 @@
                              resizableColumns="true"  
                              selectionMode="single"
                              selection="#{proveedorBean.proveedor}"
-                             rowKey="#{proveedorBean.idProveedorV}" 
+                             rowKey="#{proveedorBean.idProveedorProv}" 
                              paginatorPosition="bottom">
                     <p:column>
                         <f:facet name="header">
@@ -67,10 +67,10 @@
                         </f:facet>
                         <h:outputText value="#{prov.tipoProveedor.nombre}" />
                     </p:column>
-                    
+
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="Tipo de Proveedor" />
+                            <h:outputText value="Tipo de Persona" />
                         </f:facet>
                         <h:outputText value="#{prov.persona.nombre}" />
                     </p:column>
@@ -112,8 +112,12 @@
                         <p:outputLabel value="Id del Proveedor" />
                         <p:inputText value="#{proveedorBean.proveedor.idProveedor}"/>
                         <p:outputLabel value="Tipo de Proveedor" />
-                        <p:selectOneMenu id="tipoProveedor" value="#{proveedorBean.tipoProveedorT}">
-                            <f:selectItems  value="#{proveedorBean.listaProv}" />
+                        <p:selectOneMenu id="tipoProveedor" value="#{proveedorBean.idTipoProveedorTP}">
+                            <f:selectItems  value="#{proveedorBean.listaProveedor2}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Persona..." />
+                        <p:selectOneMenu id="persona" value="#{proveedorBean.idPersonaP}">
+                            <f:selectItems  value="#{proveedorBean.listaProveedor}" />
                         </p:selectOneMenu>
                         <p:outputLabel value="Nombre del Proveedor" />
                         <p:inputText value="#{proveedorBean.proveedor.nombre}"/>
@@ -127,10 +131,10 @@
                         <p:inputText value="#{proveedorBean.proveedor.nrc}"/>
                     </h:panelGrid>
                     <p:growl id="growl3" life="5000" />
-                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{proveedorBean.actualizaProveedor}" value="Modificar Proveedor" styleClass="ui-priority-primary"  onsuccess="PF('dlgmodificar').hide();"/>
+                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{proveedorBean.updateProveedor}" value="Modificar Proveedor" styleClass="ui-priority-primary"  onsuccess="PF('dlgmodificar').hide();"/>
                 </h:form>
             </p:dialog>
-            
+
             <p:dialog header="Insertar" widgetVar="dlginsertar" modal="true" resizable="false">
                 <h:form id="formInsertar">
                     <h:panelGrid  columns="2"
@@ -138,12 +142,12 @@
                         <p:outputLabel value="Id del Proveedor" />
                         <p:inputText value="#{proveedorBean.proveedor.idProveedor}"/>
                         <p:outputLabel value="Tipo de Proveedor" />
-                        <p:selectOneMenu id="tipoProveedor" value="#{proveedorBean.tipoProveedorT}">
-                            <f:selectItems  value="#{proveedorBean.listaProv}" />
+                        <p:selectOneMenu id="tipoProveedor" value="#{proveedorBean.idTipoProveedorTP}">
+                            <f:selectItems  value="#{proveedorBean.listaProveedor2}" />
                         </p:selectOneMenu>
                         <p:outputLabel value="Persona..." />
                         <p:selectOneMenu id="persona" value="#{proveedorBean.idPersonaP}">
-                            <f:selectItems  value="#{proveedorBean.listaPer}" />
+                            <f:selectItems  value="#{proveedorBean.listaProveedor}" />
                         </p:selectOneMenu>
                         <p:outputLabel value="Nombre del Proveedor" />
                         <p:inputText value="#{proveedorBean.proveedor.nombre}"/>

@@ -7,13 +7,19 @@
       xmlns:p="http://primefaces.org/ui">
     <f:view>
         <h:head>
-            <title>Datos empleado</title>
+            <title>Ejemplo JSF 2.0, Spring 3, Hibernate 3</title>
+
         </h:head>
         <h:body>
             <br/>
-            <h1>Lista de Empleados del sistema</h1>
+            <h3>Ejemplo de JSF 2.0, Spring 3, Hibernate 3, MySQL</h3>
+            <h4>Lista de Recursos</h4>
+
+
+
+
             <h:form id="formTable">
-                <p:dataTable id="tbl" var="emp" value="#{empleadoBean.miLista}"
+                <p:dataTable id="tbl" var="rec" value="#{recursosBean.miLista}"
                              paginator="true" 
                              rows="5"  
                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"  
@@ -21,40 +27,44 @@
                              lazy="true"
                              resizableColumns="true"  
                              selectionMode="single"
-                             selection="#{empleadoBean.empleado}"
-                             rowKey="#{empleadoBean.idEmpleadoE}" 
+                             selection="#{recursosBean.recursos}"
+                             rowKey="#{recursosBean.idRecursoV}" 
                              paginatorPosition="bottom">
-                    
+
+
+
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Id" />
                         </f:facet>
-                        <h:outputText value="#{emp.idEmpleado}" />
+                        <h:outputText value="#{rec.idRecurso}" />
                     </p:column>
 
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="Persona Empleado"/>
+                            <h:outputText value="URL"/>
                         </f:facet>
-                        <h:outputText value="#{emp.persona.nombre}" />
+                        <h:outputText value="#{rec.url}" />
                     </p:column>
 
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="Rol" />
+                            <h:outputText value="Tipo Usuario" />
                         </f:facet>
-                        <h:outputText value="#{emp.rol}" />
+                        <h:outputText value="#{rec.tipoUsuario.nombre}" />
                     </p:column>
+
+
 
                     <p:column headerText="">
                         <p:commandButton value=""  update=":formModificar" icon="ui-icon-pencil"   style="width:40px;height:40px"  onsuccess="PF('dlgmodificar').show();" >
-                            <f:setPropertyActionListener target="#{empleadoBean.empleado}" value="#{emp}"/>
+                            <f:setPropertyActionListener target="#{recursosBean.recursos}" value="#{rec}"/>
                         </p:commandButton>
                     </p:column>
 
                     <p:column headerText="">
                         <p:commandButton value="" icon="ui-icon-trash"   style="width:40px;height:40px" onclick="PF('dlgeliminar').show();" >
-                            <f:setPropertyActionListener target="#{empleadoBean.empleado}" value="#{emp}"/>
+                            <f:setPropertyActionListener target="#{recursosBean.recursos}" value="#{rec}"/>
                         </p:commandButton>
                     </p:column>
 
@@ -69,10 +79,10 @@
             </h:form>
 
 
-            <p:dialog id="dlg2" header="Eliminar Empleado" showEffect="explode" hideEffect="explode" widgetVar="dlgeliminar" modal="true" resizable="false" minWidth="200">
+            <p:dialog id="dlg2" header="Eliminar Recurso" showEffect="explode" hideEffect="explode" widgetVar="dlgeliminar" modal="true" resizable="false" minWidth="200">
                 <h:form id="formEliminar">
-                    <p:outputLabel value="¿Desea eliminar al Empleado?" />
-                    <p:commandButton actionListener="#{empleadoBean.eliminar}" value="Si" update=":formTable" onclick="PF('dlgeliminar').hide();"/>
+                    <p:outputLabel value="¿Desea eliminar Recurso?" />
+                    <p:commandButton actionListener="#{recursosBean.eliminar}" value="Si" update=":formTable" onclick="PF('dlgeliminar').hide();"/>
                     <p:commandButton  value="No" onclick="PF('dlg2').hide();"/>
                 </h:form>
             </p:dialog>
@@ -80,17 +90,17 @@
             <p:dialog header="Modificar" widgetVar="dlgmodificar" modal="true" resizable="false">
                 <h:form id="formModificar">
                     <h:panelGrid id="modificar" columns="2" cellpadding="2">
-                        <p:outputLabel value="Id del Empleado" />
-                        <p:inputText value="#{empleadoBean.empleado.idEmpleado}"/>
-                        <p:outputLabel for="empleado" value="Persona Empleado/a:" />
-                        <p:selectOneMenu id="empleado" value="#{empleadoBean.idPersonaP}">
-                            <f:selectItems  value="#{empleadoBean.listaEmpleado}" />
+                        <p:outputLabel value="Id del Recursos" />
+                        <p:inputText value="#{recursosBean.recursos.idRecurso}"/>
+                        <p:outputLabel value="URL" />
+                        <p:inputText value="#{recursosBean.recursos.url}"/>
+                        <p:outputLabel for="tipoUsuario" value="Tipo de Usuario:" />
+                        <p:selectOneMenu id="tipoUsuario" value="#{recursosBean.tipoUsuarioT}">
+                            <f:selectItems  value="#{recursosBean.listaUsu}" />
                         </p:selectOneMenu>
-                        <p:outputLabel value="Rol" />
-                        <p:inputText value="#{empleadoBean.empleado.rol}"/>
                     </h:panelGrid>
                     <p:growl id="growl3" life="5000" />
-                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{empleadoBean.updateEmpleado}" value="Modificar Empleado" styleClass="ui-priority-primary"  onsuccess="PF('dlgmodificar').hide();"/>
+                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{recursosBean.updateRecursos}" value="Modificar Recursos" styleClass="ui-priority-primary"  onsuccess="PF('dlgmodificar').hide();"/>
                 </h:form>
             </p:dialog>
 
@@ -100,17 +110,17 @@
                 <h:form id="formInsertar">
                     <h:panelGrid  columns="2"
                                   cellpadding="2">
-                        <p:outputLabel value="Id del Empleado" />
-                        <p:inputText value="#{empleadoBean.empleado.idEmpleado}"/>
-                        <p:outputLabel for="empleado" value="Persona Empleado/a:" />
-                        <p:selectOneMenu id="empleado" value="#{empleadoBean.idPersonaP}">
-                            <f:selectItems  value="#{empleadoBean.listaEmpleado}" />
+                        <p:outputLabel value="Id del Recursos" />
+                        <p:inputText value="#{recursosBean.recursos.idRecurso}"/>
+                        <p:outputLabel value="URL" />
+                        <p:inputText value="#{recursosBean.recursos.url}"/>
+                        <p:outputLabel for="tipoUsuario" value="Tipo de Usuario:" />
+                        <p:selectOneMenu id="tipoUsuario" value="#{recursosBean.tipoUsuarioT}">
+                            <f:selectItems  value="#{recursosBean.listaUsu}" />
                         </p:selectOneMenu>
-                        <p:outputLabel value="Rol" />
-                        <p:inputText value="#{empleadoBean.empleado.rol}"/>
                     </h:panelGrid>
                     <p:growl id="growl2" life="5000" />
-                    <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{empleadoBean.addEmpleado}" value="Ingresar Empleado" styleClass="ui-priority-primary" onsuccess="PF('dlginsertar').hide();" >
+                    <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{recursosBean.addRecursos}" value="Ingresar Recursos" styleClass="ui-priority-primary" onsuccess="PF('dlginsertar').hide();" >
                     </p:commandButton>
                 </h:form>
             </p:dialog>

@@ -14,7 +14,7 @@ import java.util.List;
 public class EmpleadoDaoHibImpl extends CustomHibernateDaoSupport implements EmpleadosDao{
     @Override
     public void crearEmpleado(Empleado creaEmpleado) throws DAOException {
-        getHibernateTemplate().save(creaEmpleado);
+        getHibernateTemplate().saveOrUpdate(creaEmpleado);
     }
 
     @Override
@@ -25,23 +25,23 @@ public class EmpleadoDaoHibImpl extends CustomHibernateDaoSupport implements Emp
 
      @Override
     public List<Persona> listaPersonas() throws DAOException {
-        List<Persona> lista = getHibernateTemplate().find("from Persona per order by per.idPersona");        
+        List<Persona> lista = getHibernateTemplate().find("from Persona p order by p.idPersona");        
         return lista;
     }
     
     @Override
     public List<Empleado> listaEmpleados() throws DAOException {
-        List<Empleado> lista = getHibernateTemplate().find("from Empleado emp  inner join fetch emp.persona order by emp.idEmpleado");        
+        List<Empleado> lista = getHibernateTemplate().find("from Empleado e  inner join fetch e.persona  order by e.idEmpleado");
         return lista;
     }
 
     @Override
     public void borrarEmpleados(Empleado borraEmpleado) throws DAOException {
-        getHibernateTemplate().update(borraEmpleado);
+        getHibernateTemplate().delete(borraEmpleado);
     }
 
     @Override
     public void modificarEmpleados(Empleado modificaEmpleado) throws DAOException {
-        getHibernateTemplate().delete(modificaEmpleado);
+        getHibernateTemplate().update(modificaEmpleado);
     }    
 }

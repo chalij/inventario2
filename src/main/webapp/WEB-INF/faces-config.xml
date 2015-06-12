@@ -24,7 +24,7 @@
     
     
     
-    <managed-bean>
+     <managed-bean>
         <managed-bean-name>personasBean</managed-bean-name>
         <managed-bean-class>com.ues.bean.PersonasBean</managed-bean-class>
     
@@ -37,7 +37,7 @@
     </managed-bean>
     
     
-    <managed-bean>
+     <managed-bean>
         <managed-bean-name>tipoUsuariosBean</managed-bean-name>
         <managed-bean-class>com.ues.bean.TipoUsuariosBean</managed-bean-class>
     
@@ -46,6 +46,112 @@
             <property-name>tipoUsuariosDao</property-name>
             <property-class>com.ues.dao.TipoUsuariosDao</property-class>
             <value>#{tipoUsuariosDao}</value>
+        </managed-property>
+    </managed-bean>
+    
+    
+     <managed-bean>
+        <managed-bean-name>tipoProductosBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.TipoProductosBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>tipoProductosDao</property-name>
+            <property-class>com.ues.dao.TipoProductosDao</property-class>
+            <value>#{tipoProductosDao}</value>
+        </managed-property>
+    </managed-bean>
+    
+    
+     <managed-bean>
+        <managed-bean-name>tipoDevolucionesBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.TipoDevolucionesBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>tipoDevolucionesDao</property-name>
+            <property-class>com.ues.dao.TipoDevolucionesDao</property-class>
+            <value>#{tipoDevolucionesDao}</value>
+        </managed-property>
+    </managed-bean>
+    
+    
+     <managed-bean>
+        <managed-bean-name>recursosBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.RecursosBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>recursosDao</property-name>
+            <property-class>com.ues.dao.RecursosDao</property-class>
+            <value>#{recursosDao}</value>
+        </managed-property>
+    </managed-bean>
+    
+    
+    
+    <managed-bean>
+        <managed-bean-name>tipoclienteBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.TipoClienteBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>tipoclienteDao</property-name>
+            <property-class>com.ues.dao.TipoClienteDao</property-class>
+            <value>#{tipoclienteDao}</value>
+        </managed-property>
+    </managed-bean>
+    
+    
+    
+    <managed-bean>
+        <managed-bean-name>clienteBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.ClienteBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>clienteDao</property-name>
+            <property-class>com.ues.dao.ClienteDao</property-class>
+            <value>#{clienteDao}</value>
+        </managed-property>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>tipotransaccionBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.TipoTransaccionBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>tipotransaccionDao</property-name>
+            <property-class>com.ues.dao.TipoTransaccionDao</property-class>
+            <value>#{tipotransaccionDao}</value>
+        </managed-property>
+    </managed-bean>
+    
+    
+    <managed-bean>
+        <managed-bean-name>telefonoBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.TelefonoBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>telefonoDao</property-name>
+            <property-class>com.ues.dao.TelefonoDao</property-class>
+            <value>#{telefonoDao}</value>
+        </managed-property>
+    </managed-bean>
+    
+    
+    
+     <managed-bean>
+        <managed-bean-name>transaccionBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.TransaccionBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>transaccionDao</property-name>
+            <property-class>com.ues.dao.TransaccionDao</property-class>
+            <value>#{transaccionDao}</value>
         </managed-property>
     </managed-bean>
     
@@ -89,9 +195,21 @@
     
         <managed-bean-scope>session</managed-bean-scope>
         <managed-property>
-            <property-name>empleadosDao</property-name>
+            <property-name>empleadoDao</property-name>
             <property-class>com.ues.dao.EmpleadosDao</property-class>
-            <value>#{empleadosDao}</value>
+            <value>#{empleadoDao}</value>
+        </managed-property>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>loteBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.LoteBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>loteDao</property-name>
+            <property-class>com.ues.dao.LoteDao</property-class>
+            <value>#{loteDao}</value>
         </managed-property>
     </managed-bean>
     

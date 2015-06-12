@@ -17,100 +17,32 @@ import javax.faces.model.SelectItemGroup;
  * @author Ibrahim
  */
 public class ProveedorBean {
-
-    private Proveedor proveedor = new Proveedor();
-    private int idProveedorV;
-    private int idPersonaP;
-    private int tipoProveedorT;
+    
+    private int idProveedorProv;
     private List<Proveedor> miLista;
-    private List<TipoProveedor> listaTipoP;
-    private List<Persona> listaPersona;
+    private List<Persona> miListaP;
+    private List<TipoProveedor> miListaTipoP;
     private ProveedorDao proveedorDao;
-    private List<SelectItem> listaProv = new ArrayList<SelectItem>();
-    private List<SelectItem> listaPer = new ArrayList<SelectItem>();
+    private Proveedor proveedor = new Proveedor();
+    //Para las Foraneas
+    private int idPersonaP;
+    private int idTipoProveedorTP;
+    private List<Persona> listaPer;
+    private List<TipoProveedor> listaTP;
+    
+    private List<SelectItem> listaProveedor = new ArrayList<SelectItem>();
+    private List<SelectItem> listaProveedor2 = new ArrayList<SelectItem>();
 
     public ProveedorBean() {
         proveedor = new Proveedor();
     }
 
-    public List<SelectItem> getListaPer() {
-        try {
-            listaPersona = proveedorDao.listaPersona();
-            listaPer.clear();
-            SelectItemGroup g2 = new SelectItemGroup("Tipos de Persona");
-            SelectItem[] asi = new SelectItem[listaPersona.size()];
-            for(int i=0; i<listaPersona.size(); i++){
-                Persona perAux = (Persona) listaPersona.get(i);
-                asi[i] = new SelectItem(perAux.getIdPersona(), perAux.getNombre());
-            }
-            g2.setSelectItems(asi);
-            listaPer.add(g2);
-        } catch (Exception e) {
-            e.printStackTrace();
-            listaPer = new ArrayList<SelectItem>();
-        }
-        return listaPer;
+    public int getIdProveedorProv() {
+        return idProveedorProv;
     }
 
-    public void setListaPer(List<SelectItem> listaPer) {
-        this.listaPer = listaPer;
-    }
-    
-    public List<Persona> getListaPersona() {
-        return listaPersona;
-    }
-
-    public void setListaPersona(List<Persona> listaPersona) {
-        this.listaPersona = listaPersona;
-    }
-    
-    public int getIdPersonaP() {
-        return idPersonaP;
-    }
-
-    public void setIdPersonaP(int idPersonaP) {
-        this.idPersonaP = idPersonaP;
-    }
-
-    public int getIdProveedorV() {
-        return idProveedorV;
-    }
-
-    public void setIdProveedorV(int idProveedorV) {
-        this.idProveedorV = idProveedorV;
-    }
-
-    public int getTipoProveedorT() {
-        return tipoProveedorT;
-    }
-
-    public void setTipoProveedorT(int tipoProveedorT) {
-        this.tipoProveedorT = tipoProveedorT;
-    }
-
-    public List<TipoProveedor> getListaTipoP() {
-        return listaTipoP;
-    }
-
-    public void setListaTipoP(List<TipoProveedor> listaTipoP) {
-        this.listaTipoP = listaTipoP;
-    }
-
-    public List<SelectItem> getListaProv() {
-        return listaProv;
-    }
-
-    public void setListaProv(List<SelectItem> listaProv) {
-        this.listaProv = listaProv;
-    }
-
-    public Proveedor getProveedor() {
-        return proveedor;
-    }
-
-    public void setProveedor(Proveedor proveedor) {
-        this.tipoProveedorT = proveedor.getTipoProveedor().getIdTipoProveedor();
-        this.proveedor = proveedor;
+    public void setIdProveedorProv(int idProveedorProv) {
+        this.idProveedorProv = idProveedorProv;
     }
 
     public List<Proveedor> getMiLista() {
@@ -123,113 +55,200 @@ public class ProveedorBean {
         proveedor = new Proveedor();
         return miLista;
     }
+    
+    public void addProveedor(ActionEvent actionEvent) {
+        try {
+            Proveedor p = new Proveedor();
+            Persona per = new Persona();
+            TipoProveedor tp = new TipoProveedor();
+            
+            p.setIdProveedor(proveedor.getIdProveedor());
+            per.setIdPersona(idPersonaP);
+            tp.setIdTipoProveedor(idTipoProveedorTP);
+            p.setNombre(proveedor.getNombre());
+            p.setCorreo(proveedor.getCorreo());
+            p.setNit(proveedor.getNit());
+            p.setGiro(proveedor.getGiro());
+            p.setNrc(proveedor.getNrc());
+            p.setPersona(per);
+            p.setTipoProveedor(tp);
+            proveedorDao.crearProveedor(p);
 
-    public ProveedorDao getProveedorDao() {
-        return proveedorDao;
+            addMessage("Proveedor Ingresado:!!" + proveedor.getNombre());
+        } catch (Exception e) {
+            addMessage("Error Id:!!" + proveedor.getNombre() + " " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    public void updateProveedor(ActionEvent actionEvent) {
+        try {
+            Proveedor p = new Proveedor();
+            Persona per = new Persona();
+            TipoProveedor tp = new TipoProveedor();
+            
+            p.setIdProveedor(proveedor.getIdProveedor());
+            per.setIdPersona(idPersonaP);
+            tp.setIdTipoProveedor(idTipoProveedorTP);
+            p.setNombre(proveedor.getNombre());
+            p.setCorreo(proveedor.getCorreo());
+            p.setNit(proveedor.getNit());
+            p.setGiro(proveedor.getGiro());
+            p.setNrc(proveedor.getNrc());
+            p.setPersona(per);
+            p.setTipoProveedor(tp);
+            proveedorDao.modificarProveedor(p);
+
+            addMessage("Proveedor Modificado:!!" + proveedor.getNombre());
+        } catch (Exception e) {
+            addMessage("Error Id:!!" + proveedor.getNombre() + " " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    public void eliminar() {
+        try {
+            Proveedor p = new Proveedor();
+            Persona per = new Persona();
+            TipoProveedor tp = new TipoProveedor();
+            
+            p.setIdProveedor(proveedor.getIdProveedor());
+            per.setIdPersona(idPersonaP);
+            tp.setIdTipoProveedor(idTipoProveedorTP);
+            p.setNombre(proveedor.getNombre());
+            p.setCorreo(proveedor.getCorreo());
+            p.setNit(proveedor.getNit());
+            p.setGiro(proveedor.getGiro());
+            p.setNrc(proveedor.getNrc());
+            p.setPersona(per);
+            p.setTipoProveedor(tp);
+            proveedorDao.borrarProveedor(p);
+
+            addMessage("Proveedor Eliminado:!!" + proveedor.getNombre());
+        } catch (Exception e) {
+            addMessage("Error Id:!!" + proveedor.getNombre() + " " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    private void addMessage(String welcome_to_Primefaces) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, welcome_to_Primefaces, null);
+        FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
     public void setMiLista(List<Proveedor> miLista) {
         this.miLista = miLista;
     }
 
+    public List<Persona> getMiListaP() {
+        return miListaP;
+    }
+
+    public void setMiListaP(List<Persona> miListaP) {
+        this.miListaP = miListaP;
+    }
+
+    public List<TipoProveedor> getMiListaTipoP() {
+        return miListaTipoP;
+    }
+
+    public void setMiListaTipoP(List<TipoProveedor> miListaTipoP) {
+        this.miListaTipoP = miListaTipoP;
+    }
+
+    public ProveedorDao getProveedorDao() {
+        return proveedorDao;
+    }
+
     public void setProveedorDao(ProveedorDao proveedorDao) {
         this.proveedorDao = proveedorDao;
     }
 
-    public void eliminar() {
-        try {
-            Proveedor pr = new Proveedor();
-            pr.setIdProveedor(proveedor.getIdProveedor());
-            pr.setNombre(proveedor.getNombre());
-            pr.setCorreo(proveedor.getCorreo());
-            pr.setNit(proveedor.getNit());
-            pr.setGiro(proveedor.getGiro());
-            pr.setNrc(proveedor.getNrc());
-            TipoProveedor tProv = new TipoProveedor();
-            tProv.setIdTipoProveedor(tipoProveedorT);
-            Persona per = new Persona();
-            per.setIdPersona(idPersonaP);
-            pr.setTipoProveedor(tProv);
-            pr.setPersona(per);
-            proveedorDao.borrarProveedor(pr);
-            proveedor = new Proveedor();
-            addMessage("Proveedor Eliminado!!");
-        } catch (Exception e) {
-            addMessage("Error Id:!!");
-            e.printStackTrace();
-        }
+    public Proveedor getProveedor() {
+        return proveedor;
     }
-    
-    public void addProveedor(ActionEvent actionEvent) {
-        try {
-            Proveedor pr = new Proveedor();
-            pr.setIdProveedor(proveedor.getIdProveedor());
-            pr.setNombre(proveedor.getNombre());
-            pr.setCorreo(proveedor.getCorreo());
-            pr.setNit(proveedor.getNit());
-            pr.setGiro(proveedor.getGiro());
-            pr.setNrc(proveedor.getNrc());
-            TipoProveedor tProv = new TipoProveedor();
-            tProv.setIdTipoProveedor(tipoProveedorT);
-            Persona per = new Persona();
-            per.setIdPersona(idPersonaP);
-            pr.setTipoProveedor(tProv);
-            pr.setPersona(per);
-            proveedorDao.crearProveedor(pr);
-            proveedor = new Proveedor();
-            addMessage("Proveedor Ingresado!!");
-        } catch (Exception e) {
-            addMessage("Error Id:!!");
-            e.printStackTrace();
-        }
+
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
     }
-    
-    public void actualizaProveedor(ActionEvent actionEvent) {
-        try {
-            Proveedor pr = new Proveedor();
-            pr.setIdProveedor(proveedor.getIdProveedor());
-            pr.setNombre(proveedor.getNombre());
-            pr.setCorreo(proveedor.getCorreo());
-            pr.setNit(proveedor.getNit());
-            pr.setGiro(proveedor.getGiro());
-            pr.setNrc(proveedor.getNrc());
-            TipoProveedor tProv = new TipoProveedor();
-            tProv.setIdTipoProveedor(tipoProveedorT);
-            Persona per = new Persona();
-            per.setIdPersona(idPersonaP);
-            pr.setTipoProveedor(tProv);
-            pr.setPersona(per);
-            proveedorDao.modificarProveedor(pr);
-            proveedor = new Proveedor();
-            addMessage("Proveedor Actualizado:!!");
-        } catch (Exception e) {
-            addMessage("Error Id:!!");
-            e.printStackTrace();
-        }
+
+    public int getIdPersonaP() {
+        return idPersonaP;
     }
-    
-    public List<SelectItem> getlistaProv() {
+
+    public void setIdPersonaP(int idPersonaP) {
+        this.idPersonaP = idPersonaP;
+    }
+
+    public int getIdTipoProveedorTP() {
+        return idTipoProveedorTP;
+    }
+
+    public void setIdTipoProveedorTP(int idTipoProveedorTP) {
+        this.idTipoProveedorTP = idTipoProveedorTP;
+    }
+
+    public List<Persona> getListaPer() {
+        return listaPer;
+    }
+
+    public void setListaPer(List<Persona> listaPer) {
+        this.listaPer = listaPer;
+    }
+
+    public List<TipoProveedor> getListaTP() {
+        return listaTP;
+    }
+
+    public void setListaTP(List<TipoProveedor> listaTP) {
+        this.listaTP = listaTP;
+    }
+
+    public List<SelectItem> getListaProveedor() {
         try {
-            listaTipoP = proveedorDao.listaTipoProveedor();
-            listaProv.clear();
-            SelectItemGroup g2 = new SelectItemGroup("Tipos de Proveedores");
-            SelectItem[] asi = new SelectItem[listaTipoP.size()];
-            for(int i=0; i<listaTipoP.size(); i++){
-                TipoProveedor prAux = (TipoProveedor) listaTipoP.get(i);
-                asi[i] = new SelectItem(prAux.getIdTipoProveedor(), prAux.getNombre());
+            miListaP= proveedorDao.listaPersona();
+            listaProveedor.clear();
+            SelectItemGroup g2 = new SelectItemGroup("Personas");
+            SelectItem[] asi = new SelectItem[miListaP.size()];
+            for (int i = 0; i < miListaP.size(); i++) {
+                Persona pAux = (Persona) miListaP.get(i);
+                asi[i] = new SelectItem(pAux.getIdPersona(), pAux.getNombre());
             }
             g2.setSelectItems(asi);
-            listaProv.add(g2);
+            listaProveedor.add(g2);
         } catch (Exception e) {
             e.printStackTrace();
-            listaProv = new ArrayList<SelectItem>();
+           listaProveedor = new ArrayList<SelectItem>();
         }
-        return listaProv;
+        return listaProveedor;
     }
 
-    private void addMessage(String welcome_to_Primefaces) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, welcome_to_Primefaces, null);
-        FacesContext.getCurrentInstance().addMessage(null, message);
+    public void setListaProveedor(List<SelectItem> listaProveedor) {
+        this.listaProveedor = listaProveedor;
     }
 
+    public List<SelectItem> getListaProveedor2() {
+        try {
+            miListaTipoP= proveedorDao.listaTipoProveedor();
+            listaProveedor2.clear();
+            SelectItemGroup g2 = new SelectItemGroup("Bodegas");
+            SelectItem[] asi = new SelectItem[miListaTipoP.size()];
+            for (int i = 0; i < miListaTipoP.size(); i++) {
+                TipoProveedor tpAux = (TipoProveedor) miListaTipoP.get(i);
+                asi[i] = new SelectItem(tpAux.getIdTipoProveedor(), tpAux.getNombre());
+            }
+            g2.setSelectItems(asi);
+            listaProveedor2.add(g2);
+        } catch (Exception e) {
+            e.printStackTrace();
+           listaProveedor2 = new ArrayList<SelectItem>();
+        }
+        return listaProveedor2;
+    }
+
+    public void setListaProveedor2(List<SelectItem> listaProveedor2) {
+        this.listaProveedor2 = listaProveedor2;
+    }
+    
+    
 }

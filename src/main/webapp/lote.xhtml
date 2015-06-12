@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view>
+        <h:head>
+            <title>Sistema de Inventario y Compras</title>
+
+        </h:head>
+        <h:body>
+            <br/>
+             <h1>Lote de Productos</h1>
+
+
+            <h:form id="formTable">
+                <p:dataTable id="tbl" var="lote" value="#{loteBean.miLista}"
+                             paginator="true" 
+                             rows="5"  
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"  
+                             rowsPerPageTemplate="5,10,15" 
+                             lazy="true"
+                             resizableColumns="true"  
+                             selectionMode="single"
+                             selection="#{loteBean.lote}"
+                             rowKey="#{loteBean.idLoteL}" 
+                             paginatorPosition="bottom">
+
+
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Id Lote" />
+                        </f:facet>
+                        <h:outputText value="#{lote.idLote}" />
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Id Producto"/>
+                        </f:facet>
+                        <h:outputText value="#{lote.producto.idProducto} #{lote.producto.nombre4}" />
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Bodega" />
+                        </f:facet>
+                        <h:outputText value="#{lote.bodega.nombre2}" />
+                    </p:column>
+                    
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Cantidad de Producto en Lote" />
+                        </f:facet>
+                        <h:outputText value="#{lote.cantidad}" />
+                    </p:column>
+
+                    <p:column headerText="">
+                        <p:commandButton value=""  update=":formModificar,:formInsertar" icon="ui-icon-pencil"   style="width:40px;height:40px"  onsuccess="PF('dlgmodificar').show();" >
+                            <f:setPropertyActionListener target="#{loteBean.lote}" value="#{lote}"/>
+                        </p:commandButton>
+                    </p:column>
+
+                    <p:column headerText="">
+                        <p:commandButton value="" icon="ui-icon-trash"   style="width:40px;height:40px" onclick="PF('dlgeliminar').show();" >
+                            <f:setPropertyActionListener target="#{loteBean.lote}" value="#{lote}"/>
+                        </p:commandButton>
+                    </p:column>
+
+                    <f:facet name="footer">
+                        <div class="footer-section">
+
+                            <p:commandButton update=":formTable" oncomplete="PF('dlginsertar').show()"   icon="ui-icon-plus"  style="width:40px;height:40px"   />
+
+                        </div>
+                    </f:facet>
+                </p:dataTable>
+            </h:form>
+
+
+            <p:dialog id="dlg2" header="Eliminar Lote" showEffect="explode" hideEffect="explode" widgetVar="dlgeliminar" modal="true" resizable="false" minWidth="200">
+                <h:form id="formEliminar">
+                    <p:outputLabel value="¿Desea eliminar Lote?" />
+                    <p:commandButton actionListener="#{loteBean.eliminar}" value="Si" update=":formTable" onclick="PF('dlgeliminar').hide();"/>
+                    <p:commandButton  value="No" onclick="PF('dlg2').hide();"/>
+                </h:form>
+            </p:dialog>
+
+            <p:dialog header="Modificar" widgetVar="dlgmodificar" modal="true" resizable="false">
+                <h:form id="formModificar">
+                    <h:panelGrid id="modificar" columns="2" cellpadding="2">
+                        <p:outputLabel value="Id del Lote" />
+                        <p:inputText value="#{loteBean.lote.idLote}"/>
+                       
+                        <p:outputLabel  value="Producto:" />
+                        <p:selectOneMenu id="producto" value="#{loteBean.idProductoP}">
+                            <f:selectItems  value="#{loteBean.listaLote2}" />
+                        </p:selectOneMenu>
+                        
+                         <p:outputLabel value="Bodega:" />
+                         <p:selectOneMenu id="bodega" value="#{loteBean.idBodegaB}">
+                             <f:selectItems  value="#{loteBean.listaLote}" />
+                        </p:selectOneMenu>
+                         
+                         <p:outputLabel value="Cantidad en Lote" />
+                         <p:inputText value="#{loteBean.lote.cantidad}"/>
+                         
+                         <p:outputLabel value="Descripcion de Lote" />
+                         <p:inputText value="#{loteBean.lote.descripcion}"/>
+      
+                    </h:panelGrid>
+                    <p:growl id="growl3" life="5000" />
+                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{loteBean.updateLote}" value="Modificar Lote" styleClass="ui-priority-primary"  onsuccess="PF('dlgmodificar').hide();" />
+                </h:form>
+            </p:dialog>
+
+
+
+            <p:dialog header="Insertar" widgetVar="dlginsertar" modal="true" resizable="false">
+                <h:form id="formInsertar">
+                    <h:panelGrid  columns="2"
+                                  cellpadding="2">
+                        <p:outputLabel value="Id del Lote" />
+                        <p:inputText value="#{loteBean.lote.idLote}"/>
+                       
+                        <p:outputLabel  value="Producto:" />
+                        <p:selectOneMenu id="producto" value="#{loteBean.idProductoP}">
+                            <f:selectItems  value="#{loteBean.listaLote2}" />
+                        </p:selectOneMenu>
+                        
+                         <p:outputLabel value="Bodega:" />
+                         <p:selectOneMenu id="bodega" value="#{loteBean.idBodegaB}">
+                             <f:selectItems  value="#{loteBean.listaLote}" />
+                        </p:selectOneMenu>
+                         
+                         <p:outputLabel value="Cantidad en Lote" />
+                         <p:inputText value="#{loteBean.lote.cantidad}"/>
+                         
+                         <p:outputLabel value="Descripcion de Lote" />
+                         <p:inputText value="#{loteBean.lote.descripcion}"/>
+                    </h:panelGrid>
+                    <p:growl id="growl2" life="5000" />
+                    <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{loteBean.addLote}" value="Insertar Lote" styleClass="ui-priority-primary"  onsuccess="PF('dlginsertar').hide();" />
+                </h:form>
+            </p:dialog>
+
+
+        </h:body>
+    </f:view>
+</html>
