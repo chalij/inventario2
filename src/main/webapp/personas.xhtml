@@ -100,12 +100,6 @@
                         <h:outputText value="#{per.idPersona}" />
                     </p:column>
 
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Usuario"/>
-                        </f:facet>
-                        <h:outputText value="#{per.usuario.nombreUsuario}" />
-                    </p:column>
 
                     <p:column>
                         <f:facet name="header">
@@ -208,10 +202,6 @@
                     <h:panelGrid id="modificar" columns="2" cellpadding="2">
                         <p:outputLabel value="Id de la persona" />
                         <p:inputText value="#{personasBean.persona.idPersona}"/>
-                        <p:outputLabel for="Usuario" value="Usuario:" />
-                        <p:selectOneMenu id="Usuario" value="#{personasBean.idusuarioU}">
-                            <f:selectItems  value="#{personasBean.miListaUsu}" />
-                        </p:selectOneMenu>
 
                         <p:outputLabel value="Nombre de la persona" />
                         <p:inputText value="#{personasBean.persona.nombre}"/>
@@ -244,10 +234,6 @@
 
                         <p:outputLabel value="Id de la persona" />
                         <p:inputText value="#{personasBean.persona.idPersona}"/>
-                        <p:outputLabel for="Usuario" value="Usuario:" />
-                        <p:selectOneMenu id="Usuario" value="#{personasBean.idusuarioU}">
-                            <f:selectItems  value="#{personasBean.miListaUsu}" />
-                        </p:selectOneMenu>
                         <p:outputLabel value="Nombre de la persona" />
                         <p:inputText value="#{personasBean.persona.nombre}"/>
                         <p:outputLabel value="Apellido" />
@@ -265,6 +251,10 @@
                         <p:inputText value="#{personasBean.persona.direccion}"/>
                         <p:outputLabel value="Correo Electrónico" />
                         <p:inputText value="#{personasBean.persona.correo}"/>
+                        <p:outputLabel value="Nombre de Usuario" />
+                        <p:inputText value="#{personasBean.usuario.nombreUsuario}"/>
+                        <p:outputLabel value="Contraseña" />
+                        <p:inputText value="#{personasBean.usuario.contrasena}"/>
 
 
                     </h:panelGrid>

@@ -29,7 +29,7 @@ public class PersonasDaoHibImpl extends CustomHibernateDaoSupport implements Per
 
     @Override
     public List<Persona> listaPersonas() throws DAOException {
-        List<Persona> lista = getHibernateTemplate().find("from Persona p inner join fetch p.usuario order by p.idPersona");
+        List<Persona> lista = getHibernateTemplate().find("from Persona p order by p.idPersona");
         return lista;
        
     }

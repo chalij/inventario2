@@ -61,12 +61,12 @@ public class RecursosBean {
             Recursos re = new Recursos();
             TipoUsuario tus = new TipoUsuario();
             tus.setIdTipoUsuario(tipoUsuarioT);
-            re.setIdRecurso(recursos.getIdRecurso());
+            re.setIdRecursos(recursos.getIdRecursos());
             re.setUrl(recursos.getUrl());
             re.setTipoUsuario(tus);
             recursosDao.crearRecursos(re);
             recursos = new Recursos();
-            addMessage("Insertado Id:!!" + re.getIdRecurso());
+            addMessage("Insertado Id:!!" + re.getIdRecursos());
         } catch (Exception e) {
             addMessage("Error Id:!!" + e.getMessage());
             e.printStackTrace();
@@ -79,12 +79,12 @@ public class RecursosBean {
             Recursos re = new Recursos();
             TipoUsuario tus = new TipoUsuario();
             tus.setIdTipoUsuario(tipoUsuarioT);
-            re.setIdRecurso(recursos.getIdRecurso());
+            re.setIdRecursos(recursos.getIdRecursos());
             re.setUrl(recursos.getUrl());
             re.setTipoUsuario(tus);
             recursosDao.modificarRecursos(re);
             recursos = new Recursos();
-            addMessage("Modificado Id:!!" + re.getIdRecurso());
+            addMessage("Modificado Id:!!" + re.getIdRecursos());
         } catch (Exception e) {
             addMessage("Error Id:!!" + e.getMessage());
             e.printStackTrace();
@@ -98,12 +98,12 @@ public class RecursosBean {
             Recursos re = new Recursos();
             TipoUsuario tus = new TipoUsuario();
             tus.setIdTipoUsuario(tipoUsuarioT);
-            re.setIdRecurso(recursos.getIdRecurso());
+            re.setIdRecursos(recursos.getIdRecursos());
             re.setUrl(recursos.getUrl());
             re.setTipoUsuario(tus);
             recursosDao.borrarRecursos(re);
             recursos = new Recursos();
-            addMessage("Eliminar Id:!!" + re.getIdRecurso());
+            addMessage("Eliminar Id:!!" + re.getIdRecursos());
         } catch (Exception e) {
             addMessage("Error Id:!!" + e.getMessage());
             e.printStackTrace();

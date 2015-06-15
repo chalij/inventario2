@@ -1,5 +1,5 @@
 package com.ues.model;
-// Generated 30-may-2015 11:21:15 by Hibernate Tools 4.3.1
+// Generated 13-jun-2015 20:08:50 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -13,7 +13,6 @@ public class Persona  implements java.io.Serializable {
 
 
      private int idPersona;
-     private Usuario usuario;
      private String nombre;
      private String apellido;
      private char genero;
@@ -26,6 +25,7 @@ public class Persona  implements java.io.Serializable {
      private Set<Proveedor> proveedors = new HashSet<Proveedor>(0);
      private Set<Cliente> clientes = new HashSet<Cliente>(0);
      private Set<Telefono> telefonos = new HashSet<Telefono>(0);
+     private Set<Usuario> usuarios = new HashSet<Usuario>(0);
 
     public Persona() {
     }
@@ -41,9 +41,8 @@ public class Persona  implements java.io.Serializable {
         this.fechaNac = fechaNac;
         this.direccion = direccion;
     }
-    public Persona(int idPersona, Usuario usuario, String nombre, String apellido, char genero, String dui, String nit, Date fechaNac, String direccion, String correo, Set<Empleado> empleados, Set<Proveedor> proveedors, Set<Cliente> clientes, Set<Telefono> telefonos) {
+    public Persona(int idPersona, String nombre, String apellido, char genero, String dui, String nit, Date fechaNac, String direccion, String correo, Set<Empleado> empleados, Set<Proveedor> proveedors, Set<Cliente> clientes, Set<Telefono> telefonos, Set<Usuario> usuarios) {
        this.idPersona = idPersona;
-       this.usuario = usuario;
        this.nombre = nombre;
        this.apellido = apellido;
        this.genero = genero;
@@ -56,6 +55,7 @@ public class Persona  implements java.io.Serializable {
        this.proveedors = proveedors;
        this.clientes = clientes;
        this.telefonos = telefonos;
+       this.usuarios = usuarios;
     }
    
     public int getIdPersona() {
@@ -64,13 +64,6 @@ public class Persona  implements java.io.Serializable {
     
     public void setIdPersona(int idPersona) {
         this.idPersona = idPersona;
-    }
-    public Usuario getUsuario() {
-        return this.usuario;
-    }
-    
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
     public String getNombre() {
         return this.nombre;
@@ -155,6 +148,13 @@ public class Persona  implements java.io.Serializable {
     
     public void setTelefonos(Set<Telefono> telefonos) {
         this.telefonos = telefonos;
+    }
+    public Set<Usuario> getUsuarios() {
+        return this.usuarios;
+    }
+    
+    public void setUsuarios(Set<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 
 

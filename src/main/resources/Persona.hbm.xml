@@ -1,62 +1,66 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 30-may-2015 11:21:15 by Hibernate Tools 4.3.1 -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13-jun-2015 20:08:55 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class name="com.ues.model.Persona" optimistic-lock="version" schema="INVENTARIO" table="PERSONA">
-    <id name="idPersona" type="int">
-      <column name="ID_PERSONA" precision="6" scale="0"/>
-      <generator class="assigned"/>
-    </id>
-    <many-to-one class="com.ues.model.Usuario" fetch="select" name="usuario">
-      <column name="ID_USUARIO" precision="6" scale="0"/>
-    </many-to-one>
-    <property name="nombre" type="string">
-      <column length="55" name="NOMBRE" not-null="true"/>
-    </property>
-    <property name="apellido" type="string">
-      <column length="55" name="APELLIDO" not-null="true"/>
-    </property>
-    <property name="genero" type="char">
-      <column length="1" name="GENERO" not-null="true"/>
-    </property>
-    <property name="dui" type="string">
-      <column length="10" name="DUI" not-null="true"/>
-    </property>
-    <property name="nit" type="string">
-      <column length="17" name="NIT" not-null="true"/>
-    </property>
-    <property name="fechaNac" type="date">
-      <column length="7" name="FECHA_NAC" not-null="true"/>
-    </property>
-    <property name="direccion" type="string">
-      <column length="150" name="DIRECCION" not-null="true"/>
-    </property>
-    <property name="correo" type="string">
-      <column length="80" name="CORREO"/>
-    </property>
-    <set fetch="select" inverse="true" lazy="true" name="empleados" table="EMPLEADO">
-      <key>
-        <column name="ID_PERSONA" not-null="true" precision="6" scale="0"/>
-      </key>
-      <one-to-many class="com.ues.model.Empleado"/>
-    </set>
-    <set fetch="select" inverse="true" lazy="true" name="proveedors" table="PROVEEDOR">
-      <key>
-        <column name="ID_PERSONA" not-null="true" precision="6" scale="0"/>
-      </key>
-      <one-to-many class="com.ues.model.Proveedor"/>
-    </set>
-    <set fetch="select" inverse="true" lazy="true" name="clientes" table="CLIENTE">
-      <key>
-        <column name="ID_PERSONA" not-null="true" precision="6" scale="0"/>
-      </key>
-      <one-to-many class="com.ues.model.Cliente"/>
-    </set>
-    <set fetch="select" inverse="true" lazy="true" name="telefonos" table="TELEFONO">
-      <key>
-        <column name="ID_PERSONA" not-null="true" precision="6" scale="0"/>
-      </key>
-      <one-to-many class="com.ues.model.Telefono"/>
-    </set>
-  </class>
+    <class name="com.ues.model.Persona" table="PERSONA" schema="INVENTARIO" optimistic-lock="version">
+        <id name="idPersona" type="int">
+            <column name="ID_PERSONA" precision="6" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="55" not-null="true" />
+        </property>
+        <property name="apellido" type="string">
+            <column name="APELLIDO" length="55" not-null="true" />
+        </property>
+        <property name="genero" type="char">
+            <column name="GENERO" length="1" not-null="true" />
+        </property>
+        <property name="dui" type="string">
+            <column name="DUI" length="10" not-null="true" />
+        </property>
+        <property name="nit" type="string">
+            <column name="NIT" length="17" not-null="true" />
+        </property>
+        <property name="fechaNac" type="date">
+            <column name="FECHA_NAC" length="7" not-null="true" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="DIRECCION" length="150" not-null="true" />
+        </property>
+        <property name="correo" type="string">
+            <column name="CORREO" length="80" />
+        </property>
+        <set name="empleados" table="EMPLEADO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_PERSONA" precision="6" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.ues.model.Empleado" />
+        </set>
+        <set name="proveedors" table="PROVEEDOR" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_PERSONA" precision="6" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.ues.model.Proveedor" />
+        </set>
+        <set name="clientes" table="CLIENTE" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_PERSONA" precision="6" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.ues.model.Cliente" />
+        </set>
+        <set name="telefonos" table="TELEFONO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_PERSONA" precision="6" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.ues.model.Telefono" />
+        </set>
+        <set name="usuarios" table="USUARIO" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_PERSONA" precision="6" scale="0" />
+            </key>
+            <one-to-many class="com.ues.model.Usuario" />
+        </set>
+    </class>
 </hibernate-mapping>

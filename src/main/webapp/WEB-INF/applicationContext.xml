@@ -7,7 +7,7 @@
 
     <bean id="dataSource" destroy-method="close" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="oracle.jdbc.OracleDriver"/>
-        <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE" /> 
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:ORCL" /> 
         <property name="username" value="inventario"/>
         <property name="password" value="inventario"/>
     </bean>
@@ -54,6 +54,8 @@ commit;
                 <value>Persona.hbm.xml</value>
                 <value>Empleado.hbm.xml</value>
                 <value>Producto.hbm.xml</value>
+                <value>Menu.hbm.xml</value>
+                <value>TipoMenu.hbm.xml</value>
             </list>
         </property>
         
