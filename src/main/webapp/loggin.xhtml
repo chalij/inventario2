@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view>
+        <h:head>
+            <title>Loggin</title>
+
+        </h:head>
+        <h:body>
+            <div class="panel panel-primary">
+                <p:panel id="basic" header="Loggin" >
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:form class="ui-responsive ui-grid" >            
+                            <h:outputLink value="javascript:void(0)" onclick="dfgdf" title="login" >
+                            </h:outputLink>
+                            <p:panel id="basic" header="Loggin"  style="position:relative;background-image:url('fondo.jpg');">
+                                <h:panelGrid columns="2" cellpadding="5" class="ui-responsive ui-grid-responsive">
+                                    <h:outputLabel for="username" value="Username:" />
+                                    <p:inputText id="username" value="#dfgdf" required="true" label="username" />
+
+                                    <h:outputLabel for="password" value="Password:" />
+                                    <p:password id="password" value="dfgdf" required="true" label="password" />
+
+                                    <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+                                    <f:facet name="footer">
+                                        <p:commandButton value="Login" update="growl" actionListener="gdfg"
+                                                         oncomplete="handleLoginRequest(xhr, status, args)" />
+                                    </f:facet>  
+                                </h:panelGrid>
+                            </p:panel>
+                        </h:form>
+                    </h:panelGrid>
+                </p:panel>
+            </div>
+
+
+        </h:body>
+    </f:view>
+</html>

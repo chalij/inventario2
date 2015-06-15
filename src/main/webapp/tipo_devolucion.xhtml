@@ -7,14 +7,73 @@
       xmlns:p="http://primefaces.org/ui">
     <f:view>
         <h:head>
-            <title>Ejemplo JSF 2.0, Spring 3, Hibernate 3</title>
+            <title></title>
 
         </h:head>
-        <h:body>
-            <br/>
-            <h3>Ejemplo de JSF 2.0, Spring 3, Hibernate 3, MySQL</h3>
-            <h4>Lista de Tipos de Devolucion</h4>
+        <h:body style="background-image:url('fondo.jpg')">
 
+            <p:panel id="basic" header="" footer="Centro de El Salvador, Norman Quijasno Presidente 2018" style="margin-bottom:20px">
+                <h1 style="color: whitesmoke;text-align: center;font-size: 3.8em">Sistema de Inventario y Compras</h1>
+                <h2 style="color: whitesmoke;text-align: center">Calza Moda S.A de C.V</h2>
+                <br />
+            </p:panel>
+            <p:megaMenu style="margin-top:20px">
+                <p:submenu label="Gestion de Proveedores" icon="ui-icon-suitcase">
+                    <p:column>
+                        <p:submenu>
+                            <p:menuitem value="Categorización de Proveedores" url="tipoproveedor.jsf" />
+                            <p:menuitem value="Gestión de Proveedores" url="proveedor.jsf" />
+                        </p:submenu>
+                    </p:column>
+
+                </p:submenu>
+
+                <p:submenu label="Gestion de Clientes" icon="ui-icon-cart">
+
+                    <p:column>
+                        <p:submenu>
+                            <p:menuitem value="Categorización de Clientes" url="tiposcliente.jsf" />
+                            <p:menuitem value="Gestión de Clientes" url="clientes.jsf" />
+                        </p:submenu>
+                    </p:column>
+                </p:submenu>
+
+                <p:submenu label="Gestion de Usuarios" icon="ui-icon-person">
+                    <p:column>
+                        <p:submenu>
+                            <p:menuitem value="Categorización de Usuarios" url="tipo_usuarios.jsf" />
+                            <p:menuitem value="Gestión de Usuarios" url="usuarios.jsf" />
+                        </p:submenu>
+                    </p:column>
+                </p:submenu>
+
+                <p:submenu label="Toma de Pedidos" icon="ui-icon-note">
+                    <p:column>
+                        <p:submenu>
+                        </p:submenu>
+                    </p:column>
+
+                </p:submenu>
+
+                <p:submenu label="Manejo de Devoluciones" icon="ui-icon-arrowreturnthick-1-e">
+                    <p:column>
+                        <p:submenu>
+                        </p:submenu>
+                    </p:column>
+
+                </p:submenu>
+
+                <p:submenu label="Control de Inventarios" icon="ui-icon-folder-collapsed">
+                    <p:column>
+                        <p:submenu>
+                        </p:submenu>
+                    </p:column>
+
+                </p:submenu>
+
+                <p:menuitem value="Salir" url="http://www.primefaces.org" icon="ui-icon-close" />
+            </p:megaMenu>
+            <br/>
 
 
 
@@ -92,7 +151,7 @@
                 <h:form id="formModificar">
                     <h:panelGrid id="modificar" columns="2" cellpadding="2">
                         <p:outputLabel value="Id" />
-                        <p:inputText value="#{tipoDevolucionesBean.tipoDevolucion.idTipoDevolucion}"/>
+                        <p:inputText value="#{tipoDevolucionesBean.tipoDevolucion.idTipoDevolucion}" disabled="true"/>
                         <p:outputLabel value="Tipo Devolucion" />
                         <p:inputText value="#{tipoDevolucionesBean.tipoDevolucion.nombre}"/>
                         <p:outputLabel value="Descripcion" />
@@ -108,8 +167,6 @@
             <p:dialog header="Insertar" widgetVar="dlginsertar" modal="true" resizable="false">
                 <h:form id="formInsertar">
                     <h:panelGrid  columns="2" cellpadding="2">
-                        <p:outputLabel value="Id" />
-                        <p:inputText value="#{tipoDevolucionesBean.tipoDevolucion.idTipoDevolucion}"/>
                         <p:outputLabel value="Tipo Devolucion" />
                         <p:inputText value="#{tipoDevolucionesBean.tipoDevolucion.nombre}"/>
                         <p:outputLabel value="Descripcion" />

@@ -51,7 +51,7 @@ public class UsuariosBean {
             Usuario us = new Usuario();
             TipoUsuario tus = new TipoUsuario();
             tus.setIdTipoUsuario(tipoUsuarioT);
-            us.setIdUsuario(usuario.getIdUsuario());
+          //  us.setIdUsuario(usuario.getIdUsuario());
             us.setNombreUsuario(usuario.getNombreUsuario());
             us.setContrasena(usuario.getContrasena());
             us.setFechaCreacion(new Date());
