@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view>
+        <h:head>
+            <title>Sistema de Inventario y Compras</title>
+
+        </h:head>
+        <h:body>
+            <br/>
+            <h1>Cotizacion</h1>
+
+
+            <h:form id="formTable">
+                <p:dataTable id="tbl" var="cot" value="#{cotizacionBean.miLista}"
+                             paginator="true" 
+                             rows="5"  
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"  
+                             rowsPerPageTemplate="5,10,15" 
+                             lazy="true"
+                             resizableColumns="true"  
+                             selectionMode="single"
+                             selection="#{cotizacionBean.cotizacion}"
+                             rowKey="#{cotizacionBean.idCotizacionC}" 
+                             paginatorPosition="bottom">
+
+
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Id Cotizacion" />
+                        </f:facet>
+                        <h:outputText value="#{cot.idCotizacion}" />
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Pedido - Empleado"/>
+                        </f:facet>
+                        <h:outputText value="#{cot.pedido.idPedido} #{cot.pedido.empleado.rol}" />
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Proveedor" />
+                        </f:facet>
+                        <h:outputText value="#{cot.proveedor.nombre}" />
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Estado del Pedido" />
+                        </f:facet>
+                        <h:outputText value="#{cot.estadoCot}" />
+                    </p:column>
+
+
+                    <p:column headerText="">
+                        <p:commandButton value=""  update=":formModificar,:formInsertar" icon="ui-icon-pencil"   style="width:40px;height:40px"  onsuccess="PF('dlgmodificar').show();" >
+                            <f:setPropertyActionListener target="#{cotizacionBean.cotizacion}" value="#{cot}"/>
+                        </p:commandButton>
+                    </p:column>
+
+                    <p:column headerText="">
+                        <p:commandButton value="" icon="ui-icon-trash"   style="width:40px;height:40px" onclick="PF('dlgeliminar').show();" >
+                            <f:setPropertyActionListener target="#{cotizacionBean.cotizacion}" value="#{cot}"/>
+                        </p:commandButton>
+                    </p:column>
+
+                    <f:facet name="footer">
+                        <div class="footer-section">
+
+                            <p:commandButton update=":formTable" oncomplete="PF('dlginsertar').show()"   icon="ui-icon-plus"  style="width:40px;height:40px"   />
+
+                        </div>
+                    </f:facet>
+                </p:dataTable>
+            </h:form>
+
+
+            <p:dialog id="dlg2" header="Eliminar Cotizacion" showEffect="explode" hideEffect="explode" widgetVar="dlgeliminar" modal="true" resizable="false" minWidth="200">
+                <h:form id="formEliminar">
+                    <p:outputLabel value="¿Desea eliminar Cotizacion?" />
+                    <p:commandButton actionListener="#{cotizacionBean.eliminar}" value="Si" update=":formTable" onclick="PF('dlgeliminar').hide();"/>
+                    <p:commandButton  value="No" onclick="PF('dlg2').hide();"/>
+                </h:form>
+            </p:dialog>
+
+            <p:dialog header="Modificar" widgetVar="dlgmodificar" modal="true" resizable="false">
+                <h:form id="formModificar">
+                    <h:panelGrid id="modificar" columns="2" cellpadding="2">
+                        <p:outputLabel value="Id deCotizacion" />
+                        <p:inputText value="#{cotizacionBean.cotizacion.idCotizacion}"/>
+
+                        <p:outputLabel value="Pedido" />
+                        <p:selectOneMenu id="pedido" value="#{cotizacionBean.idCotizacionC}">
+                            <f:selectItems  value="#{cotizacionBean.listaCoti}" />
+                        </p:selectOneMenu>
+
+                        <p:outputLabel for="proveedor" value="Proveedor" />
+                        <p:selectOneMenu id="proveedor" value="#{cotizacionBean.idProveedorPro}">
+                            <f:selectItems  value="#{cotizacionBean.listaCoti2}" />
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Estado de Cotizacion" />
+                        <p:selectOneMenu id="console" value="#{selectOneMenuView.console}" style="width:125px">
+                            <f:selectItem itemLabel="Select One" itemValue="" />
+                            <f:selectItem itemLabel="Aprobado" itemValue="1" />
+                            <f:selectItem itemLabel="En Espera" itemValue="2" />
+                        </p:selectOneMenu>
+                    </h:panelGrid>
+                    <p:growl id="growl3" life="5000" />
+                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{clienteBean.updateCliente}" value="Modificar Cliente" styleClass="ui-priority-primary"  onsuccess="PF('dlgmodificar').hide();" />
+                </h:form>
+            </p:dialog>
+
+
+
+            <p:dialog header="Insertar" widgetVar="dlginsertar" modal="true" resizable="false">
+                <h:form id="formInsertar">
+                    <h:panelGrid  columns="2"
+                                  cellpadding="2">
+                        <p:outputLabel value="Id deCotizacion" />
+                        <p:inputText value="#{cotizacionBean.cotizacion.idCotizacion}"/>
+
+                        <p:outputLabel value="Pedido" />
+                        <p:selectOneMenu id="pedido" value="#{cotizacionBean.idCotizacionC}">
+                            <f:selectItems  value="#{cotizacionBean.listaCoti}" />
+                        </p:selectOneMenu>
+
+                        <p:outputLabel for="proveedor" value="Proveedor" />
+                        <p:selectOneMenu id="proveedor" value="#{cotizacionBean.idProveedorPro}">
+                            <f:selectItems  value="#{cotizacionBean.listaCoti2}" />
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Estado de Cotizacion" />
+                        <p:selectOneMenu id="console" value="#{selectOneMenuView.console}" style="width:125px">
+                            <f:selectItem itemLabel="Select One" itemValue="" />
+                            <f:selectItem itemLabel="Aprobado" itemValue="1" />
+                            <f:selectItem itemLabel="En Espera" itemValue="2" />
+                        </p:selectOneMenu>
+                    </h:panelGrid>
+                    <p:growl id="growl2" life="5000" />
+                    <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{clienteBean.addCliente}" value="Insertar Cliente" styleClass="ui-priority-primary"  onsuccess="PF('dlginsertar').hide();" />
+                </h:form>
+            </p:dialog>
+
+
+        </h:body>
+    </f:view>
+</html>
