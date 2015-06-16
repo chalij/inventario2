@@ -1,8 +1,10 @@
 package com.ues.bean;
 
+import com.ues.dao.PersonasDao;
 import com.ues.dao.UsuariosDao;
 import com.ues.dao.impl.UsuariosDaoHibImpl;
 import com.ues.exception.DAOException;
+import com.ues.model.Persona;
 import com.ues.model.TipoUsuario;
 import com.ues.model.Usuario;
 import java.util.ArrayList;
@@ -23,7 +25,10 @@ import javax.faces.model.SelectItemGroup;
 public class UsuariosBean {
 
     private Usuario usuario = new Usuario();
+    private PersonasDao personasDao;
+    private Persona persona;
     private int idUsuarioV;
+    private Date fecha=new Date();
     private int tipoUsuarioT;
     private List<Usuario> miLista;
     private List<TipoUsuario> listaTipoU;
@@ -32,6 +37,7 @@ public class UsuariosBean {
 
     public UsuariosBean() {
         usuario = new Usuario();
+        persona=new Persona();
     }
 
     public List<Usuario> getMiLista() {
@@ -42,13 +48,30 @@ public class UsuariosBean {
             miLista = new ArrayList<Usuario>();
         }
         usuario = new Usuario();
+        persona=new Persona();
         return miLista;
     }
 
 
     public void addUsuario(ActionEvent actionEvent) {
         try {
+            
+            
+            
+            Persona per = new Persona();
             Usuario us = new Usuario();
+            per.setIdPersona(persona.getIdPersona());
+            per.setNombre(persona.getNombre());
+            per.setApellido(persona.getApellido());
+            per.setGenero(persona.getGenero());
+            per.setDui(persona.getDui());
+            per.setNit(persona.getNit());
+            per.setFechaNac(fecha);
+            per.setDireccion(persona.getDireccion());
+            per.setCorreo(persona.getCorreo());
+            personasDao.crearPersona(per);
+            
+            
             TipoUsuario tus = new TipoUsuario();
             tus.setIdTipoUsuario(tipoUsuarioT);
           //  us.setIdUsuario(usuario.getIdUsuario());
@@ -56,8 +79,14 @@ public class UsuariosBean {
             us.setContrasena(usuario.getContrasena());
             us.setFechaCreacion(new Date());
             us.setTipoUsuario(tus);
+           // System.out.println(usuariosDao.maxID());
+           // Persona per=new Persona();
+            per.setIdPersona(usuariosDao.maxID());
+            us.setPersona(per);
             usuariosDao.crearUsuario(us);
+            System.out.println("AQUI");
             usuario = new Usuario();
+            persona=new Persona();
             addMessage("Insertado Id:!!" + us.getIdUsuario());
         } catch (Exception e) {
             addMessage("Error Id:!!" + e.getMessage());
@@ -68,17 +97,34 @@ public class UsuariosBean {
 
     public void updateUsuario(ActionEvent actionEvent) {
         try {
+            
+            Persona per = new Persona();
             Usuario us = new Usuario();
+            per.setIdPersona(persona.getIdPersona());
+            per.setNombre(persona.getNombre());
+            per.setApellido(persona.getApellido());
+            per.setGenero(persona.getGenero());
+            per.setDui(persona.getDui());
+            per.setNit(persona.getNit());
+            per.setFechaNac(fecha);
+            per.setDireccion(persona.getDireccion());
+            per.setCorreo(persona.getCorreo());
+            personasDao.modificarPersona(per);
+            
+            
             TipoUsuario tus = new TipoUsuario();
             tus.setIdTipoUsuario(tipoUsuarioT);
             us.setIdUsuario(usuario.getIdUsuario());
             us.setNombreUsuario(usuario.getNombreUsuario());
             us.setContrasena(usuario.getContrasena());
-            us.setFechaCreacion(usuario.getFechaCreacion());
-            us.setFechaModificacion(new Date());
+            us.setFechaCreacion(new Date());
             us.setTipoUsuario(tus);
+            per.setIdPersona(usuariosDao.maxID());
+            us.setPersona(per);
             usuariosDao.modificarUsuario(us);
+            System.out.println("AQUI");
             usuario = new Usuario();
+            persona=new Persona();
             addMessage("Modificado Id:!!" + us.getIdUsuario());
         } catch (Exception e) {
             addMessage("Error Id:!!" + e.getMessage());
@@ -90,16 +136,35 @@ public class UsuariosBean {
     public void eliminar() {
 
         try {
+            
+            
+            Persona per = new Persona();
             Usuario us = new Usuario();
+            TipoUsuario tus = new TipoUsuario();
+            tus.setIdTipoUsuario(tipoUsuarioT);
             us.setIdUsuario(usuario.getIdUsuario());
             us.setNombreUsuario(usuario.getNombreUsuario());
             us.setContrasena(usuario.getContrasena());
-            us.setFechaCreacion(usuario.getFechaCreacion());
-            TipoUsuario tus = new TipoUsuario();
-            tus.setIdTipoUsuario(usuario.getTipoUsuario().getIdTipoUsuario());
+            us.setFechaCreacion(new Date());
             us.setTipoUsuario(tus);
+            per.setIdPersona(usuariosDao.maxID());
+            us.setPersona(per);
             usuariosDao.borrarUsuario(us);
+            System.out.println("AQUI");
+            per.setIdPersona(persona.getIdPersona());
+            per.setNombre(persona.getNombre());
+            per.setApellido(persona.getApellido());
+            per.setGenero(persona.getGenero());
+            per.setDui(persona.getDui());
+            per.setNit(persona.getNit());
+            per.setFechaNac(fecha);
+            per.setDireccion(persona.getDireccion());
+            per.setCorreo(persona.getCorreo());
+            personasDao.borrarPersona(per);
+            
+            
             usuario = new Usuario();
+            persona=new Persona();
             addMessage("Eliminado Id:!!");
         } catch (Exception e) {
             addMessage("Error Id:!!");
@@ -131,6 +196,7 @@ public class UsuariosBean {
      */
     public void setUsuario(Usuario usuario) {
         this.tipoUsuarioT = usuario.getTipoUsuario().getIdTipoUsuario();
+        this.persona=usuario.getPersona();
         this.usuario = usuario;
     }
 
@@ -195,6 +261,48 @@ public class UsuariosBean {
      */
     public void setListaUsu(List<SelectItem> listaUsu) {
         this.listaUsu = listaUsu;
+    }
+
+    /**
+     * @return the personasDao
+     */
+    public PersonasDao getPersonasDao() {
+        return personasDao;
+    }
+
+    /**
+     * @param personasDao the personasDao to set
+     */
+    public void setPersonasDao(PersonasDao personasDao) {
+        this.personasDao = personasDao;
+    }
+
+    /**
+     * @return the persona
+     */
+    public Persona getPersona() {
+        return persona;
+    }
+
+    /**
+     * @param persona the persona to set
+     */
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+
+    /**
+     * @return the fecha
+     */
+    public Date getFecha() {
+        return fecha;
+    }
+
+    /**
+     * @param fecha the fecha to set
+     */
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
 }

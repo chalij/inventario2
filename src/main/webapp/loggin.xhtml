@@ -14,21 +14,18 @@
             <div class="panel panel-primary">
                 <p:panel id="basic" header="Loggin" >
                     <h:panelGrid columns="2" cellpadding="5">
-                        <h:form class="ui-responsive ui-grid" >            
-                            <h:outputLink value="javascript:void(0)" onclick="dfgdf" title="login" >
-                            </h:outputLink>
+                        <h:form class="ui-responsive ui-grid" >  
                             <p:panel id="basic" header="Loggin"  style="position:relative;background-image:url('fondo.jpg');">
                                 <h:panelGrid columns="2" cellpadding="5" class="ui-responsive ui-grid-responsive">
                                     <h:outputLabel for="username" value="Username:" />
-                                    <p:inputText id="username" value="#dfgdf" required="true" label="username" />
+                                    <p:inputText id="username" value="#{loggBean.username}" required="true" label="username" />
 
                                     <h:outputLabel for="password" value="Password:" />
-                                    <p:password id="password" value="dfgdf" required="true" label="password" />
+                                    <p:password id="password" value="#{loggBean.password}" required="true" label="password" />
 
                                     <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
                                     <f:facet name="footer">
-                                        <p:commandButton value="Login" update="growl" actionListener="gdfg"
-                                                         oncomplete="handleLoginRequest(xhr, status, args)" />
+                                        <p:commandButton value="Login" update="growl" action="#{loggBean.login()}"/>
                                     </f:facet>  
                                 </h:panelGrid>
                             </p:panel>

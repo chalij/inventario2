@@ -22,5 +22,10 @@ public interface UsuariosDao {
     public void borrarUsuario(Usuario usuario) throws DAOException;
 
     public void modificarUsuario(Usuario usuario) throws DAOException;
+    
+    public int maxID() throws DAOException;
+    
+    
+    public boolean controlLogg(String nombreUsuario, String contrasena) throws DAOException;
 
 }
