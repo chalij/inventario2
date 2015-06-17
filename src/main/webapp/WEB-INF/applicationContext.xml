@@ -54,6 +54,8 @@ commit;
                 <value>Persona.hbm.xml</value>
                 <value>Empleado.hbm.xml</value>
                 <value>Producto.hbm.xml</value>
+                <value>Menu.hbm.xml</value>
+                <value>TipoMenu.hbm.xml</value>
             </list>
         </property>
         

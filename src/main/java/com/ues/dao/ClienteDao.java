@@ -19,5 +19,6 @@ public interface ClienteDao {
    public void borrarCliente(Cliente tipocliente) throws DAOException;
    public List<Persona> listaPersonas() throws DAOException;
    public List<TipoCliente> listaTiposCliente() throws DAOException;
+   public int maxId() throws DAOException;
     
 }

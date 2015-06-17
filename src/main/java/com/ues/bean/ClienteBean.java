@@ -1,6 +1,7 @@
 package com.ues.bean;
 
 import com.ues.dao.ClienteDao;
+import com.ues.dao.PersonasDao;
 import com.ues.model.Cliente;
 import java.text.ParseException;
 import java.util.Date;
@@ -17,6 +18,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.model.SelectItem;
 import javax.faces.model.SelectItemGroup;
 
+
 /**
  *
  * @author Jocelyn
@@ -28,6 +30,7 @@ public class ClienteBean {
     private List<Persona> miListaP;
      private List<TipoCliente> miListaTC;
     private ClienteDao clienteDao;
+    private PersonasDao personasDao;
     private Cliente cliente = new Cliente();
     //Para las foráneas
     private int idPersonaP;
@@ -37,9 +40,14 @@ public class ClienteBean {
    
     private List<SelectItem> listaCli = new ArrayList<SelectItem>();
     private List<SelectItem> listaCli2 = new ArrayList<SelectItem>();
+    
+    private Persona persona; 
+    private Date fecha = new Date();
+    
    
     public ClienteBean() {
          cliente = new Cliente();
+         persona = new Persona();
     }
 
     public List<Cliente> getMiLista() {
@@ -50,37 +58,68 @@ public class ClienteBean {
             miLista = new ArrayList<Cliente>();
         }
        cliente = new Cliente();
+       persona = new Persona();
         return miLista;
     }
     
     public void addCliente(ActionEvent actionEvent) {
         try {
+             Persona per = new Persona();
+       
+            per.setNombre(persona.getNombre());
+            per.setApellido(persona.getApellido());
+            per.setGenero(persona.getGenero());
+            per.setDui(persona.getDui());
+            per.setNit(persona.getNit());
+            per.setFechaNac(getFecha());
+            per.setDireccion(persona.getDireccion());
+            per.setCorreo(persona.getCorreo());
+            personasDao.crearPersona(per);
+            
             Cliente c = new Cliente();
             Persona p= new Persona ();
-            TipoCliente tc = new TipoCliente();
-            
+            TipoCliente tc = new TipoCliente();  
             c.setIdCliente(cliente.getIdCliente());
-            p.setIdPersona(idPersonaP);
+            p.setIdPersona(clienteDao.maxId());
+            c.setPersona(p);
+           
+           // per.setIdPersona(persona.getIdPersona());
+           // p.setIdPersona(idPersonaP);
             tc.setIdTipoCliente(idTipoClientTC);
             c.setPersona(p);
             c.setTipoCliente(tc);
             clienteDao.crearCliente(c);
+       
+           
            
             addMessage("Insertado Id:!!" + cliente.getIdCliente());
         } catch (Exception e) {
             addMessage("Error Id:!!" + cliente.getIdCliente() + " " + e.getMessage());
             e.printStackTrace();
         }
-
+     
     }
          public void updateCliente(ActionEvent actionEvent) {
         try {
+            Persona per = new Persona();
+            per.setIdPersona(persona.getIdPersona());
+            per.setNombre(persona.getNombre());
+            per.setApellido(persona.getApellido());
+            per.setGenero(persona.getGenero());
+            per.setDui(persona.getDui());
+            per.setNit(persona.getNit());
+            per.setFechaNac(getFecha());
+            per.setDireccion(persona.getDireccion());
+            per.setCorreo(persona.getCorreo());
+            personasDao.modificarPersona(per);
+            
             Cliente c = new Cliente();
             Persona p= new Persona ();
-            TipoCliente tc = new TipoCliente();
-            
+            TipoCliente tc = new TipoCliente();  
             c.setIdCliente(cliente.getIdCliente());
-            p.setIdPersona(idPersonaP);
+            p.setIdPersona(clienteDao.maxId());
+            c.setPersona(p);
+            
             tc.setIdTipoCliente(idTipoClientTC);
             c.setPersona(p);
             c.setTipoCliente(tc);
@@ -96,17 +135,30 @@ public class ClienteBean {
      public void eliminar() {
 
         try {
-            Cliente c= new Cliente();
-          Persona p= new Persona ();
-            TipoCliente tc = new TipoCliente();
-           
+           Cliente c = new Cliente();
+            Persona p= new Persona ();
+            TipoCliente tc = new TipoCliente();  
             c.setIdCliente(cliente.getIdCliente());
-            p.setIdPersona(idPersonaP);
+            p.setIdPersona(clienteDao.maxId());
+            c.setPersona(p);
+            
             tc.setIdTipoCliente(idTipoClientTC);
             c.setPersona(p);
             c.setTipoCliente(tc);
-            clienteDao.borrarCliente(c);
-            cliente=new Cliente();
+             clienteDao.borrarCliente(c);
+             
+             Persona per = new Persona();
+            per.setIdPersona(persona.getIdPersona());
+            per.setNombre(persona.getNombre());
+            per.setApellido(persona.getApellido());
+            per.setGenero(persona.getGenero());
+            per.setDui(persona.getDui());
+            per.setNit(persona.getNit());
+            per.setFechaNac(getFecha());
+            per.setDireccion(persona.getDireccion());
+            per.setCorreo(persona.getCorreo());
+            personasDao.borrarPersona(per);
+           
             
             addMessage("Eliminado Id:!!");
         } catch (Exception e) {
@@ -191,6 +243,7 @@ public class ClienteBean {
      * @param cliente the cliente to set
      */
     public void setCliente(Cliente cliente) {
+        this.persona=cliente.getPersona();
         this.cliente = cliente;
     }
 
@@ -281,6 +334,51 @@ public class ClienteBean {
     public void setListaCli2(List<SelectItem> listaCli2) {
         this.listaCli2 = listaCli2;
     }
+
+    
+
+    /**
+     * @return the persona
+     */
+    public Persona getPersona() {
+        return persona;
+    }
+
+    /**
+     * @param persona the persona to set
+     */
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+
+    /**
+     * @return the personasDao
+     */
+    public PersonasDao getPersonasDao() {
+        return personasDao;
+    }
+
+    /**
+     * @param personasDao the personasDao to set
+     */
+    public void setPersonasDao(PersonasDao personasDao) {
+        this.personasDao = personasDao;
+    }
+
+    /**
+     * @return the fecha
+     */
+    public Date getFecha() {
+        return fecha;
+    }
+
+    /**
+     * @param fecha the fecha to set
+     */
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
 
 }
 

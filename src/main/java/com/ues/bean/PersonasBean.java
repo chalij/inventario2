@@ -1,6 +1,7 @@
 package com.ues.bean;
 
 import com.ues.dao.PersonasDao;
+import com.ues.dao.UsuariosDao;
 import com.ues.model.Persona;
 import com.ues.model.Usuario;
 import java.text.ParseException;
@@ -11,12 +12,13 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import com.ues.dao.impl.PersonasDaoHibImpl;
+import com.ues.dao.impl.UsuariosDaoHibImpl;
 import com.ues.exception.DAOException;
+import com.ues.model.TipoUsuario;
 import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.model.SelectItem;
 import javax.faces.model.SelectItemGroup;
-
 
 /**
  *
@@ -24,32 +26,35 @@ import javax.faces.model.SelectItemGroup;
  */
 public class PersonasBean {
 
-    private int idpersonaP; 
+    private int idpersonaP;
     private List<Persona> miLista;
-    private PersonasDao personasDao;
+    private PersonasDao personasDao=new PersonasDaoHibImpl();
+    private UsuariosDao usuariosDao;
     private int idusuarioU;
-    public Date fecha=new Date();
+    public Date fecha = new Date();
     private Persona persona = new Persona();
+    private Usuario usuario=new Usuario();
     private List<Usuario> miListaU;
-    
+
     //para llenar combobox de foráneas
-     private List<SelectItem> miListaUsu = new ArrayList<SelectItem>();
+    private List<SelectItem> miListaUsu = new ArrayList<SelectItem>();
 
     public PersonasBean() {
-         persona = new Persona();
-         fecha=new Date();
+        persona = new Persona();
+        fecha = new Date();
+        usuario=new Usuario();
     }
 
     public List<Persona> getMiLista() {
         try {
             miLista = personasDao.listaPersonas();
-            
-          
+
         } catch (Exception e) {
             e.printStackTrace();
-            miLista=new ArrayList<Persona>();
+            miLista = new ArrayList<Persona>();
         }
-        persona=new Persona();
+        persona = new Persona();
+        usuario=new Usuario();
         // Retorno otra lista que tambien necesitare para que la vista la pueda utilizar
         return miLista;
     }
@@ -57,9 +62,9 @@ public class PersonasBean {
     public void addPersona(ActionEvent actionEvent) {
         try {
             Persona per = new Persona();
-            Usuario us = new Usuario();
+           // Usuario us = new Usuario();
             per.setIdPersona(persona.getIdPersona());
-            us.setIdUsuario(idusuarioU);
+            //us.setIdUsuario(idusuarioU);
             per.setNombre(persona.getNombre());
             per.setApellido(persona.getApellido());
             per.setGenero(persona.getGenero());
@@ -68,23 +73,32 @@ public class PersonasBean {
             per.setFechaNac(fecha);
             per.setDireccion(persona.getDireccion());
             per.setCorreo(persona.getCorreo());
-            per.setUsuario(us);
             personasDao.crearPersona(per);
-            addMessage("Insertado Id:!!" + persona.getIdPersona());
+            
+            Usuario uaux = new Usuario();
+            uaux.setNombreUsuario(usuario.getNombreUsuario());
+            uaux.setContrasena(usuario.getContrasena());
+            TipoUsuario tus = new TipoUsuario();
+            tus.setIdTipoUsuario(1);
+            uaux.setTipoUsuario(tus);
+            uaux.setFechaCreacion(new Date());
+           // uaux.setPersona(per);
+            usuariosDao.crearUsuario(uaux);
+            addMessage("Insertado Id:!!"+per.getNombre()+" "+per.getApellido());
         } catch (Exception e) {
-            addMessage("Error Id:!!" + persona.getIdPersona() + " " + e.getMessage());
+            addMessage("Error Id:!!"  + e.getMessage());
             e.printStackTrace();
         }
+        
 
     }
-    
-    
-     public void updatePersona(ActionEvent actionEvent) {
+
+    public void updatePersona(ActionEvent actionEvent) {
         try {
             Persona per = new Persona();
             Usuario us = new Usuario();
             per.setIdPersona(persona.getIdPersona());
-            us.setIdUsuario(idusuarioU);
+            //us.setIdUsuario(idusuarioU);
             per.setNombre(persona.getNombre());
             per.setApellido(persona.getApellido());
             per.setGenero(persona.getGenero());
@@ -93,7 +107,6 @@ public class PersonasBean {
             per.setFechaNac(fecha);
             per.setDireccion(persona.getDireccion());
             per.setCorreo(persona.getCorreo());
-            per.setUsuario(us);
             personasDao.modificarPersona(per);
             persona = new Persona();
             addMessage("Actualizado Id:!!" + per.getIdPersona());
@@ -103,9 +116,8 @@ public class PersonasBean {
         }
 
     }
-     
-     
-     public void eliminar() {
+
+    public void eliminar() {
 
         try {
             Persona per = new Persona();
@@ -120,7 +132,6 @@ public class PersonasBean {
             per.setFechaNac(fecha);
             per.setDireccion(persona.getDireccion());
             per.setCorreo(persona.getCorreo());
-            per.setUsuario(us);
             personasDao.borrarPersona(per);
             persona = new Persona();
             addMessage("Eliminado Id:!!");
@@ -129,9 +140,7 @@ public class PersonasBean {
             e.printStackTrace();
         }
     }
-     
-     
- 
+
     public void setMiLista(List<Persona> miLista) {
         this.miLista = miLista;
     }
@@ -169,7 +178,6 @@ public class PersonasBean {
      * @param persona the persona to set
      */
     public void setPersona(Persona persona) {
-        this.idusuarioU=persona.getUsuario().getIdUsuario();
         this.persona = persona;
     }
 
@@ -177,10 +185,6 @@ public class PersonasBean {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, welcome_to_Primefaces, null);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
-
-    
-
-    
 
     /**
      * @return the idpersonaP
@@ -210,28 +214,27 @@ public class PersonasBean {
         this.fecha = fecha;
     }
 
-   
     /**
      * @return the miListaUsu
      */
     public List<SelectItem> getMiListaUsu() {
-        
-         try {
-            miListaU=personasDao.listaUsuarios();
+
+        try {
+            miListaU = personasDao.listaUsuarios();
             miListaUsu.clear();
             SelectItemGroup g2 = new SelectItemGroup("Usuario");
             SelectItem[] asi = new SelectItem[miListaU.size()];
             for (int i = 0; i < miListaU.size(); i++) {
                 Usuario usAux = (Usuario) miListaU.get(i);
-               asi[i] = new SelectItem(usAux.getIdUsuario(), usAux.getNombreUsuario());
+                asi[i] = new SelectItem(usAux.getIdUsuario(), usAux.getNombreUsuario());
             }
             g2.setSelectItems(asi);
             miListaUsu.add(g2);
         } catch (Exception e) {
             e.printStackTrace();
-            miListaUsu=new ArrayList<SelectItem>();
+            miListaUsu = new ArrayList<SelectItem>();
         }
-    
+
         return miListaUsu;
     }
 
@@ -241,8 +244,6 @@ public class PersonasBean {
     public void setMiListaUsu(List<SelectItem> miListaUsu) {
         this.miListaUsu = miListaUsu;
     }
-
-    
 
     /**
      * @return the miListaU
@@ -258,4 +259,36 @@ public class PersonasBean {
         this.miListaU = miListaU;
     }
 
+    /**
+     * @return the usuariosDao
+     */
+    public UsuariosDao getUsuariosDao() {
+        return usuariosDao;
+    }
+
+    /**
+     * @param usuariosDao the usuariosDao to set
+     */
+    public void setUsuariosDao(UsuariosDao usuariosDao) {
+        this.usuariosDao = usuariosDao;
+    }
+
+    /**
+     * @return the usuario
+     */
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    /**
+     * @return the usuarioDao
+     */
+  
 }

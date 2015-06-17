@@ -1,5 +1,5 @@
 package com.ues.model;
-// Generated 30-may-2015 11:21:15 by Hibernate Tools 4.3.1
+// Generated 13-jun-2015 20:08:50 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;

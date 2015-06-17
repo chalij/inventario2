@@ -1,32 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 30-may-2015 11:21:15 by Hibernate Tools 4.3.1 -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 13-jun-2015 20:08:55 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class name="com.ues.model.Usuario" optimistic-lock="version" schema="INVENTARIO" table="USUARIO">
-    <id name="idUsuario" type="int">
-      <column name="ID_USUARIO" precision="6" scale="0"/>
-      <generator class="assigned"/>
-    </id>
-    <many-to-one class="com.ues.model.TipoUsuario" fetch="select" name="tipoUsuario">
-      <column name="ID_TIPO_USUARIO" not-null="true" precision="6" scale="0"/>
-    </many-to-one>
-    <property name="nombreUsuario" type="string">
-      <column length="50" name="NOMBRE_USUARIO" not-null="true"/>
-    </property>
-    <property name="contrasena" type="string">
-      <column length="50" name="CONTRASENA" not-null="true"/>
-    </property>
-    <property name="fechaCreacion" type="date">
-      <column length="7" name="FECHA_CREACION" not-null="true"/>
-    </property>
-    <property name="fechaModificacion" type="date">
-      <column length="7" name="FECHA_MODIFICACION"/>
-    </property>
-    <set fetch="select" inverse="true" lazy="true" name="personas" table="PERSONA">
-      <key>
-        <column name="ID_USUARIO" precision="6" scale="0"/>
-      </key>
-      <one-to-many class="com.ues.model.Persona"/>
-    </set>
-  </class>
+    <class name="com.ues.model.Usuario" table="USUARIO" schema="INVENTARIO" optimistic-lock="version">
+        <id name="idUsuario" type="int">
+            <column name="ID_USUARIO" precision="6" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="tipoUsuario" class="com.ues.model.TipoUsuario" fetch="select">
+            <column name="ID_TIPO_USUARIO" precision="6" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="persona" class="com.ues.model.Persona" fetch="select">
+            <column name="ID_PERSONA" precision="6" scale="0" />
+        </many-to-one>
+        <property name="nombreUsuario" type="string">
+            <column name="NOMBRE_USUARIO" length="50" not-null="true" />
+        </property>
+        <property name="contrasena" type="string">
+            <column name="CONTRASENA" length="50" not-null="true" />
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="FECHA_CREACION" length="7" not-null="true" />
+        </property>
+        <property name="fechaModificacion" type="date">
+            <column name="FECHA_MODIFICACION" length="7" />
+        </property>
+    </class>
 </hibernate-mapping>

@@ -156,8 +156,23 @@
             <p:dialog header="Modificar" widgetVar="dlgmodificar" modal="true" resizable="false">
                 <h:form id="formModificar">
                     <h:panelGrid id="modificar" columns="2" cellpadding="2">
-                        <p:outputLabel value="Id del usuario" />
-                        <p:inputText value="#{usuariosBean.usuario.idUsuario}" disabled="true"/>
+                        <p:outputLabel value="Nombre de la persona" />
+                        <p:inputText value="#{usuariosBean.persona.nombre}"/>
+                        <p:outputLabel value="Apellido" />
+                        <p:inputText value="#{usuariosBean.persona.apellido}"/>
+                        <p:outputLabel value="Genero" />
+                        <p:inputText value="#{usuariosBean.persona.genero}"/>
+                        <p:outputLabel value="DUI" />
+                        <p:inputText value="#{usuariosBean.persona.dui}"/>
+                        <p:outputLabel value="NIT" />
+                        <p:inputText value="#{usuariosBean.persona.nit}"/>
+
+                        <p:outputLabel for="button" value="Fecha de Nacimiento:" />
+                        <p:calendar id="button" value="#{usuariosBean.fecha}" showOn="button" />
+                        <p:outputLabel value="Dirección" />
+                        <p:inputText value="#{usuariosBean.persona.direccion}"/>
+                        <p:outputLabel value="Correo Electrónico" />
+                        <p:inputText value="#{usuariosBean.persona.correo}"/>
                         <p:outputLabel value="Nombre del usuario" />
                         <p:inputText value="#{usuariosBean.usuario.nombreUsuario}"/>
                         <p:outputLabel value="Contraseña" />
@@ -178,6 +193,24 @@
                 <h:form id="formInsertar">
                     <h:panelGrid  columns="2"
                                   cellpadding="2">
+                        
+                        <p:outputLabel value="Nombre de la persona" />
+                        <p:inputText value="#{usuariosBean.persona.nombre}"/>
+                        <p:outputLabel value="Apellido" />
+                        <p:inputText value="#{usuariosBean.persona.apellido}"/>
+                        <p:outputLabel value="Genero" />
+                        <p:inputText value="#{usuariosBean.persona.genero}"/>
+                        <p:outputLabel value="DUI" />
+                        <p:inputText value="#{usuariosBean.persona.dui}"/>
+                        <p:outputLabel value="NIT" />
+                        <p:inputText value="#{usuariosBean.persona.nit}"/>
+
+                        <p:outputLabel for="button" value="Fecha de Nacimiento:" />
+                        <p:calendar id="button" value="#{usuariosBean.fecha}" showOn="button" />
+                        <p:outputLabel value="Dirección" />
+                        <p:inputText value="#{usuariosBean.persona.direccion}"/>
+                        <p:outputLabel value="Correo Electrónico" />
+                        <p:inputText value="#{usuariosBean.persona.correo}"/>
                         <p:outputLabel value="Nombre del usuario" />
                         <p:inputText value="#{usuariosBean.usuario.nombreUsuario}"/>
                         <p:outputLabel value="Contraseña" />

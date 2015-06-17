@@ -34,6 +34,12 @@
             <property-class>com.ues.dao.PersonasDao</property-class>
             <value>#{personasDao}</value>
         </managed-property>
+        <managed-property>
+            <property-name>usuariosDao</property-name>
+            <property-class>com.ues.dao.UsuariosDao</property-class>
+            <value>#{usuariosDao}</value>
+        </managed-property>
+        
     </managed-bean>
     
     
@@ -89,7 +95,6 @@
     </managed-bean>
     
     
-    
     <managed-bean>
         <managed-bean-name>tipoclienteBean</managed-bean-name>
         <managed-bean-class>com.ues.bean.TipoClienteBean</managed-bean-class>
@@ -114,6 +119,15 @@
             <property-class>com.ues.dao.ClienteDao</property-class>
             <value>#{clienteDao}</value>
         </managed-property>
+    
+    
+        <managed-property>
+            <property-name>personasDao</property-name>
+            <property-class>com.ues.dao.PersonasDao</property-class>
+            <value>#{personasDao}</value>
+        </managed-property>
+    
+    
     </managed-bean>
     
     <managed-bean>
