@@ -103,11 +103,58 @@
 
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="Id Persona"/>
+                            <h:outputText value="Nombre"/>
                         </f:facet>
                         <h:outputText value="#{cli.persona.nombre} #{cli.persona.apellido}" />
                     </p:column>
+                    
+                     <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Género"/>
+                        </f:facet>
+                         <h:outputText value="#{cli.persona.genero}" />
+                    </p:column>
+                    
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="DUI"/>
+                        </f:facet>
+                        <h:outputText value="#{cli.persona.dui}" />
+                    </p:column>
+                    
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="NIT"/>
+                        </f:facet>
+                        <h:outputText value="#{cli.persona.nit}" />
+                    </p:column>
 
+                    
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Fecha de Nac."/>
+                        </f:facet>
+                        <h:outputText value="#{cli.persona.fechaNac}" />
+                    </p:column>
+                    
+                    
+                    
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Dirección"/>
+                        </f:facet>
+                        <h:outputText value="#{cli.persona.direccion}" />
+                    </p:column>
+                    
+                      <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Correo"/>
+                        </f:facet>
+                        <h:outputText value="#{cli.persona.correo}" />
+                    </p:column>
+                    
+                    
+                    
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Id Tipo Cliente" />
@@ -150,19 +197,28 @@
             <p:dialog header="Modificar" widgetVar="dlgmodificar" modal="true" resizable="false">
                 <h:form id="formModificar">
                     <h:panelGrid id="modificar" columns="2" cellpadding="2">
-                        <p:outputLabel value="Id del cliente" />
-                        <p:inputText value="#{clienteBean.cliente.idCliente}"/>
-                       
-                        <p:outputLabel for="Persona" value="Persona:" />
-                        <p:selectOneMenu id="Persona" value="#{clienteBean.idPersonaP}">
-                            <f:selectItems  value="#{clienteBean.listaCli2}" />
-                        </p:selectOneMenu>
+                        <p:outputLabel value="Nombre" />
+                        <p:inputText value="#{clienteBean.persona.nombre}"/>
+                        <p:outputLabel value="Apellido" />
+                        <p:inputText value="#{clienteBean.persona.apellido}"/>
+                        <p:outputLabel value="Género" />
+                        <p:inputText value="#{clienteBean.persona.genero}"/>
+                        <p:outputLabel value="DUI" />
+                        <p:inputText value="#{clienteBean.persona.dui}"/>
+                        <p:outputLabel value="NIT" />
+                        <p:inputText value="#{clienteBean.persona.nit}"/>
+                        <p:outputLabel for="button" value="Fecha de Nacimiento" />
+                        <p:calendar id="button" value="#{clienteBean.fecha}" showOn="button" />
+                        <p:outputLabel value="Dirección" />
+                        <p:inputText value="#{clienteBean.persona.direccion}"/>
+                        <p:outputLabel value="Correo Electrónico" />
+                        <p:inputText value="#{clienteBean.persona.correo}"/>
+                 
                         
-                         <p:outputLabel for="tipoCliente" value="Tipo de Cliente:" />
+                         <p:outputLabel for="tipoCliente" value="Tipo de Cliente" />
                          <p:selectOneMenu id="tipoCliente" value="#{clienteBean.idTipoClientTC}">
                             <f:selectItems  value="#{clienteBean.listaCli}" />
-                        </p:selectOneMenu>
-      
+                       </p:selectOneMenu>
                     </h:panelGrid>
                     <p:growl id="growl3" life="5000" />
                     <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{clienteBean.updateCliente}" value="Modificar Cliente" styleClass="ui-priority-primary"  onsuccess="PF('dlgmodificar').hide();" />
@@ -175,17 +231,34 @@
                 <h:form id="formInsertar">
                     <h:panelGrid  columns="2"
                                   cellpadding="2">
-                        <p:outputLabel value="Id del cliente" />
-                        <p:inputText value="#{clienteBean.cliente.idCliente}"/>
-                        <p:outputLabel for="Persona" value="Persona:" />
-                        <p:selectOneMenu id="Persona" value="#{clienteBean.idPersonaP}">
-                            <f:selectItems  value="#{clienteBean.listaCli2}" />
-                        </p:selectOneMenu>
                         
-                         <p:outputLabel for="tipoCliente" value="Tipo de Cliente:" />
+                        <p:outputLabel value="Nombre" />
+                        <p:inputText value="#{clienteBean.persona.nombre}"/>
+                        <p:outputLabel value="Apellido" />
+                        <p:inputText value="#{clienteBean.persona.apellido}"/>
+                        <p:outputLabel value="Género" />
+                        <p:inputText value="#{clienteBean.persona.genero}"/>
+                        <p:outputLabel value="DUI" />
+                        <p:inputText value="#{clienteBean.persona.dui}"/>
+                        <p:outputLabel value="NIT" />
+                        <p:inputText value="#{clienteBean.persona.nit}"/>
+                        <p:outputLabel for="button" value="Fecha de Nacimiento" />
+                        <p:calendar id="button" value="#{clienteBean.fecha}" showOn="button" />
+                        <p:outputLabel value="Dirección" />
+                        <p:inputText value="#{clienteBean.persona.direccion}"/>
+                        <p:outputLabel value="Correo Electrónico" />
+                        <p:inputText value="#{clienteBean.persona.correo}"/>
+                 
+                        
+                        
+                     
+                        
+                         <p:outputLabel for="tipoCliente" value="Tipo de Cliente" />
                          <p:selectOneMenu id="tipoCliente" value="#{clienteBean.idTipoClientTC}">
                             <f:selectItems  value="#{clienteBean.listaCli}" />
-                        </p:selectOneMenu>
+                       </p:selectOneMenu>
+                         
+                         
                     </h:panelGrid>
                     <p:growl id="growl2" life="5000" />
                     <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{clienteBean.addCliente}" value="Insertar Cliente" styleClass="ui-priority-primary"  onsuccess="PF('dlginsertar').hide();" />

@@ -50,5 +50,18 @@ public class ClienteDaoHibImpl extends CustomHibernateDaoSupport implements Clie
         
         
         return lista;}
+
+    @Override
+    public int maxId() throws DAOException {
+        
+         List list=  getHibernateTemplate().find("select max(p.idPersona) from Persona p");
+      System.out.println(list.get(0));
+         
+        return (Integer)list.get(0);
+    }
+    
+    
+    
+    
     }
 

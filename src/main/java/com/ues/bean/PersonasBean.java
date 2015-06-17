@@ -62,9 +62,9 @@ public class PersonasBean {
     public void addPersona(ActionEvent actionEvent) {
         try {
             Persona per = new Persona();
-            Usuario us = new Usuario();
+           // Usuario us = new Usuario();
             per.setIdPersona(persona.getIdPersona());
-            us.setIdUsuario(idusuarioU);
+            //us.setIdUsuario(idusuarioU);
             per.setNombre(persona.getNombre());
             per.setApellido(persona.getApellido());
             per.setGenero(persona.getGenero());
