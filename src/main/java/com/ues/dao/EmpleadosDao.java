@@ -27,4 +27,6 @@ public interface EmpleadosDao {
     public void borrarEmpleados(Empleado borraEmpleado) throws DAOException;
 
     public void modificarEmpleados(Empleado modificaEmpleado) throws DAOException;
+    
+    public int maxId() throws DAOException;
 }

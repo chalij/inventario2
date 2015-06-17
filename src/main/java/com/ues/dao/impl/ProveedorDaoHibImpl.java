@@ -51,4 +51,11 @@ public class ProveedorDaoHibImpl extends CustomHibernateDaoSupport implements Pr
         List<TipoProveedor> listaTp = getHibernateTemplate().find("from TipoProveedor tp order by tp.idTipoProveedor");
         return listaTp;
     } //arreglar el parametro sql de este metodo!!
+
+    @Override
+    public int maxId() throws DAOException {
+        List list = getHibernateTemplate().find("select max(p.idPersona) from Persona p");
+        System.out.println(list);        
+        return (Integer) list.get(0);
+    }
 }

@@ -80,12 +80,31 @@
             <p:dialog header="Modificar" widgetVar="dlgmodificar" modal="true" resizable="false">
                 <h:form id="formModificar">
                     <h:panelGrid id="modificar" columns="2" cellpadding="2">
-                        <p:outputLabel value="Id del Empleado" />
+                        <p:outputLabel value="Nombre de la persona" />
+                        <p:inputText value="#{empleadoBean.persona.nombre}"/>
+                        <p:outputLabel value="Apellido" />
+                        <p:inputText value="#{empleadoBean.persona.apellido}"/>
+                        <p:outputLabel value="Genero" />
+                        <p:inputText value="#{empleadoBean.persona.genero}"/>
+                        <p:outputLabel value="DUI" />
+                        <p:inputText value="#{empleadoBean.persona.dui}"/>
+                        <p:outputLabel value="NIT" />
+                        <p:inputText value="#{empleadoBean.persona.nit}"/>
+
+                        <p:outputLabel for="button" value="Fecha de Nacimiento:" />
+                        <p:calendar id="button" value="#{empleadoBean.persona.fechaNac}" showOn="button" />
+                        <p:outputLabel value="Dirección" />
+                        <p:inputText value="#{empleadoBean.persona.direccion}"/>
+                        <p:outputLabel value="Correo Electrónico" />
+                        <p:inputText value="#{empleadoBean.persona.correo}"/>
+                        
+                        <!--<p:outputLabel value="Id del Empleado" />
                         <p:inputText value="#{empleadoBean.empleado.idEmpleado}"/>
                         <p:outputLabel for="empleado" value="Persona Empleado/a:" />
                         <p:selectOneMenu id="empleado" value="#{empleadoBean.idPersonaP}">
                             <f:selectItems  value="#{empleadoBean.listaEmpleado}" />
                         </p:selectOneMenu>
+                        -->
                         <p:outputLabel value="Rol" />
                         <p:inputText value="#{empleadoBean.empleado.rol}"/>
                     </h:panelGrid>
@@ -100,12 +119,31 @@
                 <h:form id="formInsertar">
                     <h:panelGrid  columns="2"
                                   cellpadding="2">
-                        <p:outputLabel value="Id del Empleado" />
+                        <p:outputLabel value="Nombre de la persona" />
+                        <p:inputText value="#{empleadoBean.persona.nombre}"/>
+                        <p:outputLabel value="Apellido" />
+                        <p:inputText value="#{empleadoBean.persona.apellido}"/>
+                        <p:outputLabel value="Genero" />
+                        <p:inputText value="#{empleadoBean.persona.genero}"/>
+                        <p:outputLabel value="DUI" />
+                        <p:inputText value="#{empleadoBean.persona.dui}"/>
+                        <p:outputLabel value="NIT" />
+                        <p:inputText value="#{empleadoBean.persona.nit}"/>
+
+                        <p:outputLabel for="button" value="Fecha de Nacimiento:" />
+                        <p:calendar id="button" value="#{empleadoBean.persona.fechaNac}" showOn="button" />
+                        <p:outputLabel value="Dirección" />
+                        <p:inputText value="#{empleadoBean.persona.direccion}"/>
+                        <p:outputLabel value="Correo Electrónico" />
+                        <p:inputText value="#{empleadoBean.persona.correo}"/>
+                        
+                        <!--<p:outputLabel value="Id del Empleado" />
                         <p:inputText value="#{empleadoBean.empleado.idEmpleado}"/>
                         <p:outputLabel for="empleado" value="Persona Empleado/a:" />
                         <p:selectOneMenu id="empleado" value="#{empleadoBean.idPersonaP}">
                             <f:selectItems  value="#{empleadoBean.listaEmpleado}" />
                         </p:selectOneMenu>
+                        -->
                         <p:outputLabel value="Rol" />
                         <p:inputText value="#{empleadoBean.empleado.rol}"/>
                     </h:panelGrid>

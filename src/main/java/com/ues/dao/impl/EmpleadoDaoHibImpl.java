@@ -44,4 +44,12 @@ public class EmpleadoDaoHibImpl extends CustomHibernateDaoSupport implements Emp
     public void modificarEmpleados(Empleado modificaEmpleado) throws DAOException {
         getHibernateTemplate().update(modificaEmpleado);
     }    
+
+    @Override
+    public int maxId() throws DAOException {
+        List list = getHibernateTemplate().find("select max(p.idPersona) from Persona p");
+        System.out.println(list);
+        
+        return (Integer) list.get(0);
+    }
 }

@@ -24,7 +24,7 @@
     
     
     
-     <managed-bean>
+    <managed-bean>
         <managed-bean-name>personasBean</managed-bean-name>
         <managed-bean-class>com.ues.bean.PersonasBean</managed-bean-class>
     
@@ -37,7 +37,7 @@
     </managed-bean>
     
     
-     <managed-bean>
+    <managed-bean>
         <managed-bean-name>tipoUsuariosBean</managed-bean-name>
         <managed-bean-class>com.ues.bean.TipoUsuariosBean</managed-bean-class>
     
@@ -50,7 +50,7 @@
     </managed-bean>
     
     
-     <managed-bean>
+    <managed-bean>
         <managed-bean-name>tipoProductosBean</managed-bean-name>
         <managed-bean-class>com.ues.bean.TipoProductosBean</managed-bean-class>
     
@@ -63,7 +63,7 @@
     </managed-bean>
     
     
-     <managed-bean>
+    <managed-bean>
         <managed-bean-name>tipoDevolucionesBean</managed-bean-name>
         <managed-bean-class>com.ues.bean.TipoDevolucionesBean</managed-bean-class>
     
@@ -76,7 +76,7 @@
     </managed-bean>
     
     
-     <managed-bean>
+    <managed-bean>
         <managed-bean-name>recursosBean</managed-bean-name>
         <managed-bean-class>com.ues.bean.RecursosBean</managed-bean-class>
     
@@ -143,7 +143,7 @@
     
     
     
-     <managed-bean>
+    <managed-bean>
         <managed-bean-name>transaccionBean</managed-bean-name>
         <managed-bean-class>com.ues.bean.TransaccionBean</managed-bean-class>
     
@@ -194,10 +194,17 @@
         <managed-bean-class>com.ues.bean.EmpleadoBean</managed-bean-class>
     
         <managed-bean-scope>session</managed-bean-scope>
+        
         <managed-property>
             <property-name>empleadoDao</property-name>
             <property-class>com.ues.dao.EmpleadosDao</property-class>
             <value>#{empleadoDao}</value>
+        </managed-property>
+        
+        <managed-property>
+            <property-name>personasDao</property-name>
+            <property-class>com.ues.dao.PersonasDao</property-class>
+            <value>#{personasDao}</value>
         </managed-property>
     </managed-bean>
     

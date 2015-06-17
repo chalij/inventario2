@@ -1,10 +1,12 @@
 package com.ues.bean;
 
+import com.ues.dao.PersonasDao;
 import com.ues.dao.ProveedorDao;
 import com.ues.model.Persona;
 import com.ues.model.Proveedor;
 import com.ues.model.TipoProveedor;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -23,20 +25,47 @@ public class ProveedorBean {
     private List<Persona> miListaP;
     private List<TipoProveedor> miListaTipoP;
     private ProveedorDao proveedorDao;
+    private PersonasDao personasDao;
     private Proveedor proveedor = new Proveedor();
+    private Persona persona;
     //Para las Foraneas
     private int idPersonaP;
     private int idTipoProveedorTP;
     private List<Persona> listaPer;
     private List<TipoProveedor> listaTP;
-    
+    private Date fecha = new Date();
     private List<SelectItem> listaProveedor = new ArrayList<SelectItem>();
     private List<SelectItem> listaProveedor2 = new ArrayList<SelectItem>();
 
     public ProveedorBean() {
         proveedor = new Proveedor();
+        persona = new Persona();
     }
 
+    public PersonasDao getPersonasDao() {
+        return personasDao;
+    }
+
+    public void setPersonasDao(PersonasDao personasDao) {
+        this.personasDao = personasDao;
+    }
+
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+    
     public int getIdProveedorProv() {
         return idProveedorProv;
     }
@@ -53,6 +82,7 @@ public class ProveedorBean {
             miLista = new ArrayList<Proveedor>();
         }
         proveedor = new Proveedor();
+        persona = new Persona();
         return miLista;
     }
     
@@ -169,6 +199,7 @@ public class ProveedorBean {
     }
 
     public void setProveedor(Proveedor proveedor) {
+        this.persona = proveedor.getPersona();
         this.proveedor = proveedor;
     }
 

@@ -1,9 +1,11 @@
 package com.ues.bean;
 
 import com.ues.dao.EmpleadosDao;
+import com.ues.dao.PersonasDao;
 import com.ues.model.Empleado;
 import com.ues.model.Persona;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -21,17 +23,28 @@ public class EmpleadoBean {
     private List<Empleado> miLista;
     private List<Persona> miListaPer;
     private EmpleadosDao empleadoDao;
+    private PersonasDao personasDao; //esto se agrego
     private Empleado empleado = new Empleado();
+    private Persona persona; //esto se agrego
     //Para las foraneas
     private int idPersonaP;
     private List<Persona> listaPe;
-    
+    private Date fecha = new Date(); //esto se agrego
     private List<SelectItem> listaEmpleado = new ArrayList<SelectItem>();
 
     public EmpleadoBean() {
         empleado = new Empleado();
+        persona = new Persona(); //esto se agrego
     }
 
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
+    }
+    
     public int getIdEmpleadoE() {
         return idEmpleadoE;
     }
@@ -48,6 +61,7 @@ public class EmpleadoBean {
             miLista = new ArrayList<Empleado>();
         }
         empleado = new Empleado();
+        persona = new Persona();
         return miLista;
     }
     
@@ -55,8 +69,17 @@ public class EmpleadoBean {
         try {
             Empleado e = new Empleado();
             Persona p = new Persona();
+            p.setNombre(persona.getNombre());
+            p.setApellido(persona.getApellido());
+            p.setGenero(persona.getGenero());
+            p.setDui(persona.getDui());
+            p.setNit(persona.getNit());
+            p.setFechaNac(fecha);
+            p.setDireccion(persona.getDireccion());
+            p.setCorreo(persona.getCorreo());
+            personasDao.crearPersona(p);
 
-            e.setIdEmpleado(empleado.getIdEmpleado());
+            //e.setIdEmpleado(empleado.getIdEmpleado());
             p.setIdPersona(idPersonaP);
             e.setRol(empleado.getRol());
             e.setPersona(p);
@@ -67,18 +90,36 @@ public class EmpleadoBean {
             e.printStackTrace();
         }
     }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
     
     public void updateEmpleado(ActionEvent actionEvent) {
         try {
             Empleado e = new Empleado();
             Persona p = new Persona();
+            p.setIdPersona(persona.getIdPersona());
+            p.setNombre(persona.getNombre());
+            p.setApellido(persona.getApellido());
+            p.setGenero(persona.getGenero());
+            p.setDui(persona.getDui());
+            p.setNit(persona.getNit());
+            p.setFechaNac(fecha);
+            p.setDireccion(persona.getDireccion());
+            p.setCorreo(persona.getCorreo());
+            personasDao.modificarPersona(p);
 
             e.setIdEmpleado(empleado.getIdEmpleado());
             p.setIdPersona(idPersonaP);
             e.setRol(empleado.getRol());
             e.setPersona(p);
             empleadoDao.modificarEmpleados(e);
-            addMessage("Empleado Modificado:!!" + empleado.getRol());
+            addMessage("Empleado Modificado" + empleado.getRol());
         } catch (Exception e) {
             addMessage("Error Id:!!" + empleado.getIdEmpleado() + " " + e.getMessage());
             e.printStackTrace();
@@ -89,13 +130,24 @@ public class EmpleadoBean {
         try {
             Empleado e = new Empleado();
             Persona p = new Persona();
-
+            
             e.setIdEmpleado(empleado.getIdEmpleado());
             p.setIdPersona(idPersonaP);
             e.setRol(empleado.getRol());
             e.setPersona(p);
             empleadoDao.borrarEmpleados(e);
-            addMessage("Empleado Eliminado!" + empleado.getRol());
+            
+            p.setIdPersona(persona.getIdPersona());
+            p.setNombre(persona.getNombre());
+            p.setApellido(persona.getApellido());
+            p.setGenero(persona.getGenero());
+            p.setDui(persona.getDui());
+            p.setNit(persona.getNit());
+            p.setFechaNac(fecha);
+            p.setDireccion(persona.getDireccion());
+            p.setCorreo(persona.getCorreo());
+            personasDao.borrarPersona(p);
+            addMessage("Empleado Borrado" + empleado.getRol());
         } catch (Exception e) {
             addMessage("Error Id:!!" + empleado.getIdEmpleado() + " " + e.getMessage());
             e.printStackTrace();
@@ -107,6 +159,14 @@ public class EmpleadoBean {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
+    public PersonasDao getPersonasDao() {
+        return personasDao;
+    }
+
+    public void setPersonasDao(PersonasDao personasDao) {
+        this.personasDao = personasDao;
+    }
+    
     public void setMiLista(List<Empleado> miLista) {
         this.miLista = miLista;
     }
@@ -132,6 +192,7 @@ public class EmpleadoBean {
     }
 
     public void setEmpleado(Empleado empleado) {
+        this.persona = empleado.getPersona();
         this.empleado = empleado;
     }
 
