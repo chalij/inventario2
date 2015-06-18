@@ -12,7 +12,7 @@ import java.util.Set;
 public class TipoMenu  implements java.io.Serializable {
 
 
-     private BigDecimal idTipoMenu;
+     private int idTipoMenu;
      private String nombre;
      private Set<Menu> menus = new HashSet<Menu>(0);
 
@@ -20,21 +20,21 @@ public class TipoMenu  implements java.io.Serializable {
     }
 
 	
-    public TipoMenu(BigDecimal idTipoMenu, String nombre) {
+    public TipoMenu(int idTipoMenu, String nombre) {
         this.idTipoMenu = idTipoMenu;
         this.nombre = nombre;
     }
-    public TipoMenu(BigDecimal idTipoMenu, String nombre, Set<Menu> menus) {
+    public TipoMenu(int idTipoMenu, String nombre, Set<Menu> menus) {
        this.idTipoMenu = idTipoMenu;
        this.nombre = nombre;
        this.menus = menus;
     }
    
-    public BigDecimal getIdTipoMenu() {
+    public int getIdTipoMenu() {
         return this.idTipoMenu;
     }
     
-    public void setIdTipoMenu(BigDecimal idTipoMenu) {
+    public void setIdTipoMenu(int idTipoMenu) {
         this.idTipoMenu = idTipoMenu;
     }
     public String getNombre() {

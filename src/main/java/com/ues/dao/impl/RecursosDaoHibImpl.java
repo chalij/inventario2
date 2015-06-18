@@ -4,6 +4,7 @@ import com.ues.dao.RecursosDao;
 import com.ues.model.CustomHibernateDaoSupport;
 import com.ues.dao.UsuariosDao;
 import com.ues.exception.DAOException;
+import com.ues.model.Menu;
 import com.ues.model.Recursos;
 import com.ues.model.TipoUsuario;
 import com.ues.model.Usuario;
@@ -41,10 +42,20 @@ public class RecursosDaoHibImpl extends CustomHibernateDaoSupport implements Rec
 
     @Override
     public List<Recursos> listaRecursos() throws DAOException {
-        List<Recursos> lista = getHibernateTemplate().find("from Recursos u  inner join fetch u.tipoUsuario order by u.idRecurso");
+        List<Recursos> lista = getHibernateTemplate().find("from Recursos u  inner join fetch u.tipoUsuario order by u.idRecursos");
         
         return lista;
     }
+    
+    
+    @Override
+    public List<Menu> listaMenus() throws DAOException {
+        List<Menu> lista = getHibernateTemplate().find("from Menu m  inner join fetch  m.recursos inner join fetch m.tipoMenu");
+        
+        return lista;
+    }
+    
+    
 
     @Override
     public void borrarRecursos(Recursos recursos) throws DAOException {
