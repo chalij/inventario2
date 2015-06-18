@@ -125,6 +125,15 @@
             <property-class>com.ues.dao.ClienteDao</property-class>
             <value>#{clienteDao}</value>
         </managed-property>
+    
+    
+        <managed-property>
+            <property-name>personasDao</property-name>
+            <property-class>com.ues.dao.PersonasDao</property-class>
+            <value>#{personasDao}</value>
+        </managed-property>
+    
+    
     </managed-bean>
     
     <managed-bean>
