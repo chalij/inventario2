@@ -139,7 +139,8 @@ commit;
         <property name="sessionFactory" ref="mySessionFactory"/>
     </bean>
     
-    <bean id="cotizacionDao" class="com.ues.dao.impl.CotizacionDaoHibImpl">
+    
+    <bean id="menusDao" class="com.ues.dao.impl.MenusDaoHibImpl">
         <property name="sessionFactory" ref="mySessionFactory"/>
     </bean>
     

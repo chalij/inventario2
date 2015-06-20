@@ -79,9 +79,9 @@ public class EmpleadoBean {
             p.setCorreo(persona.getCorreo());
             personasDao.crearPersona(p);
 
-            //e.setIdEmpleado(empleado.getIdEmpleado());
+            e.setIdEmpleado(empleado.getIdEmpleado());
             //NO SE HACE UN e.setIdEmpleado(empleado.getIdEmpleado) porque es autogenerado
-            p.setIdPersona(idPersonaP);
+            p.setIdPersona(empleadoDao.maxId());
             e.setRol(empleado.getRol());
             e.setPersona(p);
             empleadoDao.crearEmpleado(e);
@@ -102,7 +102,6 @@ public class EmpleadoBean {
     
     public void updateEmpleado(ActionEvent actionEvent) {
         try {
-            Empleado e = new Empleado();
             Persona p = new Persona();
             p.setIdPersona(persona.getIdPersona());
             p.setNombre(persona.getNombre());
@@ -115,10 +114,12 @@ public class EmpleadoBean {
             p.setCorreo(persona.getCorreo());
             personasDao.modificarPersona(p);
 
+            Empleado e = new Empleado();
+            Persona per = new Persona();
             e.setIdEmpleado(empleado.getIdEmpleado());
-            p.setIdPersona(empleadoDao.maxId());
+            per.setIdPersona(empleadoDao.maxId());
             e.setRol(empleado.getRol());
-            e.setPersona(p);
+            e.setPersona(per);
             empleadoDao.modificarEmpleados(e);
             addMessage("Empleado Modificado" + empleado.getRol());
         } catch (Exception e) {
@@ -133,21 +134,23 @@ public class EmpleadoBean {
             Persona p = new Persona();
             //primero elimina la hija...
             e.setIdEmpleado(empleado.getIdEmpleado());
-            p.setIdPersona(idPersonaP);
+            p.setIdPersona(empleadoDao.maxId());
             e.setRol(empleado.getRol());
             e.setPersona(p);
             empleadoDao.borrarEmpleados(e);
+            
             //luego se mocha la padre
-            p.setIdPersona(persona.getIdPersona());
-            p.setNombre(persona.getNombre());
-            p.setApellido(persona.getApellido());
-            p.setGenero(persona.getGenero());
-            p.setDui(persona.getDui());
-            p.setNit(persona.getNit());
-            p.setFechaNac(fecha);
-            p.setDireccion(persona.getDireccion());
-            p.setCorreo(persona.getCorreo());
-            personasDao.borrarPersona(p);
+            Persona per = new Persona();
+            per.setIdPersona(persona.getIdPersona());
+            per.setNombre(persona.getNombre());
+            per.setApellido(persona.getApellido());
+            per.setGenero(persona.getGenero());
+            per.setDui(persona.getDui());
+            per.setNit(persona.getNit());
+            per.setFechaNac(fecha);
+            per.setDireccion(persona.getDireccion());
+            per.setCorreo(persona.getCorreo());
+            personasDao.borrarPersona(per);
             addMessage("Empleado Borrado" + empleado.getRol());
         } catch (Exception e) {
             addMessage("Error Id:!!" + empleado.getIdEmpleado() + " " + e.getMessage());

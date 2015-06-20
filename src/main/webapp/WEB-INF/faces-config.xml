@@ -29,7 +29,7 @@
     
     
     
-    <managed-bean>
+     <managed-bean>
         <managed-bean-name>personasBean</managed-bean-name>
         <managed-bean-class>com.ues.bean.PersonasBean</managed-bean-class>
     
@@ -48,7 +48,7 @@
     </managed-bean>
     
     
-    <managed-bean>
+     <managed-bean>
         <managed-bean-name>tipoUsuariosBean</managed-bean-name>
         <managed-bean-class>com.ues.bean.TipoUsuariosBean</managed-bean-class>
     
@@ -61,7 +61,7 @@
     </managed-bean>
     
     
-    <managed-bean>
+     <managed-bean>
         <managed-bean-name>tipoProductosBean</managed-bean-name>
         <managed-bean-class>com.ues.bean.TipoProductosBean</managed-bean-class>
     
@@ -74,7 +74,7 @@
     </managed-bean>
     
     
-    <managed-bean>
+     <managed-bean>
         <managed-bean-name>tipoDevolucionesBean</managed-bean-name>
         <managed-bean-class>com.ues.bean.TipoDevolucionesBean</managed-bean-class>
     
@@ -87,7 +87,7 @@
     </managed-bean>
     
     
-    <managed-bean>
+     <managed-bean>
         <managed-bean-name>recursosBean</managed-bean-name>
         <managed-bean-class>com.ues.bean.RecursosBean</managed-bean-class>
     
@@ -96,6 +96,11 @@
             <property-name>recursosDao</property-name>
             <property-class>com.ues.dao.RecursosDao</property-class>
             <value>#{recursosDao}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>menusDao</property-name>
+            <property-class>com.ues.dao.MenusDao</property-class>
+            <value>#{menusDao}</value>
         </managed-property>
     </managed-bean>
     
@@ -163,7 +168,7 @@
     
     
     
-    <managed-bean>
+     <managed-bean>
         <managed-bean-name>transaccionBean</managed-bean-name>
         <managed-bean-class>com.ues.bean.TransaccionBean</managed-bean-class>
     
@@ -194,6 +199,11 @@
             <property-name>proveedorDao</property-name>
             <property-class>com.ues.dao.ProveedorDao</property-class>
             <value>#{proveedorDao}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>personasDao</property-name>
+            <property-class>com.ues.dao.PersonasDao</property-class>
+            <value>#{personasDao}</value>
         </managed-property>
     </managed-bean>
 
@@ -264,19 +274,6 @@
             <property-name>recursosDao</property-name>
             <property-class>com.ues.dao.RecursosDao</property-class>
             <value>#{recursosDao}</value>
-        </managed-property>
-    </managed-bean>
-    
-</faces-config>
-    <managed-bean>
-        <managed-bean-name>cotizacionBean</managed-bean-name>
-        <managed-bean-class>com.ues.bean.CotizacionBean</managed-bean-class>
-    
-        <managed-bean-scope>session</managed-bean-scope>
-        <managed-property>
-            <property-name>cotizacionDao</property-name>
-            <property-class>com.ues.dao.CotizacionDao</property-class>
-            <value>#{cotizacionDao}</value>
         </managed-property>
     </managed-bean>
     

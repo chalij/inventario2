@@ -9,9 +9,70 @@
         <h:head>
             <title>Datos de Proveedor</title>
         </h:head>
-        <h:body>
+        <h:body style="background-image:url('fondo.jpg')">
+            <p:panel id="basic" header="" footer="Centro de El Salvador, Norman Quijasno Presidente 2018" style="margin-bottom:20px">
+                <h1 style="color: whitesmoke;text-align: center;font-size: 3.8em">Sistema de Inventario y Compras</h1>
+                <h2 style="color: whitesmoke;text-align: center">Calza Moda S.A de C.V.</h2>
+                <br />
+            </p:panel>
+            <p:megaMenu style="margin-top:20px">
+                <p:submenu label="Gestion de Proveedores" icon="ui-icon-suitcase">
+                    <p:column>
+                        <p:submenu>
+                            <p:menuitem value="Categorización de Proveedores" url="tipoproveedor.jsf" />
+                            <p:menuitem value="Gestión de Proveedores" url="proveedor.jsf" />
+                        </p:submenu>
+                    </p:column>
+
+                </p:submenu>
+
+                <p:submenu label="Gestion de Clientes" icon="ui-icon-cart">
+
+                    <p:column>
+                        <p:submenu>
+                            <p:menuitem value="Categorización de Clientes" url="tiposcliente.jsf" />
+                            <p:menuitem value="Gestión de Clientes" url="clientes.jsf" />
+                        </p:submenu>
+                    </p:column>
+                </p:submenu>
+
+                <p:submenu label="Gestion de Usuarios" icon="ui-icon-person">
+                    <p:column>
+                        <p:submenu>
+                            <p:menuitem value="Categorización de Usuarios" url="tipo_usuarios.jsf" />
+                            <p:menuitem value="Gestión de Usuarios" url="usuarios.jsf" />
+                        </p:submenu>
+                    </p:column>
+                </p:submenu>
+
+                <p:submenu label="Toma de Pedidos" icon="ui-icon-note">
+                    <p:column>
+                        <p:submenu>
+                        </p:submenu>
+                    </p:column>
+
+                </p:submenu>
+
+                <p:submenu label="Manejo de Devoluciones" icon="ui-icon-arrowreturnthick-1-e">
+                    <p:column>
+                        <p:submenu>
+                        </p:submenu>
+                    </p:column>
+
+                </p:submenu>
+
+                <p:submenu label="Control de Inventarios" icon="ui-icon-folder-collapsed">
+                    <p:column>
+                        <p:submenu>
+                        </p:submenu>
+                    </p:column>
+
+                </p:submenu>
+
+                <p:menuitem value="Salir" url="http://www.primefaces.org" icon="ui-icon-close" />
+            </p:megaMenu>
             <br/>
-            <h1>Datos de Proveedor</h1>
+            
             <h:form id="formTable">
                 <p:dataTable id="tbl" var="prov" value="#{proveedorBean.miLista}"
                              paginator="true" 
@@ -26,14 +87,21 @@
                              paginatorPosition="bottom">
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="Id" />
+                            <h:outputText value="Id Proveedor" />
                         </f:facet>
                         <h:outputText value="#{prov.idProveedor}" />
+                    </p:column>
+                    
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombre Persona"/>
+                        </f:facet>
+                        <h:outputText value="#{prov.persona.nombre} #{prov.persona.apellido}" />
                     </p:column>
 
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="Nombre"/>
+                            <h:outputText value="Nombre Prov."/>
                         </f:facet>
                         <h:outputText value="#{prov.nombre}" />
                     </p:column>
@@ -42,12 +110,6 @@
                             <h:outputText value="Correo"/>
                         </f:facet>
                         <h:outputText value="#{prov.correo}" />
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Nit" />
-                        </f:facet>
-                        <h:outputText value="#{prov.nit}" />
                     </p:column>
                     <p:column>
                         <f:facet name="header">
@@ -63,16 +125,9 @@
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="Tipo de Proveedor" />
+                            <h:outputText value="Tipo de Prov" />
                         </f:facet>
                         <h:outputText value="#{prov.tipoProveedor.nombre}" />
-                    </p:column>
-
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Tipo de Persona" />
-                        </f:facet>
-                        <h:outputText value="#{prov.persona.nombre}" />
                     </p:column>
 
                     <p:column headerText="">
@@ -109,16 +164,35 @@
             <p:dialog header="Modificar" widgetVar="dlgmodificar" modal="true" resizable="false">
                 <h:form id="formModificar">
                     <h:panelGrid id="modificar" columns="2" cellpadding="2">
-                        <p:outputLabel value="Id del Proveedor" />
-                        <p:inputText value="#{proveedorBean.proveedor.idProveedor}"/>
+                        <h5> Datos Personales de Proveedor</h5><br/>
+                        <p:outputLabel value="Nombre" />
+                        <p:inputText value="#{proveedorBean.persona.nombre}"/>
+                        <p:outputLabel value="Apellido" />
+                        <p:inputText value="#{proveedorBean.persona.apellido}"/>
+                        <p:outputLabel value="Género" />
+                        <p:inputText value="#{proveedorBean.persona.genero}"/>
+                        <p:outputLabel value="DUI" />
+                        <p:inputText value="#{proveedorBean.persona.dui}"/>
+                        <p:outputLabel value="NIT" />
+                        <p:inputText value="#{proveedorBean.persona.nit}"/>
+                        <p:outputLabel for="button" value="Fecha de Nacimiento" />
+                        <p:calendar id="button" value="#{proveedorBean.fecha}" showOn="button" />
+                        <p:outputLabel value="Dirección" />
+                        <p:inputText value="#{proveedorBean.persona.direccion}"/>
+                        <p:outputLabel value="Correo Electrónico" />
+                        <p:inputText value="#{proveedorBean.persona.correo}"/>
+                        
+                        <!--<p:outputLabel value="Id del Proveedor" />
+                        <p:inputText value="#{proveedorBean.proveedor.idProveedor}"/> ESTO ES AUTOGENERADO-->
+                        <h5> Datos de la Empresa Proveedorar</h5><br/>
                         <p:outputLabel value="Tipo de Proveedor" />
                         <p:selectOneMenu id="tipoProveedor" value="#{proveedorBean.idTipoProveedorTP}">
                             <f:selectItems  value="#{proveedorBean.listaProveedor2}" />
                         </p:selectOneMenu>
-                        <p:outputLabel value="Persona..." />
+                        <!--<p:outputLabel value="Persona..." />
                         <p:selectOneMenu id="persona" value="#{proveedorBean.idPersonaP}">
                             <f:selectItems  value="#{proveedorBean.listaProveedor}" />
-                        </p:selectOneMenu>
+                        </p:selectOneMenu> ESTO SE LLENA CON PERSONA ARRIBA-->
                         <p:outputLabel value="Nombre del Proveedor" />
                         <p:inputText value="#{proveedorBean.proveedor.nombre}"/>
                         <p:outputLabel value="Correo" />
@@ -139,16 +213,35 @@
                 <h:form id="formInsertar">
                     <h:panelGrid  columns="2"
                                   cellpadding="2">
-                        <p:outputLabel value="Id del Proveedor" />
-                        <p:inputText value="#{proveedorBean.proveedor.idProveedor}"/>
+                        <h5> Datos Personales de Proveedor</h5><br/>
+                        <p:outputLabel value="Nombre" />
+                        <p:inputText value="#{proveedorBean.persona.nombre}"/>
+                        <p:outputLabel value="Apellido" />
+                        <p:inputText value="#{proveedorBean.persona.apellido}"/>
+                        <p:outputLabel value="Género" />
+                        <p:inputText value="#{proveedorBean.persona.genero}"/>
+                        <p:outputLabel value="DUI" />
+                        <p:inputText value="#{proveedorBean.persona.dui}"/>
+                        <p:outputLabel value="NIT" />
+                        <p:inputText value="#{proveedorBean.persona.nit}"/>
+                        <p:outputLabel for="button" value="Fecha de Nacimiento" />
+                        <p:calendar id="button" value="#{proveedorBean.fecha}" showOn="button" />
+                        <p:outputLabel value="Dirección" />
+                        <p:inputText value="#{proveedorBean.persona.direccion}"/>
+                        <p:outputLabel value="Correo Electrónico" />
+                        <p:inputText value="#{proveedorBean.persona.correo}"/>
+                        
+                        <!--<p:outputLabel value="Id del Proveedor" />
+                        <p:inputText value="#{proveedorBean.proveedor.idProveedor}"/> ESTO ES AUTOGENERADO-->
+                        <h5> Datos de la Empresa Proveedorar</h5><br/>
                         <p:outputLabel value="Tipo de Proveedor" />
                         <p:selectOneMenu id="tipoProveedor" value="#{proveedorBean.idTipoProveedorTP}">
                             <f:selectItems  value="#{proveedorBean.listaProveedor2}" />
                         </p:selectOneMenu>
-                        <p:outputLabel value="Persona..." />
+                        <!--<p:outputLabel value="Persona..." />
                         <p:selectOneMenu id="persona" value="#{proveedorBean.idPersonaP}">
                             <f:selectItems  value="#{proveedorBean.listaProveedor}" />
-                        </p:selectOneMenu>
+                        </p:selectOneMenu> ESTO SE LLENA CON PERSONA ARRIBA-->
                         <p:outputLabel value="Nombre del Proveedor" />
                         <p:inputText value="#{proveedorBean.proveedor.nombre}"/>
                         <p:outputLabel value="Correo" />

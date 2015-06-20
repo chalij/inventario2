@@ -139,10 +139,11 @@ public class ProveedorBean {
             personasDao.modificarPersona(per);
             
             Proveedor pro = new Proveedor();
+            Persona p = new Persona();
             TipoProveedor tp = new TipoProveedor();
             pro.setIdProveedor(proveedor.getIdProveedor());
-            per.setIdPersona(proveedorDao.maxId());
-            pro.setPersona(per);
+            p.setIdPersona(proveedorDao.maxId());
+            pro.setPersona(p);
             
             tp.setIdTipoProveedor(idTipoProveedorTP);
             pro.setPersona(per);
@@ -303,7 +304,7 @@ public class ProveedorBean {
         try {
             miListaTipoP= proveedorDao.listaTipoProveedor();
             listaProveedor2.clear();
-            SelectItemGroup g2 = new SelectItemGroup("Bodegas");
+            SelectItemGroup g2 = new SelectItemGroup("Elija Tipo Prov.");
             SelectItem[] asi = new SelectItem[miListaTipoP.size()];
             for (int i = 0; i < miListaTipoP.size(); i++) {
                 TipoProveedor tpAux = (TipoProveedor) miListaTipoP.get(i);

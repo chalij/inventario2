@@ -7,12 +7,69 @@
       xmlns:p="http://primefaces.org/ui">
     <f:view>
         <h:head>
-            <title>Informacion de Bodega.</title>
-        </h:head>
-        <h:body>
-            <br/>
-            <h1>Lista de Bodegas de la Empresa</h1>
+            <title></title>
 
+        </h:head>
+        <h:body style="background-image:url('fondo.jpg')">
+            <p:panel id="basic" header="" footer="Centro de El Salvador, Norman Quijasno Presidente 2018" style="margin-bottom:20px">
+                <h1 style="color: whitesmoke;text-align: center;font-size: 3.8em">Sistema de Inventario y Compras</h1>
+                <h2 style="color: whitesmoke;text-align: center">Calza Moda S.A de C.V</h2>
+                <br />
+            </p:panel>
+            <p:megaMenu style="margin-top:20px">
+                <p:submenu label="Gestion de Proveedores" icon="ui-icon-suitcase">
+
+                    <p:column>
+                        <p:menu model="#{menuBean.model}" />
+                    </p:column>
+
+                </p:submenu>
+
+                <p:submenu label="Gestion de Clientes" icon="ui-icon-cart">
+
+                    <p:column>
+                        <p:menu model="#{menuBean.clientes}" />
+                    </p:column>
+                </p:submenu>
+
+                <p:submenu label="Gestion de Usuarios" icon="ui-icon-person">
+                    <p:column>
+                        <p:menu model="#{menuBean.usuarios}" />
+                    </p:column>
+                </p:submenu>
+
+                <p:submenu label="Toma de Pedidos" icon="ui-icon-note">
+                    <p:column>
+                        <p:menu model="#{menuBean.pedidos}" />
+                    </p:column>
+
+                </p:submenu>
+
+                <p:submenu label="Manejo de Devoluciones" icon="ui-icon-arrowreturnthick-1-e">
+                    <p:column>
+                        <p:menu model="#{menuBean.devoluciones}" />
+                    </p:column>
+
+                </p:submenu>
+
+                <p:submenu label="Control de Inventarios" icon="ui-icon-folder-collapsed">
+                    <p:column>
+                        <p:menu model="#{menuBean.inventarios}" />
+                    </p:column>
+
+                </p:submenu>
+
+
+                <p:submenu label="Ordenes de Compra" icon="ui-icon-folder-collapsed">
+                    <p:column>
+                        <p:menu model="#{menuBean.ordenes}" />
+                    </p:column>
+
+                </p:submenu>
+
+                <p:menuitem value="Salir" url="loggin.xhtml" icon="ui-icon-close" />
+            </p:megaMenu>
+            <br/> 
             <h:form id="formTable">
                 <p:dataTable id="tbl" var="bo" value="#{bodegaBean.bodegaLista}"
                              paginator="true" 
@@ -34,7 +91,7 @@
 
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="Cantidad de Pasillos en Bodega"/>
+                            <h:outputText value="# Pasillos"/>
                         </f:facet>
                         <h:outputText value="#{bo.cantidadPasillos}" />
                     </p:column>
@@ -46,21 +103,9 @@
                     </p:column>
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="Nombre de la Bodega" />
+                            <h:outputText value="Nombre" />
                         </f:facet>
                         <h:outputText value="#{bo.nombre2}" />
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Cantidad x Estante" />
-                        </f:facet>
-                        <h:outputText value="#{bo.catidadEstante}" />
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Productos x Estante" />
-                        </f:facet>
-                        <h:outputText value="#{bo.productoPorEstante}" />
                     </p:column>
                     <p:column>
                         <f:facet name="header">
@@ -102,8 +147,7 @@
             <p:dialog header="Modificar" widgetVar="dlgmodificar" modal="true" resizable="false">
                 <h:form id="formModificar">
                     <h:panelGrid id="modificar" columns="2" cellpadding="2">
-                        <p:outputLabel value="Id de Bodega" />
-                        <p:inputText value="#{bodegaBean.bodega.idBodega}"/>
+                        <h3 style="margin-top:0"> Datos de la BODEGA</h3><br/>
                         <p:outputLabel value="Cantidad de pasillos" />
                         <p:inputText value="#{bodegaBean.bodega.cantidadPasillos}"/>
                         <p:outputLabel value="Estantes x Pasillo" />
@@ -126,8 +170,7 @@
                 <h:form id="formInsertar">
                     <h:panelGrid  columns="2"
                                   cellpadding="2">
-                        <p:outputLabel value="Id de Bodega" />
-                        <p:inputText value="#{bodegaBean.bodega.idBodega}"/>
+                        <h3 style="margin-top:0"> Datos de la BODEGA</h3><br/>
                         <p:outputLabel value="Cantidad de pasillos" />
                         <p:inputText value="#{bodegaBean.bodega.cantidadPasillos}"/>
                         <p:outputLabel value="Estantes x Pasillo" />
