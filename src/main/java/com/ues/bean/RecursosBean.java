@@ -18,6 +18,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 import javax.faces.model.SelectItemGroup;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -43,6 +44,7 @@ public class RecursosBean {
     public List<Recursos> getMiLista() {
         try {
             miLista = recursosDao.listaRecursos();
+            
         } catch (Exception e) {
             e.printStackTrace();
             miLista = new ArrayList<Recursos>();
@@ -61,14 +63,14 @@ public class RecursosBean {
             Recursos re = new Recursos();
             TipoUsuario tus = new TipoUsuario();
             tus.setIdTipoUsuario(tipoUsuarioT);
-            re.setIdRecursos(recursos.getIdRecursos());
+           // re.setIdRecursos(recursos.getIdRecursos());
             re.setUrl(recursos.getUrl());
             re.setTipoUsuario(tus);
             recursosDao.crearRecursos(re);
             recursos = new Recursos();
-            addMessage("Insertado Id:!!" + re.getIdRecursos());
+            addMessage("Insertado!!");
         } catch (Exception e) {
-            addMessage("Error Id:!!" + e.getMessage());
+            addMessage("Error!!" + e.getMessage());
             e.printStackTrace();
         }
 
@@ -84,9 +86,9 @@ public class RecursosBean {
             re.setTipoUsuario(tus);
             recursosDao.modificarRecursos(re);
             recursos = new Recursos();
-            addMessage("Modificado Id:!!" + re.getIdRecursos());
+            addMessage("Modificado!!");
         } catch (Exception e) {
-            addMessage("Error Id:!!" + e.getMessage());
+            addMessage("Error!!" + e.getMessage());
             e.printStackTrace();
         }
 
@@ -103,9 +105,9 @@ public class RecursosBean {
             re.setTipoUsuario(tus);
             recursosDao.borrarRecursos(re);
             recursos = new Recursos();
-            addMessage("Eliminar Id:!!" + re.getIdRecursos());
+            addMessage("Eliminar!!" );
         } catch (Exception e) {
-            addMessage("Error Id:!!" + e.getMessage());
+            addMessage("Error!!" + e.getMessage());
             e.printStackTrace();
         }
     }

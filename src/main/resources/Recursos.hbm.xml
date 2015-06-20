@@ -4,8 +4,8 @@
 <!-- Generated 13-jun-2015 20:08:55 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="com.ues.model.Recursos" table="RECURSOS" schema="INVENTARIO" optimistic-lock="version">
-        <id name="idRecursos" type="big_decimal">
-            <column name="ID_RECURSOS" precision="22" scale="0" />
+        <id name="idRecursos" type="int">
+            <column name="ID_RECURSOS" precision="6" scale="0" />
             <generator class="assigned" />
         </id>
         <many-to-one name="tipoUsuario" class="com.ues.model.TipoUsuario" fetch="select">

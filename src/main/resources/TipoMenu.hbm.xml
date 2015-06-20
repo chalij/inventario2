@@ -3,7 +3,7 @@
 <!-- Generated 13-jun-2015 20:08:55 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
   <class name="com.ues.model.TipoMenu" optimistic-lock="version" schema="INVENTARIO" table="TIPO_MENU">
-    <id name="idTipoMenu" type="big_decimal">
+    <id name="idTipoMenu" type="int">
       <column name="ID_TIPO_MENU" precision="22" scale="0"/>
       <generator class="assigned"/>
     </id>

@@ -12,7 +12,7 @@ import java.util.Set;
 public class Recursos  implements java.io.Serializable {
 
 
-     private BigDecimal idRecursos;
+     private int idRecursos;
      private TipoUsuario tipoUsuario;
      private String url;
      private Set<Menu> menus = new HashSet<Menu>(0);
@@ -21,22 +21,22 @@ public class Recursos  implements java.io.Serializable {
     }
 
 	
-    public Recursos(BigDecimal idRecursos, String url) {
+    public Recursos(int idRecursos, String url) {
         this.idRecursos = idRecursos;
         this.url = url;
     }
-    public Recursos(BigDecimal idRecursos, TipoUsuario tipoUsuario, String url, Set<Menu> menus) {
+    public Recursos(int idRecursos, TipoUsuario tipoUsuario, String url, Set<Menu> menus) {
        this.idRecursos = idRecursos;
        this.tipoUsuario = tipoUsuario;
        this.url = url;
        this.menus = menus;
     }
    
-    public BigDecimal getIdRecursos() {
+    public int getIdRecursos() {
         return this.idRecursos;
     }
     
-    public void setIdRecursos(BigDecimal idRecursos) {
+    public void setIdRecursos(int idRecursos) {
         this.idRecursos = idRecursos;
     }
     public TipoUsuario getTipoUsuario() {

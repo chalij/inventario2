@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 public class Menu  implements java.io.Serializable {
 
 
-     private BigDecimal idMenu;
+     private int idMenu;
      private TipoMenu tipoMenu;
      private Recursos recursos;
      private String nombre;
@@ -19,22 +19,22 @@ public class Menu  implements java.io.Serializable {
     }
 
 	
-    public Menu(BigDecimal idMenu, String nombre) {
+    public Menu(int idMenu, String nombre) {
         this.idMenu = idMenu;
         this.nombre = nombre;
     }
-    public Menu(BigDecimal idMenu, TipoMenu tipoMenu, Recursos recursos, String nombre) {
+    public Menu(int idMenu, TipoMenu tipoMenu, Recursos recursos, String nombre) {
        this.idMenu = idMenu;
        this.tipoMenu = tipoMenu;
        this.recursos = recursos;
        this.nombre = nombre;
     }
    
-    public BigDecimal getIdMenu() {
+    public int getIdMenu() {
         return this.idMenu;
     }
     
-    public void setIdMenu(BigDecimal idMenu) {
+    public void setIdMenu(int idMenu) {
         this.idMenu = idMenu;
     }
     public TipoMenu getTipoMenu() {

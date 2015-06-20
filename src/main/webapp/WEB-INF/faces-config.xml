@@ -20,6 +20,11 @@
             <property-class>com.ues.dao.UsuariosDao</property-class>
             <value>#{usuariosDao}</value>
         </managed-property>
+        <managed-property>
+            <property-name>personasDao</property-name>
+            <property-class>com.ues.dao.PersonasDao</property-class>
+            <value>#{personasDao}</value>
+        </managed-property>
     </managed-bean>
     
     
@@ -93,6 +98,7 @@
             <value>#{recursosDao}</value>
         </managed-property>
     </managed-bean>
+    
     
     
     <managed-bean>
@@ -234,6 +240,34 @@
         </managed-property>
     </managed-bean>
     
+    
+    <managed-bean>
+        <managed-bean-name>loggBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.LoggBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        
+        <managed-property>
+            <property-name>usuariosDao</property-name>
+            <property-class>com.ues.dao.UsuariosDao</property-class>
+            <value>#{usuariosDao}</value>
+        </managed-property>
+    </managed-bean>
+    
+    
+     <managed-bean>
+        <managed-bean-name>menuBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.MenuBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>recursosDao</property-name>
+            <property-class>com.ues.dao.RecursosDao</property-class>
+            <value>#{recursosDao}</value>
+        </managed-property>
+    </managed-bean>
+    
+</faces-config>
     <managed-bean>
         <managed-bean-name>cotizacionBean</managed-bean-name>
         <managed-bean-class>com.ues.bean.CotizacionBean</managed-bean-class>
