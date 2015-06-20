@@ -88,9 +88,10 @@ public class ProveedorBean {
     
     public void addProveedor(ActionEvent actionEvent) {
         try {
-            //objeto de persona en proveedor
+            //CREA PERSONA, ASOCIADO A PROVEEDOR
             Persona per = new Persona();
-            
+            Proveedor pro = new Proveedor();
+            TipoProveedor tp = new TipoProveedor();
             per.setNombre(persona.getNombre());
             per.setApellido(persona.getApellido());
             per.setGenero(persona.getGenero());
@@ -99,39 +100,21 @@ public class ProveedorBean {
             per.setFechaNac(getFecha());
             per.setDireccion(persona.getDireccion());
             per.setCorreo(persona.getCorreo());
-            personasDao.crearPersona(per);
+            personasDao.crearPersona(per);            
             
-            //objetos para Proveedor
-            Proveedor p = new Proveedor();
-            Persona pe = new Persona();
-            TipoProveedor tp = new TipoProveedor();
-            //Setea cada atributo, el de persona con el proveedor que se esta ingresando.
-            p.setIdProveedor(proveedor.getIdProveedor());
-            pe.setIdPersona(proveedorDao.maxId());
-            p.setPersona(pe);
+            pro.setIdProveedor(proveedor.getIdProveedor());
+            per.setIdPersona(proveedorDao.maxId());
+            pro.setPersona(per);
             
             tp.setIdTipoProveedor(idTipoProveedorTP);
-            p.setPersona(pe);
-            p.setTipoProveedor(tp);
-            p.setNombre(proveedor.getNombre());
-            p.setCorreo(proveedor.getCorreo());
-            p.setNit(proveedor.getNit());
-            p.setGiro(proveedor.getGiro());
-            p.setNrc(proveedor.getNrc());
-            proveedorDao.crearProveedor(p);
-             //p.setPersona(per);
-            //p.setTipoProveedor(tp);
-            //per.setIdPersona(idPersonaP);
-            /*
-            per.setIdPersona(idPersonaP);
-            p.setNombre(proveedor.getNombre());
-            p.setCorreo(proveedor.getCorreo());
-            p.setNit(proveedor.getNit());
-            p.setGiro(proveedor.getGiro());
-            p.setNrc(proveedor.getNrc());
-            p.setPersona(per);
-            p.setTipoProveedor(tp);
-            proveedorDao.crearProveedor(p);*/
+            pro.setPersona(per);
+            pro.setTipoProveedor(tp);
+            pro.setNombre(proveedor.getNombre());
+            pro.setCorreo(proveedor.getCorreo());
+            pro.setNit(proveedor.getNit());
+            pro.setGiro(proveedor.getGiro());
+            pro.setNrc(proveedor.getNrc());
+            proveedorDao.crearProveedor(pro);
 
             addMessage("Proveedor Ingresado:!!" + proveedor.getNombre());
         } catch (Exception e) {
@@ -144,7 +127,7 @@ public class ProveedorBean {
         try {
             //objeto de persona en proveedor
             Persona per = new Persona();
-            
+            per.setIdPersona(persona.getIdPersona());
             per.setNombre(persona.getNombre());
             per.setApellido(persona.getApellido());
             per.setGenero(persona.getGenero());
@@ -155,25 +138,21 @@ public class ProveedorBean {
             per.setCorreo(persona.getCorreo());
             personasDao.modificarPersona(per);
             
-            //objetos para Proveedor
-            Proveedor p = new Proveedor();
-            Persona pe = new Persona();
+            Proveedor pro = new Proveedor();
             TipoProveedor tp = new TipoProveedor();
-            //Setea cada atributo, el de persona con el proveedor que se esta ingresando.
-            p.setIdProveedor(proveedor.getIdProveedor());
-            pe.setIdPersona(idPersonaP);
-            p.setPersona(pe);
+            pro.setIdProveedor(proveedor.getIdProveedor());
+            per.setIdPersona(proveedorDao.maxId());
+            pro.setPersona(per);
             
-            // REVISAR BIEN ESTE METODO
             tp.setIdTipoProveedor(idTipoProveedorTP);
-            p.setPersona(pe);
-            p.setTipoProveedor(tp);
-            p.setNombre(proveedor.getNombre());
-            p.setCorreo(proveedor.getCorreo());
-            p.setNit(proveedor.getNit());
-            p.setGiro(proveedor.getGiro());
-            p.setNrc(proveedor.getNrc());
-            proveedorDao.crearProveedor(p);
+            pro.setPersona(per);
+            pro.setTipoProveedor(tp);
+            pro.setNombre(proveedor.getNombre());
+            pro.setCorreo(proveedor.getCorreo());
+            pro.setNit(proveedor.getNit());
+            pro.setGiro(proveedor.getGiro());
+            pro.setNrc(proveedor.getNrc());
+            proveedorDao.modificarProveedor(pro);
 
             addMessage("Proveedor Modificado:!!" + proveedor.getNombre());
         } catch (Exception e) {
@@ -184,21 +163,37 @@ public class ProveedorBean {
     
     public void eliminar() {
         try {
-            Proveedor p = new Proveedor();
+            Proveedor pro = new Proveedor();
             Persona per = new Persona();
             TipoProveedor tp = new TipoProveedor();
             
-            p.setIdProveedor(proveedor.getIdProveedor());
-            per.setIdPersona(idPersonaP);
+            //primero borra el hijo, y luego el padre
+            pro.setIdProveedor(proveedor.getIdProveedor());
+            per.setIdPersona(proveedorDao.maxId());
+            pro.setPersona(per);
+            
             tp.setIdTipoProveedor(idTipoProveedorTP);
-            p.setNombre(proveedor.getNombre());
-            p.setCorreo(proveedor.getCorreo());
-            p.setNit(proveedor.getNit());
-            p.setGiro(proveedor.getGiro());
-            p.setNrc(proveedor.getNrc());
-            p.setPersona(per);
-            p.setTipoProveedor(tp);
-            proveedorDao.borrarProveedor(p);
+            pro.setPersona(per);
+            pro.setTipoProveedor(tp);
+            pro.setNombre(proveedor.getNombre());
+            pro.setCorreo(proveedor.getCorreo());
+            pro.setNit(proveedor.getNit());
+            pro.setGiro(proveedor.getGiro());
+            pro.setNrc(proveedor.getNrc());
+            proveedorDao.borrarProveedor(pro);
+            
+            //ahora borra el padre
+            Persona p = new Persona();
+            p.setIdPersona(persona.getIdPersona());
+            p.setNombre(persona.getNombre());
+            p.setApellido(persona.getApellido());
+            p.setGenero(persona.getGenero());
+            p.setDui(persona.getDui());
+            p.setNit(persona.getNit());
+            p.setFechaNac(getFecha());
+            p.setDireccion(persona.getDireccion());
+            p.setCorreo(persona.getCorreo());
+            personasDao.borrarPersona(p);
 
             addMessage("Proveedor Eliminado:!!" + proveedor.getNombre());
         } catch (Exception e) {

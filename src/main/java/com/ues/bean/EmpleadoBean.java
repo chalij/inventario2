@@ -80,6 +80,7 @@ public class EmpleadoBean {
             personasDao.crearPersona(p);
 
             //e.setIdEmpleado(empleado.getIdEmpleado());
+            //NO SE HACE UN e.setIdEmpleado(empleado.getIdEmpleado) porque es autogenerado
             p.setIdPersona(idPersonaP);
             e.setRol(empleado.getRol());
             e.setPersona(p);
@@ -115,7 +116,7 @@ public class EmpleadoBean {
             personasDao.modificarPersona(p);
 
             e.setIdEmpleado(empleado.getIdEmpleado());
-            p.setIdPersona(idPersonaP);
+            p.setIdPersona(empleadoDao.maxId());
             e.setRol(empleado.getRol());
             e.setPersona(p);
             empleadoDao.modificarEmpleados(e);
@@ -130,13 +131,13 @@ public class EmpleadoBean {
         try {
             Empleado e = new Empleado();
             Persona p = new Persona();
-            
+            //primero elimina la hija...
             e.setIdEmpleado(empleado.getIdEmpleado());
             p.setIdPersona(idPersonaP);
             e.setRol(empleado.getRol());
             e.setPersona(p);
             empleadoDao.borrarEmpleados(e);
-            
+            //luego se mocha la padre
             p.setIdPersona(persona.getIdPersona());
             p.setNombre(persona.getNombre());
             p.setApellido(persona.getApellido());
