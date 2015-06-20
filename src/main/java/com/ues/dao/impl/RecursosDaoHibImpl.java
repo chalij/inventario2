@@ -49,8 +49,8 @@ public class RecursosDaoHibImpl extends CustomHibernateDaoSupport implements Rec
     
     
     @Override
-    public List<Menu> listaMenus() throws DAOException {
-        List<Menu> lista = getHibernateTemplate().find("from Menu m  inner join fetch  m.recursos inner join fetch m.tipoMenu");
+    public List<Menu> listaMenus(int tipoMenu) throws DAOException {
+        List<Menu> lista = getHibernateTemplate().find("from Menu m  inner join fetch  m.recursos inner join fetch m.tipoMenu inner join fetch m.recursos.tipoUsuario where m.recursos.tipoUsuario.idTipoUsuario="+tipoMenu);
         
         return lista;
     }

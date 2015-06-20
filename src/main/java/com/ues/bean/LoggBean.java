@@ -6,19 +6,21 @@
 package com.ues.bean;
 
 import com.ues.dao.UsuariosDao;
+import com.ues.model.CustomHibernateDaoSupport;
 import com.ues.model.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.servlet.http.HttpSession;
 import org.primefaces.context.RequestContext;
 
 /**
  *
  * @author Administrador
  */
-public class LoggBean {
+public class LoggBean extends CustomHibernateDaoSupport {
 
     private String username;
 
@@ -78,6 +80,9 @@ public class LoggBean {
 
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Bienvenido!!", null);
                 FacesContext.getCurrentInstance().addMessage(null, message);
+
+                HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+                session.setAttribute("username", username);
                 return "menu_principal.xhmtl?faces-redirect=true";
             } else {
                 RequestContext.getCurrentInstance().update("growl");

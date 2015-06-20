@@ -15,15 +15,14 @@ public interface RecursosDao {
 
     public void crearRecursos(Recursos recursos) throws DAOException;
 
-
     public List<Recursos> listaRecursos() throws DAOException;
-    
+
     public List<TipoUsuario> listaTipoUsuarios() throws DAOException;
 
     public void borrarRecursos(Recursos recursos) throws DAOException;
 
     public void modificarRecursos(Recursos recursos) throws DAOException;
-    
-    public List<Menu> listaMenus() throws DAOException;
+
+    public List<Menu> listaMenus(int tipoMenu) throws DAOException;
 
 }

@@ -8,6 +8,8 @@ import com.ues.model.TipoUsuario;
 import com.ues.model.Usuario;
 import java.util.Date;
 import java.util.List;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -65,11 +67,14 @@ public class UsuariosDaoHibImpl extends CustomHibernateDaoSupport implements Usu
 
     @Override
     public boolean controlLogg(String nombreUsuario, String contrasena) throws DAOException {
-        List list = getHibernateTemplate().find(" from Usuario WHERE nombreUsuario=? and contrasena=?", nombreUsuario, contrasena);
+        List<Usuario> list = getHibernateTemplate().find(" from Usuario u inner join fetch u.tipoUsuario WHERE u.nombreUsuario=? and u.contrasena=?", nombreUsuario, contrasena);
         if (list.size() == 0) {
             return false;
                     
         } else {
+                Usuario us=list.get(0);
+                HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+                session.setAttribute("tipoUsuario", us.getTipoUsuario().getIdTipoUsuario());
             return true;
     
         }

@@ -8,6 +8,8 @@ package com.ues.bean;
 import com.ues.dao.RecursosDao;
 import com.ues.model.Menu;
 import java.util.List;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 import org.primefaces.model.menu.DefaultMenuItem;
 import org.primefaces.model.menu.DefaultMenuModel;
 import org.primefaces.model.menu.DefaultSubMenu;
@@ -36,6 +38,12 @@ public class MenuBean {
      */
     public DefaultMenuModel getModel() {
         try {
+
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+            System.out.println("----------Nombre del usuario---------------");
+            System.out.println(session.getAttribute("username"));
+            System.out.println(session.getAttribute("tipoUsuario"));
+            int tipoUsuario=(Integer)session.getAttribute("tipoUsuario");
             model = new DefaultMenuModel();
             clientes = new DefaultMenuModel();
             usuarios = new DefaultMenuModel();
@@ -54,7 +62,7 @@ public class MenuBean {
             DefaultSubMenu firstSubmenu7 = new DefaultSubMenu("");
 
             DefaultMenuItem item;
-            List<Menu> listAux = recursosDao.listaMenus();
+            List<Menu> listAux = recursosDao.listaMenus(tipoUsuario);
             System.out.println("aqui");
             for (int i = 0; i < listAux.size(); i++) {
                 Menu men = listAux.get(i);
@@ -76,25 +84,25 @@ public class MenuBean {
                     item.setIcon("ui-icon-home");
                     firstSubmenu2.addElement(item);
                 }
-                if (men.getTipoMenu().getNombre().equals( "usuario")) {
+                if (men.getTipoMenu().getNombre().equals("usuario")) {
                     item = new DefaultMenuItem(men.getNombre());
                     item.setUrl(men.getRecursos().getUrl());
                     item.setIcon("ui-icon-home");
                     firstSubmenu3.addElement(item);
                 }
-                if (men.getTipoMenu().getNombre().equals( "pedido")) {
+                if (men.getTipoMenu().getNombre().equals("pedido")) {
                     item = new DefaultMenuItem(men.getNombre());
                     item.setUrl(men.getRecursos().getUrl());
                     item.setIcon("ui-icon-home");
                     firstSubmenu4.addElement(item);
                 }
-                if (men.getTipoMenu().getNombre().equals( "devoluciones")) {
+                if (men.getTipoMenu().getNombre().equals("devoluciones")) {
                     item = new DefaultMenuItem(men.getNombre());
                     item.setUrl(men.getRecursos().getUrl());
                     item.setIcon("ui-icon-home");
                     firstSubmenu5.addElement(item);
                 }
-                if (men.getTipoMenu().getNombre().equals( "inventario")) {
+                if (men.getTipoMenu().getNombre().equals("inventario")) {
                     item = new DefaultMenuItem(men.getNombre());
                     item.setUrl(men.getRecursos().getUrl());
                     item.setIcon("ui-icon-home");

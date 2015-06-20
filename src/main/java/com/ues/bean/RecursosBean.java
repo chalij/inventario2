@@ -18,6 +18,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 import javax.faces.model.SelectItemGroup;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -43,6 +44,7 @@ public class RecursosBean {
     public List<Recursos> getMiLista() {
         try {
             miLista = recursosDao.listaRecursos();
+            
         } catch (Exception e) {
             e.printStackTrace();
             miLista = new ArrayList<Recursos>();
