@@ -88,13 +88,42 @@ public class ProveedorBean {
     
     public void addProveedor(ActionEvent actionEvent) {
         try {
-            Proveedor p = new Proveedor();
+            //objeto de persona en proveedor
             Persona per = new Persona();
-            TipoProveedor tp = new TipoProveedor();
             
+            per.setNombre(persona.getNombre());
+            per.setApellido(persona.getApellido());
+            per.setGenero(persona.getGenero());
+            per.setDui(persona.getDui());
+            per.setNit(persona.getNit());
+            per.setFechaNac(getFecha());
+            per.setDireccion(persona.getDireccion());
+            per.setCorreo(persona.getCorreo());
+            personasDao.crearPersona(per);
+            
+            //objetos para Proveedor
+            Proveedor p = new Proveedor();
+            Persona pe = new Persona();
+            TipoProveedor tp = new TipoProveedor();
+            //Setea cada atributo, el de persona con el proveedor que se esta ingresando.
             p.setIdProveedor(proveedor.getIdProveedor());
-            per.setIdPersona(idPersonaP);
+            pe.setIdPersona(proveedorDao.maxId());
+            p.setPersona(pe);
+            
             tp.setIdTipoProveedor(idTipoProveedorTP);
+            p.setPersona(pe);
+            p.setTipoProveedor(tp);
+            p.setNombre(proveedor.getNombre());
+            p.setCorreo(proveedor.getCorreo());
+            p.setNit(proveedor.getNit());
+            p.setGiro(proveedor.getGiro());
+            p.setNrc(proveedor.getNrc());
+            proveedorDao.crearProveedor(p);
+             //p.setPersona(per);
+            //p.setTipoProveedor(tp);
+            //per.setIdPersona(idPersonaP);
+            /*
+            per.setIdPersona(idPersonaP);
             p.setNombre(proveedor.getNombre());
             p.setCorreo(proveedor.getCorreo());
             p.setNit(proveedor.getNit());
@@ -102,7 +131,7 @@ public class ProveedorBean {
             p.setNrc(proveedor.getNrc());
             p.setPersona(per);
             p.setTipoProveedor(tp);
-            proveedorDao.crearProveedor(p);
+            proveedorDao.crearProveedor(p);*/
 
             addMessage("Proveedor Ingresado:!!" + proveedor.getNombre());
         } catch (Exception e) {
@@ -113,21 +142,38 @@ public class ProveedorBean {
     
     public void updateProveedor(ActionEvent actionEvent) {
         try {
-            Proveedor p = new Proveedor();
+            //objeto de persona en proveedor
             Persona per = new Persona();
-            TipoProveedor tp = new TipoProveedor();
             
+            per.setNombre(persona.getNombre());
+            per.setApellido(persona.getApellido());
+            per.setGenero(persona.getGenero());
+            per.setDui(persona.getDui());
+            per.setNit(persona.getNit());
+            per.setFechaNac(getFecha());
+            per.setDireccion(persona.getDireccion());
+            per.setCorreo(persona.getCorreo());
+            personasDao.modificarPersona(per);
+            
+            //objetos para Proveedor
+            Proveedor p = new Proveedor();
+            Persona pe = new Persona();
+            TipoProveedor tp = new TipoProveedor();
+            //Setea cada atributo, el de persona con el proveedor que se esta ingresando.
             p.setIdProveedor(proveedor.getIdProveedor());
-            per.setIdPersona(idPersonaP);
+            pe.setIdPersona(idPersonaP);
+            p.setPersona(pe);
+            
+            // REVISAR BIEN ESTE METODO
             tp.setIdTipoProveedor(idTipoProveedorTP);
+            p.setPersona(pe);
+            p.setTipoProveedor(tp);
             p.setNombre(proveedor.getNombre());
             p.setCorreo(proveedor.getCorreo());
             p.setNit(proveedor.getNit());
             p.setGiro(proveedor.getGiro());
             p.setNrc(proveedor.getNrc());
-            p.setPersona(per);
-            p.setTipoProveedor(tp);
-            proveedorDao.modificarProveedor(p);
+            proveedorDao.crearProveedor(p);
 
             addMessage("Proveedor Modificado:!!" + proveedor.getNombre());
         } catch (Exception e) {
