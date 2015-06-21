@@ -144,4 +144,9 @@ commit;
         <property name="sessionFactory" ref="mySessionFactory"/>
     </bean>
     
+       
+    <bean id="tipomenuDao" class="com.ues.dao.impl.TipoMenuDaoHibImpl">
+        <property name="sessionFactory" ref="mySessionFactory"/>
+    </bean>
+    
 </beans>

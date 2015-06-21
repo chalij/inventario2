@@ -277,4 +277,18 @@
         </managed-property>
     </managed-bean>
     
+    
+    
+    <managed-bean>
+        <managed-bean-name>tipomenuBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.TipoMenuBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>tipomenuDao</property-name>
+            <property-class>com.ues.dao.TipoMenuDao</property-class>
+            <value>#{tipomenuDao}</value>
+        </managed-property>
+    </managed-bean>
+    
 </faces-config>

@@ -1,8 +1,9 @@
 package com.ues.dao;
 
 import com.ues.exception.DAOException;
-import com.ues.model.TipoUsuario;
-import com.ues.model.Usuario;
+import com.ues.model.TipoMenu;
+
+
 import java.util.List;
 
 /**
@@ -11,21 +12,16 @@ import java.util.List;
  */
 public interface TipoMenuDao {
 
-    public void crearUsuario(Usuario usuario) throws DAOException;
+    public void crearTipoMenu(TipoMenu tipomenu) throws DAOException;
 
-    public Usuario buscaUsuario(String username) throws DAOException;
+    public TipoMenu buscaTipoMenu(Integer tipomenu) throws DAOException;
+   
+    public List<TipoMenu> listaTipoMenus() throws DAOException;
 
-    public List<Usuario> listaUsuarios() throws DAOException;
-    
-    public List<TipoUsuario> listaTipoUsuarios() throws DAOException;
+    public void borrarTipoMenu(TipoMenu tipomenu) throws DAOException;
 
-    public void borrarUsuario(Usuario usuario) throws DAOException;
-
-    public void modificarUsuario(Usuario usuario) throws DAOException;
+    public void modificarTipoMenu(TipoMenu tipomenu) throws DAOException;
     
     public int maxID() throws DAOException;
-    
-    
-    public boolean controlLogg(String nombreUsuario, String contrasena) throws DAOException;
-
+      
 }
