@@ -11,13 +11,13 @@
 
         </h:head>
         <h:body  style="background-image:url('fondo.jpg')">
-            
+
             <p:panel id="basic" header="" footer="Centro de El Salvador, Norman Quijasno Presidente 2018" style="margin-bottom:20px">
                 <h1 style="color: whitesmoke;text-align: center;font-size: 3.8em">Sistema de Inventario y Compras</h1>
                 <h2 style="color: whitesmoke;text-align: center">Calza Moda S.A de C.V</h2>
                 <br />
             </p:panel>
-            
+
             <p:megaMenu style="margin-top:20px">
                 <p:submenu label="Gestion de Proveedores" icon="ui-icon-suitcase">
 
@@ -74,7 +74,7 @@
             <br/>
 
             <h:form id="formTable">
-                <p:dataTable id="tbl" var="tprod" value="#{tipoProductosBean.tipoProductoLista}"
+                <p:dataTable id="tbl" var="tprod" value="#{productoBean.miLista}"
                              paginator="true" 
                              rows="5"  
                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"  
@@ -82,8 +82,8 @@
                              lazy="true"
                              resizableColumns="true"  
                              selectionMode="single"
-                             selection="#{tipoProductosBean.tipoProducto}"
-                             rowKey="#{tipoProductosBean.idTipoProductoV}" 
+                             selection="#{productoBean.producto}"
+                             rowKey="#{productoBean.prodIdV}" 
                              paginatorPosition="bottom">
 
 
@@ -92,14 +92,14 @@
                         <f:facet name="header">
                             <h:outputText value="Id" />
                         </f:facet>
-                        <h:outputText value="#{tprod.idTipoProducto}" />
+                        <h:outputText value="#{tprod.idProducto}" />
                     </p:column>
 
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Tipo Producto"/>
                         </f:facet>
-                        <h:outputText value="#{tprod.nombre}" />
+                        <h:outputText value="#{tprod.nombre4}" />
                     </p:column>
 
                     <p:column>
@@ -109,16 +109,15 @@
                         <h:outputText value="#{tprod.descripcion}" />
                     </p:column>
 
-
                     <p:column headerText="">
                         <p:commandButton value=""  update=":formModificar" icon="ui-icon-pencil"   style="width:40px;height:40px"  onsuccess="PF('dlgmodificar').show();" >
-                            <f:setPropertyActionListener target="#{tipoProductosBean.tipoProducto}" value="#{tprod}"/>
+                            <f:setPropertyActionListener target="#{productoBean.producto}" value="#{tprod}"/>
                         </p:commandButton>
                     </p:column>
 
                     <p:column headerText="">
                         <p:commandButton value="" icon="ui-icon-trash"   style="width:40px;height:40px" onclick="PF('dlgeliminar').show();" >
-                            <f:setPropertyActionListener target="#{tipoProductosBean.tipoProducto}" value="#{tprod}"/>
+                            <f:setPropertyActionListener target="#{productoBean.producto}" value="#{tprod}"/>
                         </p:commandButton>
                     </p:column>
 
@@ -134,11 +133,10 @@
             </h:form>
 
 
-
-            <p:dialog id="dlg2" header="Eliminar Tipo Producto" showEffect="explode" hideEffect="explode" widgetVar="dlgeliminar" modal="true" resizable="false" minWidth="200">
+            <p:dialog id="dlg2" header="Eliminar Producto" showEffect="explode" hideEffect="explode" widgetVar="dlgeliminar" modal="true" resizable="false" minWidth="200">
                 <h:form id="formEliminar">
-                    <p:outputLabel value="¿Desea Eliminar Tipo Producto?" />
-                    <p:commandButton actionListener="#{tipoProductosBean.eliminar}" value="Si" update=":formTable" onclick="PF('dlgeliminar').hide();"/>
+                    <p:outputLabel value="¿Desea eliminar al Producto?" />
+                    <p:commandButton actionListener="#{productoBean.eliminar}" value="Si" update=":formTable" onclick="PF('dlgeliminar').hide();"/>
                     <p:commandButton  value="No" onclick="PF('dlg2').hide();"/>
                 </h:form>
             </p:dialog>
@@ -146,15 +144,25 @@
             <p:dialog header="Modificar" widgetVar="dlgmodificar" modal="true" resizable="false">
                 <h:form id="formModificar">
                     <h:panelGrid id="modificar" columns="2" cellpadding="2">
-                        <p:outputLabel value="Id" />
-                        <p:inputText value="#{tipoProductosBean.tipoProducto.idTipoProducto}" disabled="true"/>
-                        <p:outputLabel value="Tipo Producto" />
-                        <p:inputText value="#{tipoProductosBean.tipoProducto.nombre}"/>
+                        <p:outputLabel value="Producto" />
+                        <p:inputText value="#{productoBean.producto.nombre4}"/>
+                        <p:outputLabel for="proveedor" value="Proveedor" />
+                        <p:selectOneMenu id="proveedor" value="#{productoBean.proveeTdV}">
+                            <f:selectItems  value="#{productoBean.listaUsu2}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel for="tipoProducto" value="Proveedor" />
+                        <p:selectOneMenu id="tipoProducto" value="#{productoBean.tipoProdIdV}">
+                            <f:selectItems  value="#{productoBean.listaUsu}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Costo" />
+                        <p:inputText value="#{productoBean.producto.costo}"/>
+                        <p:outputLabel value="Codigo" />
+                        <p:inputText value="#{productoBean.producto.codigoProducto}"/>
                         <p:outputLabel value="Descripcion" />
-                        <p:inputText value="#{tipoProductosBean.tipoProducto.descripcion}"/>
+                        <p:inputText value="#{productoBean.producto.descripcion}"/>
                     </h:panelGrid>
                     <p:growl id="growl3" life="5000" />
-                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{tipoProductosBean.updateTipoProducto}" value="Modificar Tipo Producto" styleClass="ui-priority-primary"  onsuccess="PF('dlgmodificar').hide();"/>
+                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{productoBean.updateTipoProducto}" value="Modificar Producto" styleClass="ui-priority-primary"  onsuccess="PF('dlgmodificar').hide();"/>
                 </h:form>
             </p:dialog>
 
@@ -162,14 +170,28 @@
 
             <p:dialog header="Insertar" widgetVar="dlginsertar" modal="true" resizable="false">
                 <h:form id="formInsertar">
-                    <h:panelGrid  columns="2" cellpadding="2">
-                        <p:outputLabel value="Tipo Producto" />
-                        <p:inputText value="#{tipoProductosBean.tipoProducto.nombre}"/>
+                    <h:panelGrid  columns="2"
+                                  cellpadding="2">
+
+                        <p:outputLabel value="Producto" />
+                        <p:inputText value="#{productoBean.producto.nombre4}"/>
+                        <p:outputLabel for="proveedor" value="Proveedor" />
+                        <p:selectOneMenu id="proveedor" value="#{productoBean.proveeTdV}">
+                            <f:selectItems  value="#{productoBean.listaUsu2}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel for="tipoProducto" value="Proveedor" />
+                        <p:selectOneMenu id="tipoProducto" value="#{productoBean.tipoProdIdV}">
+                            <f:selectItems  value="#{productoBean.listaUsu}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Costo" />
+                        <p:inputText value="#{productoBean.producto.costo}"/>
+                        <p:outputLabel value="Codigo" />
+                        <p:inputText value="#{productoBean.producto.codigoProducto}"/>
                         <p:outputLabel value="Descripcion" />
-                        <p:inputText value="#{tipoProductosBean.tipoProducto.descripcion}"/>
+                        <p:inputText value="#{productoBean.producto.descripcion}"/>
                     </h:panelGrid>
                     <p:growl id="growl2" life="5000" />
-                    <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{tipoProductosBean.addTipoProducto}" value="Insertar Tipo Producto" styleClass="ui-priority-primary" onsuccess="PF('dlginsertar').hide();" >
+                    <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{productoBean.addTipoProducto}" value="Ingresar Producto" styleClass="ui-priority-primary" onsuccess="PF('dlginsertar').hide();" >
                     </p:commandButton>
                 </h:form>
             </p:dialog>
