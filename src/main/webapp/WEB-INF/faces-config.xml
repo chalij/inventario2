@@ -304,4 +304,18 @@
         </managed-property>
     </managed-bean>
     
+    
+    
+    <managed-bean>
+        <managed-bean-name>requisicionBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.RequisicionBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>requisicionDao</property-name>
+            <property-class>com.ues.dao.RequisicionDao</property-class>
+            <value>#{requisicionDao}</value>
+        </managed-property>
+    </managed-bean>
+    
 </faces-config>

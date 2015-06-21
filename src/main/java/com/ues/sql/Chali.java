@@ -53,5 +53,26 @@ public class Chali {
      INSERT INTO menu(ID_RECURSOS,ID_TIPO_MENU,NOMBRE) VALUES (46,23,'Recursos');
      INSERT INTO menu(ID_RECURSOS,ID_TIPO_MENU,NOMBRE) VALUES (47,23,'Tipo de Usuarios');
      commit;
+    
+    
+     ----------------Tipo Cliente-------------------------
+     insert into tipo_cliente(nombre,descripcion) values('VIP','Buen Ciente');
+     commit;
+    
+     ------------------Cliente-----------------------------
+     insert into cliente(id_persona,id_tipo_cliente) values(101,1);
+     commit;
+    
+    -------------------Empleado------------------------------
+    
+     insert into empleado(id_persona,rol) values(101,'chaneque');
+     commit;
+    
+    -------------------Requisicion------------------------------
+    
+     insert into requisicion(id_cliente,id_empleado,fecha_req) values(1,1,sysdate);
+     commit;
+    
+    
      */
 }

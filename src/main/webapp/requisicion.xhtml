@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view>
+        <h:head>
+            <title>Ejemplo JSF 2.0, Spring 3, Hibernate 3</title>
+
+        </h:head>
+        <h:body style="background-image:url('fondo.jpg')">
+            <p:panel id="basic" header="" footer="Centro de El Salvador, Norman Quijasno Presidente 2018" style="margin-bottom:20px">
+                <h1 style="color: whitesmoke;text-align: center;font-size: 3.8em">Sistema de Inventario y Compras</h1>
+                <h2 style="color: whitesmoke;text-align: center">Calza Moda S.A de C.V</h2>
+                <br />
+            </p:panel>
+            <p:megaMenu style="margin-top:20px" id="menuM">
+                <p:submenu label="Gestion de Proveedores" icon="ui-icon-suitcase">
+
+                    <p:column>
+                        <p:menu model="#{menuBean.model}" />
+                    </p:column>
+
+                </p:submenu>
+
+                <p:submenu label="Gestion de Clientes" icon="ui-icon-cart">
+
+                    <p:column>
+                        <p:menu model="#{menuBean.clientes}" />
+                    </p:column>
+                </p:submenu>
+
+                <p:submenu label="Gestion de Usuarios" icon="ui-icon-person">
+                    <p:column>
+                        <p:menu model="#{menuBean.usuarios}" />
+                    </p:column>
+                </p:submenu>
+
+                <p:submenu label="Toma de Pedidos" icon="ui-icon-note">
+                    <p:column>
+                        <p:menu model="#{menuBean.pedidos}" />
+                    </p:column>
+
+                </p:submenu>
+
+                <p:submenu label="Manejo de Devoluciones" icon="ui-icon-arrowreturnthick-1-e">
+                    <p:column>
+                        <p:menu model="#{menuBean.devoluciones}" />
+                    </p:column>
+
+                </p:submenu>
+
+                <p:submenu label="Control de Inventarios" icon="ui-icon-folder-collapsed">
+                    <p:column>
+                        <p:menu model="#{menuBean.inventarios}" />
+                    </p:column>
+
+                </p:submenu>
+
+
+                <p:submenu label="Ordenes de Compra" icon="ui-icon-folder-collapsed">
+                    <p:column>
+                        <p:menu model="#{menuBean.ordenes}" />
+                    </p:column>
+
+                </p:submenu>
+
+                <p:menuitem value="Salir" url="loggin.xhtml" icon="ui-icon-close" />
+            </p:megaMenu>
+            <br/>
+
+
+            <h:form id="formTable">
+                <p:dataTable id="tbl" var="rec" value="#{requisicionBean.miLista}"
+                             paginator="true" 
+                             rows="5"  
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"  
+                             rowsPerPageTemplate="5,10,15" 
+                             lazy="true"
+                             resizableColumns="true"  
+                             selectionMode="single"
+                             selection="#{requisicionBean.requisicion}"
+                             rowKey="#{requisicionBean.reqIdV}" 
+                             paginatorPosition="bottom">
+
+
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Id Requision" />
+                        </f:facet>
+                        <h:outputText value="#{rec.idRequisicion}" />
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Cliente"/>
+                        </f:facet>
+                        <h:outputText value="#{rec.cliente.persona.nombre} #{rec.cliente.persona.apellido}" />
+                    </p:column>
+                    
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Empleado"/>
+                        </f:facet>
+                        <h:outputText value="#{rec.empleado.persona.nombre} #{rec.empleado.persona.apellido}" />
+                    </p:column>
+
+
+
+                    <p:column headerText="">
+                        <p:commandButton value=""  update=":formModificar" icon="ui-icon-pencil"   style="width:40px;height:40px"  onsuccess="PF('dlgmodificar').show();" >
+                            <f:setPropertyActionListener target="#{requisicionBean.requisicion}" value="#{rec}"/>
+                        </p:commandButton>
+                    </p:column>
+
+                    <p:column headerText="">
+                        <p:commandButton value="" icon="ui-icon-trash"   style="width:40px;height:40px" onclick="PF('dlgeliminar').show();" >
+                            <f:setPropertyActionListener target="#{requisicionBean.requisicion}" value="#{rec}"/>
+                        </p:commandButton>
+                    </p:column>
+
+                    <f:facet name="footer">
+                        <div class="footer-section">
+
+                            <p:commandButton update=":formInsertar" onsuccess="PF('dlginsertar').show()"  icon="ui-icon-plus"  style="width:40px;height:40px"   />
+
+                        </div>
+                    </f:facet>
+                </p:dataTable>
+            </h:form>
+
+
+            <p:dialog id="dlg2" header="Eliminar Recurso" showEffect="explode" hideEffect="explode" widgetVar="dlgeliminar" modal="true" resizable="false" minWidth="200">
+                <h:form id="formEliminar">
+                    <p:outputLabel value="¿Desea eliminar Recurso?" />
+                    <p:commandButton actionListener="#{recursosBean.eliminar}" value="Si" update=":formTable" onclick="PF('dlgeliminar').hide();"/>
+                    <p:commandButton  value="No" onclick="PF('dlg2').hide();"/>
+                </h:form>
+            </p:dialog>
+
+            <p:dialog header="Modificar" widgetVar="dlgmodificar" modal="true" resizable="false">
+                <h:form id="formModificar">
+                    <h:panelGrid id="modificar" columns="2" cellpadding="2">
+                        <p:outputLabel value="Etiqueta" />
+                        <p:inputText value="#{recursosBean.menu.nombre}"/>
+                        <p:outputLabel value="URL" />
+                        <p:inputText value="#{recursosBean.recursos.url}"/>
+                        <p:outputLabel for="tipoMenu" value="Tipo de Menu:" />
+                        <p:selectOneMenu id="tipoMenu" value="#{recursosBean.tipoMenuT}">
+                            <f:selectItems  value="#{recursosBean.listaUsu2}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel for="tipoUsuario" value="Tipo de Usuario:" />
+                        <p:selectOneMenu id="tipoUsuario" value="#{recursosBean.tipoUsuarioT}">
+                            <f:selectItems  value="#{recursosBean.listaUsu}" />
+                        </p:selectOneMenu>
+                    </h:panelGrid>
+                    <p:growl id="growl3" life="5000" />
+                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{requisicionBean.updateRecursos}" value="Modificar Recursos" styleClass="ui-priority-primary"  onsuccess="PF('dlgmodificar').hide();"/>
+                </h:form>
+            </p:dialog>
+
+
+
+            <p:dialog header="Insertar" widgetVar="dlginsertar" modal="true" resizable="false">
+                <h:form id="formInsertar">
+                    <h:panelGrid  columns="2"
+                                  cellpadding="2">
+                        <p:outputLabel value="Etiqueta" />
+                        <p:inputText value="#{recursosBean.menu.nombre}"/>
+                        <p:outputLabel value="URL" />
+                        <p:inputText value="#{recursosBean.recursos.url}"/>
+                        <p:outputLabel for="tipoMenu" value="Tipo de Menu:" />
+                        <p:selectOneMenu id="tipoMenu" value="#{recursosBean.tipoMenuT}">
+                            <f:selectItems  value="#{requisicionBean.listaUsu2}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel for="tipoUsuario" value="Tipo de Usuario:" />
+                        <p:selectOneMenu id="tipoUsuario" value="#{recursosBean.tipoUsuarioT}">
+                            <f:selectItems  value="#{requisicionBean.listaUsu}" />
+                        </p:selectOneMenu>
+                    </h:panelGrid>
+                    <p:growl id="growl2" life="5000" />
+                    <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{requisicionBean.addRecursos}" value="Ingresar Recursos" styleClass="ui-priority-primary" onsuccess="PF('dlginsertar').hide();" >
+                    </p:commandButton>
+                </h:form>
+            </p:dialog>
+
+
+        </h:body>
+    </f:view>
+</html>
