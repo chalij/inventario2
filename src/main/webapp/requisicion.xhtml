@@ -133,10 +133,10 @@
             </h:form>
 
 
-            <p:dialog id="dlg2" header="Eliminar Recurso" showEffect="explode" hideEffect="explode" widgetVar="dlgeliminar" modal="true" resizable="false" minWidth="200">
+            <p:dialog id="dlg2" header="Eliminar Requisicion" showEffect="explode" hideEffect="explode" widgetVar="dlgeliminar" modal="true" resizable="false" minWidth="200">
                 <h:form id="formEliminar">
-                    <p:outputLabel value="¿Desea eliminar Recurso?" />
-                    <p:commandButton actionListener="#{recursosBean.eliminar}" value="Si" update=":formTable" onclick="PF('dlgeliminar').hide();"/>
+                    <p:outputLabel value="¿Desea eliminar Requisicion?" />
+                    <p:commandButton actionListener="#{requisicionBean.eliminar}" value="Si" update=":formTable" onclick="PF('dlgeliminar').hide();"/>
                     <p:commandButton  value="No" onclick="PF('dlg2').hide();"/>
                 </h:form>
             </p:dialog>
@@ -144,17 +144,13 @@
             <p:dialog header="Modificar" widgetVar="dlgmodificar" modal="true" resizable="false">
                 <h:form id="formModificar">
                     <h:panelGrid id="modificar" columns="2" cellpadding="2">
-                        <p:outputLabel value="Etiqueta" />
-                        <p:inputText value="#{recursosBean.menu.nombre}"/>
-                        <p:outputLabel value="URL" />
-                        <p:inputText value="#{recursosBean.recursos.url}"/>
-                        <p:outputLabel for="tipoMenu" value="Tipo de Menu:" />
-                        <p:selectOneMenu id="tipoMenu" value="#{recursosBean.tipoMenuT}">
-                            <f:selectItems  value="#{recursosBean.listaUsu2}" />
+                        <p:outputLabel for="tipoMenu" value="Cliente" />
+                        <p:selectOneMenu id="tipoMenu" value="#{requisicionBean.clienteIdV}">
+                            <f:selectItems  value="#{requisicionBean.listaUsu2}" />
                         </p:selectOneMenu>
-                        <p:outputLabel for="tipoUsuario" value="Tipo de Usuario:" />
-                        <p:selectOneMenu id="tipoUsuario" value="#{recursosBean.tipoUsuarioT}">
-                            <f:selectItems  value="#{recursosBean.listaUsu}" />
+                        <p:outputLabel for="tipoUsuario" value="Empleado" />
+                        <p:selectOneMenu id="tipoUsuario" value="#{requisicionBean.empleadoIdV}">
+                            <f:selectItems  value="#{requisicionBean.listaUsu}" />
                         </p:selectOneMenu>
                     </h:panelGrid>
                     <p:growl id="growl3" life="5000" />
@@ -168,16 +164,12 @@
                 <h:form id="formInsertar">
                     <h:panelGrid  columns="2"
                                   cellpadding="2">
-                        <p:outputLabel value="Etiqueta" />
-                        <p:inputText value="#{recursosBean.menu.nombre}"/>
-                        <p:outputLabel value="URL" />
-                        <p:inputText value="#{recursosBean.recursos.url}"/>
-                        <p:outputLabel for="tipoMenu" value="Tipo de Menu:" />
-                        <p:selectOneMenu id="tipoMenu" value="#{recursosBean.tipoMenuT}">
+                        <p:outputLabel for="tipoMenu" value="Cliente" />
+                        <p:selectOneMenu id="tipoMenu" value="#{requisicionBean.clienteIdV}">
                             <f:selectItems  value="#{requisicionBean.listaUsu2}" />
                         </p:selectOneMenu>
-                        <p:outputLabel for="tipoUsuario" value="Tipo de Usuario:" />
-                        <p:selectOneMenu id="tipoUsuario" value="#{recursosBean.tipoUsuarioT}">
+                        <p:outputLabel for="tipoUsuario" value="Empleado" />
+                        <p:selectOneMenu id="tipoUsuario" value="#{requisicionBean.empleadoIdV}">
                             <f:selectItems  value="#{requisicionBean.listaUsu}" />
                         </p:selectOneMenu>
                     </h:panelGrid>

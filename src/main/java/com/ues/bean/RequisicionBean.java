@@ -41,8 +41,11 @@ public class RequisicionBean {
     private List<Requisicion> miLista;
     private int reqIdV;
     
-    private int tipoUsuarioT;
-    private int tipoMenuT;
+    
+    private int clienteIdV;
+    private int empleadoIdV;
+   // private int tipoUsuarioT;
+    //private int tipoMenuT;
     // private int idUsuarioV;
     private int idRecursoV;
     private List<Cliente> listClienteV;
@@ -81,102 +84,69 @@ public class RequisicionBean {
     }
 
     public void addRecursos() {
-      /*  try {
-            Recursos re = new Recursos();
-            TipoUsuario tus = new TipoUsuario();
-            tus.setIdTipoUsuario(tipoUsuarioT);
+        try {
+            Requisicion re = new Requisicion();
+            Cliente cl=new Cliente();
+            cl.setIdCliente(this.clienteIdV);
+            Empleado em=new Empleado();
+            em.setIdEmpleado(empleadoIdV);
             // re.setIdRecursos(recursos.getIdRecursos());
-            re.setUrl(recursos.getUrl());
-            re.setTipoUsuario(tus);
-            recursosDao.crearRecursos(re);
-            System.out.println(recursosDao.maxID());
-            Recursos rea = new Recursos();
-            rea.setIdRecursos(recursosDao.maxID());
-            Menu me = new Menu();
-            me.setNombre(menu.getNombre());
-            TipoMenu tm = new TipoMenu();
-            tm.setIdTipoMenu(tipoMenuT);
-            me.setTipoMenu(tm);
-            me.setRecursos(rea);
-            menusDao.crearMenu(me);
-            recursos = new Recursos();
-            menu = new Menu();
+            re.setCliente(cl);
+            re.setEmpleado(em);
+            re.setFechaReq(new Date());
+            requisicionDao.crearRequisicion(re);
+            requisicion = new Requisicion();
             addMessage("Insertado!!");
         } catch (Exception e) {
             addMessage("Error!!" + e.getMessage());
             e.printStackTrace();
-        }*/
+        }
 
     }
 
     public void updateRecursos() {
-       /* try {
-            
-            Recursos re = new Recursos();
-            re.setIdRecursos(recursos.getIdRecursos());
-            TipoUsuario tus = new TipoUsuario();
-            tus.setIdTipoUsuario(tipoUsuarioT);
-            re.setUrl(recursos.getUrl());
-            re.setTipoUsuario(tus);
-            recursosDao.modificarRecursos(re);
-            System.out.println("++++++++++++claves++++++++++++++");
-            System.out.println(re.getIdRecursos());
-            System.out.println(menu.getIdMenu());
-          //  System.out.println(recursosDao.maxID());
-            Recursos rea = new Recursos();
-            rea.setIdRecursos(recursos.getIdRecursos());
-            Menu me = new Menu();
-            me.setIdMenu(menu.getIdMenu());
-            me.setNombre(menu.getNombre());
-            TipoMenu tm = new TipoMenu();
-            tm.setIdTipoMenu(tipoMenuT);
-            me.setTipoMenu(tm);
-            me.setRecursos(rea);
-            menusDao.modificarMenu(me);
-            recursos = new Recursos();
-            menu = new Menu();
+       
+        try {
+            Requisicion re = new Requisicion();
+            Cliente cl=new Cliente();
+            cl.setIdCliente(this.clienteIdV);
+            Empleado em=new Empleado();
+            em.setIdEmpleado(empleadoIdV);
+            // re.setIdRecursos(recursos.getIdRecursos());
+            re.setIdRequisicion(requisicion.getIdRequisicion());
+            re.setCliente(cl);
+            re.setEmpleado(em);
+            re.setFechaReq(new Date());
+            requisicionDao.modificarRequisicion(re);
+            requisicion = new Requisicion();
             addMessage("Modificado!!");
         } catch (Exception e) {
             addMessage("Error!!" + e.getMessage());
             e.printStackTrace();
-        }*/
+        }
 
     }
 
     public void eliminar() {
 
-      /*  try {
-            
-            Recursos rea = new Recursos();
-            rea.setIdRecursos(recursos.getIdRecursos());
-            Menu me = new Menu();
-            me.setIdMenu(menu.getIdMenu());
-            me.setNombre(menu.getNombre());
-            TipoMenu tm = new TipoMenu();
-            tm.setIdTipoMenu(tipoMenuT);
-            me.setTipoMenu(tm);
-            me.setRecursos(rea);
-            menusDao.borrarMenu(me);
-            
-            
-            Recursos re = new Recursos();
-            re.setIdRecursos(recursos.getIdRecursos());
-            TipoUsuario tus = new TipoUsuario();
-            tus.setIdTipoUsuario(tipoUsuarioT);
-            re.setUrl(recursos.getUrl());
-            re.setTipoUsuario(tus);
-            recursosDao.borrarRecursos(re);
-            System.out.println("++++++++++++claves++++++++++++++");
-            System.out.println(re.getIdRecursos());
-            System.out.println(menu.getIdMenu());
-            recursos = new Recursos();
-            menu = new Menu();
-          //  System.out.println(recursosDao.maxID());
-            addMessage("Eliminar!!");
+        try {
+            Requisicion re = new Requisicion();
+            Cliente cl=new Cliente();
+            cl.setIdCliente(this.clienteIdV);
+            Empleado em=new Empleado();
+            em.setIdEmpleado(empleadoIdV);
+            // re.setIdRecursos(recursos.getIdRecursos());
+            re.setIdRequisicion(requisicion.getIdRequisicion());
+            re.setCliente(cl);
+            re.setEmpleado(em);
+            re.setFechaReq(new Date());
+            requisicionDao.borrarRequisicion(re);
+            requisicion = new Requisicion();
+            addMessage("Eliminado!!");
         } catch (Exception e) {
             addMessage("Error!!" + e.getMessage());
             e.printStackTrace();
-        }*/
+        }
     }
 
     private void addMessage(String welcome_to_Primefaces) {
@@ -184,19 +154,7 @@ public class RequisicionBean {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
-    /**
-     * @return the tipoUsuarioT
-     */
-    public int getTipoUsuarioT() {
-        return tipoUsuarioT;
-    }
-
-    /**
-     * @param tipoUsuarioT the tipoUsuarioT to set
-     */
-    public void setTipoUsuarioT(int tipoUsuarioT) {
-        this.tipoUsuarioT = tipoUsuarioT;
-    }
+   
 
     /**
      * @return the listaUsu
@@ -291,19 +249,7 @@ public class RequisicionBean {
 
     
 
-    /**
-     * @return the tipoMenuT
-     */
-    public int getTipoMenuT() {
-        return tipoMenuT;
-    }
-
-    /**
-     * @param tipoMenuT the tipoMenuT to set
-     */
-    public void setTipoMenuT(int tipoMenuT) {
-        this.tipoMenuT = tipoMenuT;
-    }
+    
 
     
     
@@ -405,6 +351,34 @@ public class RequisicionBean {
      */
     public void setListEpleadoV(List<Empleado> listEpleadoV) {
         this.listEpleadoV = listEpleadoV;
+    }
+
+    /**
+     * @return the clienteIdV
+     */
+    public int getClienteIdV() {
+        return clienteIdV;
+    }
+
+    /**
+     * @param clienteIdV the clienteIdV to set
+     */
+    public void setClienteIdV(int clienteIdV) {
+        this.clienteIdV = clienteIdV;
+    }
+
+    /**
+     * @return the empleadoIdV
+     */
+    public int getEmpleadoIdV() {
+        return empleadoIdV;
+    }
+
+    /**
+     * @param empleadoIdV the empleadoIdV to set
+     */
+    public void setEmpleadoIdV(int empleadoIdV) {
+        this.empleadoIdV = empleadoIdV;
     }
 
 }
