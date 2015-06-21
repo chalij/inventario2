@@ -137,8 +137,10 @@
 
             <p:dialog header="Modificar" widgetVar="dlgmodificar" modal="true" resizable="false">
                 <h:form id="formModificar">
-                    <h:panelGrid id="modificar" columns="2" cellpadding="2">
-                        <h5> Datos Personales del Empleado</h5><br/>
+                    <h:panelGrid columns="2" cellpadding="2">
+                        
+                        <h5> Datos Personales del Empleado </h5><br/><br/><br/>
+                        <p:separator/>
                         <p:outputLabel value="Nombre de la persona" />
                         <p:inputText value="#{empleadoBean.persona.nombre}"/>
                         <p:outputLabel value="Apellido" />
@@ -164,9 +166,22 @@
                             <f:selectItems  value="#{empleadoBean.listaEmpleado}" />
                         </p:selectOneMenu>
                         -->
-                        <h5> Datos Personales del Empleado</h5><br/>
+                        <h5>Info del Empleado</h5><br/><br/><br/>
+                        <p:separator/>
                         <p:outputLabel value="Rol" />
                         <p:inputText value="#{empleadoBean.empleado.rol}"/>
+                        
+                        <h5>Usuario</h5><br/><br/><br/>
+                        <p:separator/>
+                        
+                        <p:outputLabel value="Nombre del usuario" />
+                        <p:inputText value="#{empleadoBean.nombreUsuario}"/>
+                        <p:outputLabel value="Contraseña" />
+                        <p:inputText value="#{empleadoBean.clave}"/>
+                        <p:outputLabel for="tipoUsuario" value="Tipo de Usuario:" />
+                        <p:selectOneMenu id="tipoUsuario" value="#{empleadoBean.tipoUsuarioT}">
+                            <f:selectItems  value="#{empleadoBean.listaUsu}" />
+                        </p:selectOneMenu>
                     </h:panelGrid>
                     <p:growl id="growl3" life="5000" />
                     <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{empleadoBean.updateEmpleado}" value="Modificar Empleado" styleClass="ui-priority-primary"  onsuccess="PF('dlgmodificar').hide();"/>
@@ -210,6 +225,18 @@
                         <p:separator/>
                         <p:outputLabel value="Rol" />
                         <p:inputText value="#{empleadoBean.empleado.rol}"/>
+                        
+                        <h5>Usuario</h5><br/><br/><br/>
+                        <p:separator/>
+                        
+                        <p:outputLabel value="Nombre del usuario" />
+                        <p:inputText value="#{empleadoBean.nombreUsuario}"/>
+                        <p:outputLabel value="Contraseña" />
+                        <p:inputText value="#{empleadoBean.clave}"/>
+                        <p:outputLabel for="tipoUsuario" value="Tipo de Usuario:" />
+                        <p:selectOneMenu id="tipoUsuario" value="#{empleadoBean.tipoUsuarioT}">
+                            <f:selectItems  value="#{empleadoBean.listaUsu}" />
+                        </p:selectOneMenu>
                     </h:panelGrid>
                     <p:growl id="growl2" life="5000" />
                     <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{empleadoBean.addEmpleado}" value="Ingresar Empleado" styleClass="ui-priority-primary" onsuccess="PF('dlginsertar').hide();" >

@@ -28,8 +28,8 @@ public class UsuariosDaoHibImpl extends CustomHibernateDaoSupport implements Usu
     }
 
     @Override
-    public Usuario buscaUsuario(String nombreUsuario) throws DAOException {
-        List list = getHibernateTemplate().find(" from Usuario WHERE nombreUsuario=?", nombreUsuario);
+    public Usuario buscaUsuario(int persona) throws DAOException {
+        List<Usuario> list = getHibernateTemplate().find("from Usuario u  inner join fetch u.tipoUsuario inner join fetch u.persona WHERE u.persona.idPersona="+persona);
         return (Usuario) list.get(0);
     }
 
@@ -67,7 +67,7 @@ public class UsuariosDaoHibImpl extends CustomHibernateDaoSupport implements Usu
 
     @Override
     public boolean controlLogg(String nombreUsuario, String contrasena) throws DAOException {
-        List<Usuario> list = getHibernateTemplate().find(" from Usuario u inner join fetch u.tipoUsuario WHERE u.nombreUsuario=? and u.contrasena=?", nombreUsuario, contrasena);
+        List<Usuario> list = getHibernateTemplate().find(" from Usuario u inner join fetch u.tipoUsuario inner join fetch u.persona WHERE u.nombreUsuario=? and u.contrasena=?", nombreUsuario, contrasena);
         if (list.size() == 0) {
             return false;
                     
@@ -75,6 +75,7 @@ public class UsuariosDaoHibImpl extends CustomHibernateDaoSupport implements Usu
                 Usuario us=list.get(0);
                 HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
                 session.setAttribute("tipoUsuario", us.getTipoUsuario().getIdTipoUsuario());
+                session.setAttribute("persona", us.getPersona().getIdPersona());
             return true;
     
         }

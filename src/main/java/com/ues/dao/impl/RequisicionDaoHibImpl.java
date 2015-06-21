@@ -63,6 +63,15 @@ public class RequisicionDaoHibImpl extends CustomHibernateDaoSupport implements 
 
         return lista;
     }
+    
+    
+    
+    @Override
+    public Empleado listaBuscarEmp(int persona) throws DAOException {
+        List<Empleado> lista = getHibernateTemplate().find("from Empleado rq join fetch rq.persona where rq.persona.idPersona="+persona);
+
+        return lista.get(0);
+    }
 
     @Override
     public int maxID(String table) throws DAOException {

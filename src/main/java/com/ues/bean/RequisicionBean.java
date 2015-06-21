@@ -85,12 +85,19 @@ public class RequisicionBean {
 
     public void addRecursos() {
         try {
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+            System.out.println("----------Nombre del usuario---------------");
+            System.out.println(session.getAttribute("persona"));
             Requisicion re = new Requisicion();
             Cliente cl=new Cliente();
             cl.setIdCliente(this.clienteIdV);
             Empleado em=new Empleado();
-            em.setIdEmpleado(empleadoIdV);
-            // re.setIdRecursos(recursos.getIdRecursos());
+            int idp=(Integer)session.getAttribute("persona");
+            System.out.println(idp);
+            System.out.println("----------Persona---------------");
+            Empleado eps=requisicionDao.listaBuscarEmp(idp);
+            em.setIdEmpleado(eps.getIdEmpleado());
+            
             re.setCliente(cl);
             re.setEmpleado(em);
             re.setFechaReq(new Date());
@@ -107,11 +114,14 @@ public class RequisicionBean {
     public void updateRecursos() {
        
         try {
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+            int idp=(Integer)session.getAttribute("persona");
+            Empleado eps=requisicionDao.listaBuscarEmp(idp);
             Requisicion re = new Requisicion();
             Cliente cl=new Cliente();
             cl.setIdCliente(this.clienteIdV);
             Empleado em=new Empleado();
-            em.setIdEmpleado(empleadoIdV);
+            em.setIdEmpleado(eps.getIdEmpleado());
             // re.setIdRecursos(recursos.getIdRecursos());
             re.setIdRequisicion(requisicion.getIdRequisicion());
             re.setCliente(cl);

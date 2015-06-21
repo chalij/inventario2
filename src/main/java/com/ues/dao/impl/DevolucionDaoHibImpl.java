@@ -70,4 +70,9 @@ public class DevolucionDaoHibImpl extends CustomHibernateDaoSupport implements R
         System.out.println(list.get(0));
         return (Integer) list.get(0);
     }
+
+    @Override
+    public Empleado listaBuscarEmp(int persona) throws DAOException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

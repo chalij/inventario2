@@ -13,7 +13,7 @@ public interface UsuariosDao {
 
     public void crearUsuario(Usuario usuario) throws DAOException;
 
-    public Usuario buscaUsuario(String username) throws DAOException;
+    public Usuario buscaUsuario(int username) throws DAOException;
 
     public List<Usuario> listaUsuarios() throws DAOException;
     

@@ -60,44 +60,29 @@
 
 
 
-            <h:form>
-                <p:dataTable id="tbl" var="car" value="fghfgh"
-                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
-                             paginator="true" rows="10" style="margin-bottom:20px">
+           
+            <div class="panel panel-primary">
+                <p:panel id="basic" header="Loggin" >
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:form class="ui-responsive ui-grid" >  
+                            <p:panel id="basic" header="Loggin"  style="position:relative;background-image:url('fondo.jpg');">
+                                <h:panelGrid columns="2" cellpadding="5" class="ui-responsive ui-grid-responsive">
+                                    <h:outputLabel for="username" value="Username:" />
+                                    <p:inputText id="username" value="#{loggBean.username}" required="true" label="username" />
 
+                                    <h:outputLabel for="password" value="Password:" />
+                                    <p:password id="password" value="#{loggBean.password}" required="true" label="password" />
 
-
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Id" />
-                        </f:facet>
-                        <h:outputText value="fghfghf" />
-                    </p:column>
-
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Year"/>
-                        </f:facet>
-                        <h:outputText value="fghgfhfh" />
-                    </p:column>
-
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Brand" />
-                        </f:facet>
-                        <h:outputText value="fghgfh" />
-                    </p:column>
-
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Color" />
-                        </f:facet>
-                        <h:outputText value="fghfh" />
-                    </p:column>
-                </p:dataTable>
-
-
-            </h:form>
+                                    <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+                                    <f:facet name="footer">
+                                        <p:commandButton value="Login" update="growl" action="#{loggBean.login()}"/>
+                                    </f:facet>  
+                                </h:panelGrid>
+                            </p:panel>
+                        </h:form>
+                    </h:panelGrid>
+                </p:panel>
+            </div>
         </h:body>
     </f:view>
 </html>

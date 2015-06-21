@@ -236,6 +236,12 @@
             <property-class>com.ues.dao.PersonasDao</property-class>
             <value>#{personasDao}</value>
         </managed-property>
+        
+        <managed-property>
+            <property-name>usuariosDao</property-name>
+            <property-class>com.ues.dao.UsuariosDao</property-class>
+            <value>#{usuariosDao}</value>
+        </managed-property>
     </managed-bean>
     
     <managed-bean>

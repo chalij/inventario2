@@ -26,7 +26,7 @@ public class TipoMenusDaoHibImpl extends CustomHibernateDaoSupport implements Us
     }
 
     @Override
-    public Usuario buscaUsuario(String nombreUsuario) throws DAOException {
+    public Usuario buscaUsuario(int nombreUsuario) throws DAOException {
         List list = getHibernateTemplate().find(" from Usuario WHERE nombreUsuario=?", nombreUsuario);
         return (Usuario) list.get(0);
     }

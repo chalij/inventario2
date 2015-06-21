@@ -25,5 +25,7 @@ public interface RequisicionDao {
     public List<Empleado> listaEmpleado() throws DAOException;
     
     public int maxID(String table) throws DAOException;
+    
+    public Empleado listaBuscarEmp(int persona) throws DAOException;
 
 }

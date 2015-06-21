@@ -148,10 +148,6 @@
                         <p:selectOneMenu id="tipoMenu" value="#{requisicionBean.clienteIdV}">
                             <f:selectItems  value="#{requisicionBean.listaUsu2}" />
                         </p:selectOneMenu>
-                        <p:outputLabel for="tipoUsuario" value="Empleado" />
-                        <p:selectOneMenu id="tipoUsuario" value="#{requisicionBean.empleadoIdV}">
-                            <f:selectItems  value="#{requisicionBean.listaUsu}" />
-                        </p:selectOneMenu>
                     </h:panelGrid>
                     <p:growl id="growl3" life="5000" />
                     <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{requisicionBean.updateRecursos}" value="Modificar Recursos" styleClass="ui-priority-primary"  onsuccess="PF('dlgmodificar').hide();"/>
@@ -167,10 +163,6 @@
                         <p:outputLabel for="tipoMenu" value="Cliente" />
                         <p:selectOneMenu id="tipoMenu" value="#{requisicionBean.clienteIdV}">
                             <f:selectItems  value="#{requisicionBean.listaUsu2}" />
-                        </p:selectOneMenu>
-                        <p:outputLabel for="tipoUsuario" value="Empleado" />
-                        <p:selectOneMenu id="tipoUsuario" value="#{requisicionBean.empleadoIdV}">
-                            <f:selectItems  value="#{requisicionBean.listaUsu}" />
                         </p:selectOneMenu>
                     </h:panelGrid>
                     <p:growl id="growl2" life="5000" />
