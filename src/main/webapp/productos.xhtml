@@ -7,16 +7,18 @@
       xmlns:p="http://primefaces.org/ui">
     <f:view>
         <h:head>
-            <title>Ejemplo JSF 2.0, Spring 3, Hibernate 3</title>
+            <title></title>
 
         </h:head>
-        <h:body style="background-image:url('fondo.jpg')">
+        <h:body  style="background-image:url('fondo.jpg')">
+            
             <p:panel id="basic" header="" footer="Centro de El Salvador, Norman Quijasno Presidente 2018" style="margin-bottom:20px">
                 <h1 style="color: whitesmoke;text-align: center;font-size: 3.8em">Sistema de Inventario y Compras</h1>
                 <h2 style="color: whitesmoke;text-align: center">Calza Moda S.A de C.V</h2>
                 <br />
             </p:panel>
-            <p:megaMenu style="margin-top:20px" id="menuM">
+            
+            <p:megaMenu style="margin-top:20px">
                 <p:submenu label="Gestion de Proveedores" icon="ui-icon-suitcase">
 
                     <p:column>
@@ -71,9 +73,8 @@
             </p:megaMenu>
             <br/>
 
-
             <h:form id="formTable">
-                <p:dataTable id="tbl" var="rec" value="#{recursosBean.miLista}"
+                <p:dataTable id="tbl" var="tprod" value="#{tipoProductosBean.tipoProductoLista}"
                              paginator="true" 
                              rows="5"  
                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"  
@@ -81,8 +82,8 @@
                              lazy="true"
                              resizableColumns="true"  
                              selectionMode="single"
-                             selection="#{recursosBean.menu}"
-                             rowKey="#{recursosBean.idRecursoV}" 
+                             selection="#{tipoProductosBean.tipoProducto}"
+                             rowKey="#{tipoProductosBean.idTipoProductoV}" 
                              paginatorPosition="bottom">
 
 
@@ -91,48 +92,33 @@
                         <f:facet name="header">
                             <h:outputText value="Id" />
                         </f:facet>
-                        <h:outputText value="#{rec.idMenu}" />
+                        <h:outputText value="#{tprod.idTipoProducto}" />
                     </p:column>
 
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="Etiqueta"/>
+                            <h:outputText value="Tipo Producto"/>
                         </f:facet>
-                        <h:outputText value="#{rec.nombre}" />
-                    </p:column>
-                    
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="URL"/>
-                        </f:facet>
-                        <h:outputText value="#{rec.recursos.url}" />
+                        <h:outputText value="#{tprod.nombre}" />
                     </p:column>
 
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="Tipo Usuario Asignado" />
+                            <h:outputText value="Descripcion" />
                         </f:facet>
-                        <h:outputText value="#{rec.recursos.tipoUsuario.nombre}" />
+                        <h:outputText value="#{tprod.descripcion}" />
                     </p:column>
-                    
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Tipo de Menu" />
-                        </f:facet>
-                        <h:outputText value="#{rec.tipoMenu.nombre}" />
-                    </p:column>
-
 
 
                     <p:column headerText="">
                         <p:commandButton value=""  update=":formModificar" icon="ui-icon-pencil"   style="width:40px;height:40px"  onsuccess="PF('dlgmodificar').show();" >
-                            <f:setPropertyActionListener target="#{recursosBean.menu}" value="#{rec}"/>
+                            <f:setPropertyActionListener target="#{tipoProductosBean.tipoProducto}" value="#{tprod}"/>
                         </p:commandButton>
                     </p:column>
 
                     <p:column headerText="">
                         <p:commandButton value="" icon="ui-icon-trash"   style="width:40px;height:40px" onclick="PF('dlgeliminar').show();" >
-                            <f:setPropertyActionListener target="#{recursosBean.menu}" value="#{rec}"/>
+                            <f:setPropertyActionListener target="#{tipoProductosBean.tipoProducto}" value="#{tprod}"/>
                         </p:commandButton>
                     </p:column>
 
@@ -143,14 +129,16 @@
 
                         </div>
                     </f:facet>
+
                 </p:dataTable>
             </h:form>
 
 
-            <p:dialog id="dlg2" header="Eliminar Recurso" showEffect="explode" hideEffect="explode" widgetVar="dlgeliminar" modal="true" resizable="false" minWidth="200">
+
+            <p:dialog id="dlg2" header="Eliminar Tipo Producto" showEffect="explode" hideEffect="explode" widgetVar="dlgeliminar" modal="true" resizable="false" minWidth="200">
                 <h:form id="formEliminar">
-                    <p:outputLabel value="¿Desea eliminar Recurso?" />
-                    <p:commandButton actionListener="#{recursosBean.eliminar}" value="Si" update=":formTable" onclick="PF('dlgeliminar').hide();"/>
+                    <p:outputLabel value="¿Desea Eliminar Tipo Producto?" />
+                    <p:commandButton actionListener="#{tipoProductosBean.eliminar}" value="Si" update=":formTable" onclick="PF('dlgeliminar').hide();"/>
                     <p:commandButton  value="No" onclick="PF('dlg2').hide();"/>
                 </h:form>
             </p:dialog>
@@ -158,21 +146,15 @@
             <p:dialog header="Modificar" widgetVar="dlgmodificar" modal="true" resizable="false">
                 <h:form id="formModificar">
                     <h:panelGrid id="modificar" columns="2" cellpadding="2">
-                        <p:outputLabel value="Etiqueta" />
-                        <p:inputText value="#{recursosBean.menu.nombre}"/>
-                        <p:outputLabel value="URL" />
-                        <p:inputText value="#{recursosBean.recursos.url}"/>
-                        <p:outputLabel for="tipoMenu" value="Tipo de Menu:" />
-                        <p:selectOneMenu id="tipoMenu" value="#{recursosBean.tipoMenuT}">
-                            <f:selectItems  value="#{recursosBean.listaUsu2}" />
-                        </p:selectOneMenu>
-                        <p:outputLabel for="tipoUsuario" value="Tipo de Usuario:" />
-                        <p:selectOneMenu id="tipoUsuario" value="#{recursosBean.tipoUsuarioT}">
-                            <f:selectItems  value="#{recursosBean.listaUsu}" />
-                        </p:selectOneMenu>
+                        <p:outputLabel value="Id" />
+                        <p:inputText value="#{tipoProductosBean.tipoProducto.idTipoProducto}" disabled="true"/>
+                        <p:outputLabel value="Tipo Producto" />
+                        <p:inputText value="#{tipoProductosBean.tipoProducto.nombre}"/>
+                        <p:outputLabel value="Descripcion" />
+                        <p:inputText value="#{tipoProductosBean.tipoProducto.descripcion}"/>
                     </h:panelGrid>
                     <p:growl id="growl3" life="5000" />
-                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{recursosBean.updateRecursos}" value="Modificar Recursos" styleClass="ui-priority-primary"  onsuccess="PF('dlgmodificar').hide();"/>
+                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{tipoProductosBean.updateTipoProducto}" value="Modificar Tipo Producto" styleClass="ui-priority-primary"  onsuccess="PF('dlgmodificar').hide();"/>
                 </h:form>
             </p:dialog>
 
@@ -180,23 +162,14 @@
 
             <p:dialog header="Insertar" widgetVar="dlginsertar" modal="true" resizable="false">
                 <h:form id="formInsertar">
-                    <h:panelGrid  columns="2"
-                                  cellpadding="2">
-                        <p:outputLabel value="Etiqueta" />
-                        <p:inputText value="#{recursosBean.menu.nombre}"/>
-                        <p:outputLabel value="URL" />
-                        <p:inputText value="#{recursosBean.recursos.url}"/>
-                        <p:outputLabel for="tipoMenu" value="Tipo de Menu:" />
-                        <p:selectOneMenu id="tipoMenu" value="#{recursosBean.tipoMenuT}">
-                            <f:selectItems  value="#{recursosBean.listaUsu2}" />
-                        </p:selectOneMenu>
-                        <p:outputLabel for="tipoUsuario" value="Tipo de Usuario:" />
-                        <p:selectOneMenu id="tipoUsuario" value="#{recursosBean.tipoUsuarioT}">
-                            <f:selectItems  value="#{recursosBean.listaUsu}" />
-                        </p:selectOneMenu>
+                    <h:panelGrid  columns="2" cellpadding="2">
+                        <p:outputLabel value="Tipo Producto" />
+                        <p:inputText value="#{tipoProductosBean.tipoProducto.nombre}"/>
+                        <p:outputLabel value="Descripcion" />
+                        <p:inputText value="#{tipoProductosBean.tipoProducto.descripcion}"/>
                     </h:panelGrid>
                     <p:growl id="growl2" life="5000" />
-                    <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{recursosBean.addRecursos}" value="Ingresar Recursos" styleClass="ui-priority-primary" onsuccess="PF('dlginsertar').hide();" >
+                    <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{tipoProductosBean.addTipoProducto}" value="Insertar Tipo Producto" styleClass="ui-priority-primary" onsuccess="PF('dlginsertar').hide();" >
                     </p:commandButton>
                 </h:form>
             </p:dialog>

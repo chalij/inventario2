@@ -15,7 +15,7 @@ public interface RecursosDao {
 
     public void crearRecursos(Recursos recursos) throws DAOException;
 
-    public List<Recursos> listaRecursos() throws DAOException;
+    public List<Menu> listaRecursos() throws DAOException;
 
     public List<TipoUsuario> listaTipoUsuarios() throws DAOException;
 
@@ -24,5 +24,7 @@ public interface RecursosDao {
     public void modificarRecursos(Recursos recursos) throws DAOException;
 
     public List<Menu> listaMenus(int tipoMenu) throws DAOException;
+    
+    public int maxID() throws DAOException;
 
 }

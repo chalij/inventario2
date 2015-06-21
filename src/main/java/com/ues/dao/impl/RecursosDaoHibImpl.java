@@ -41,8 +41,8 @@ public class RecursosDaoHibImpl extends CustomHibernateDaoSupport implements Rec
     }
 
     @Override
-    public List<Recursos> listaRecursos() throws DAOException {
-        List<Recursos> lista = getHibernateTemplate().find("from Recursos u  inner join fetch u.tipoUsuario order by u.idRecursos");
+    public List<Menu> listaRecursos() throws DAOException {
+        List<Menu> lista = getHibernateTemplate().find("from Menu m  inner join fetch  m.recursos inner join fetch m.tipoMenu inner join fetch m.recursos.tipoUsuario order by m.recursos.idRecursos");
         
         return lista;
     }
@@ -65,5 +65,13 @@ public class RecursosDaoHibImpl extends CustomHibernateDaoSupport implements Rec
     @Override
     public void modificarRecursos(Recursos recursos) throws DAOException {
         getHibernateTemplate().update(recursos);
+    }
+    
+    
+    @Override
+    public int maxID() throws DAOException {
+        List list = getHibernateTemplate().find("select max(p.idRecursos) from Recursos p");
+        System.out.println(list.get(0));
+        return (Integer) list.get(0);
     }
 }

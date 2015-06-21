@@ -29,7 +29,7 @@
     
     
     
-     <managed-bean>
+    <managed-bean>
         <managed-bean-name>personasBean</managed-bean-name>
         <managed-bean-class>com.ues.bean.PersonasBean</managed-bean-class>
     
@@ -48,7 +48,7 @@
     </managed-bean>
     
     
-     <managed-bean>
+    <managed-bean>
         <managed-bean-name>tipoUsuariosBean</managed-bean-name>
         <managed-bean-class>com.ues.bean.TipoUsuariosBean</managed-bean-class>
     
@@ -61,7 +61,7 @@
     </managed-bean>
     
     
-     <managed-bean>
+    <managed-bean>
         <managed-bean-name>tipoProductosBean</managed-bean-name>
         <managed-bean-class>com.ues.bean.TipoProductosBean</managed-bean-class>
     
@@ -74,7 +74,7 @@
     </managed-bean>
     
     
-     <managed-bean>
+    <managed-bean>
         <managed-bean-name>tipoDevolucionesBean</managed-bean-name>
         <managed-bean-class>com.ues.bean.TipoDevolucionesBean</managed-bean-class>
     
@@ -87,7 +87,7 @@
     </managed-bean>
     
     
-     <managed-bean>
+    <managed-bean>
         <managed-bean-name>recursosBean</managed-bean-name>
         <managed-bean-class>com.ues.bean.RecursosBean</managed-bean-class>
     
@@ -168,7 +168,7 @@
     
     
     
-     <managed-bean>
+    <managed-bean>
         <managed-bean-name>transaccionBean</managed-bean-name>
         <managed-bean-class>com.ues.bean.TransaccionBean</managed-bean-class>
     
@@ -265,7 +265,7 @@
     </managed-bean>
     
     
-     <managed-bean>
+    <managed-bean>
         <managed-bean-name>menuBean</managed-bean-name>
         <managed-bean-class>com.ues.bean.MenuBean</managed-bean-class>
     
@@ -288,6 +288,19 @@
             <property-name>tipomenuDao</property-name>
             <property-class>com.ues.dao.TipoMenuDao</property-class>
             <value>#{tipomenuDao}</value>
+        </managed-property>
+    </managed-bean>
+    
+    
+    <managed-bean>
+        <managed-bean-name>productoBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.ProductoBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>productoDao</property-name>
+            <property-class>com.ues.dao.ProductoDao</property-class>
+            <value>#{productoDao}</value>
         </managed-property>
     </managed-bean>
     
