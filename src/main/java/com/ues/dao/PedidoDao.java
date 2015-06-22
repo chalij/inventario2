@@ -23,6 +23,8 @@ public interface PedidoDao {
     public Empleado buscarEmpleado(int id) throws DAOException;
     
     public void borrarPedido(Pedido pedido) throws DAOException;
+    
+    public List<Producto> listaProducto() throws DAOException;
 
    /* public List<Cliente> listaCliente() throws DAOException;
 

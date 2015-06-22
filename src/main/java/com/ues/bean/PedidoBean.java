@@ -40,6 +40,11 @@ public class PedidoBean {
     private int pedidoIdV;
     private List<Pedido> listaPedido;
     private PedidoDao pedidoDao;
+    private int prodIdV;
+    private int valorEx;
+    private List<SelectItem> listaUsu = new ArrayList<SelectItem>();
+    private List<Producto> listaProd = new ArrayList<Producto>();
+    private List<Producto> listProdV;
 
     public void addPedido() {
         try {
@@ -143,4 +148,97 @@ public class PedidoBean {
         this.pedidoDao = pedidoDao;
     }
 
+    /**
+     * @return the prodIdV
+     */
+    public int getProdIdV() {
+        return prodIdV;
+    }
+
+    /**
+     * @param prodIdV the prodIdV to set
+     */
+    public void setProdIdV(int prodIdV) {
+        this.prodIdV = prodIdV;
+    }
+
+    /**
+     * @return the valorEx
+     */
+    public int getValorEx() {
+        return valorEx;
+    }
+
+    /**
+     * @param valorEx the valorEx to set
+     */
+    public void setValorEx(int valorEx) {
+        this.valorEx = valorEx;
+    }
+
+    
+    public List<SelectItem> getListaUsu() {
+
+        try {
+            this.setListProdV(pedidoDao.listaProducto());
+            listaUsu.clear();
+            SelectItemGroup g2 = new SelectItemGroup("Producto");
+            SelectItem[] asi = new SelectItem[getListProdV().size()];
+            for (int i = 0; i < getListProdV().size(); i++) {
+                Producto usAux = (Producto) getListProdV().get(i);
+                asi[i] = new SelectItem(usAux.getIdProducto(), usAux.getNombre4());
+            }
+            g2.setSelectItems(asi);
+            listaUsu.add(g2);
+        } catch (Exception e) {
+            e.printStackTrace();
+            listaUsu = new ArrayList<SelectItem>();
+        }
+        return listaUsu;
+    }
+
+    /**
+     * @param listaUsu the listaUsu to set
+     */
+    public void setListaUsu(List<SelectItem> listaUsu) {
+        this.listaUsu = listaUsu;
+    }
+
+    public void agreegarProducto() {
+        //listaProd=new ArrayList<Producto>();
+        Producto pd = new Producto();
+        pd.setNombre4(this.prodIdV + "");
+        pd.setIdProducto(prodIdV);
+        pd.setExistencias(this.valorEx);
+        getListaProd().add(pd);
+    }
+
+    /**
+     * @return the listaProd
+     */
+    public List<Producto> getListaProd() {
+        return listaProd;
+    }
+
+    /**
+     * @param listaProd the listaProd to set
+     */
+    public void setListaProd(List<Producto> listaProd) {
+        this.listaProd = listaProd;
+    }
+
+    /**
+     * @return the listProdV
+     */
+    public List<Producto> getListProdV() {
+        return listProdV;
+    }
+
+    /**
+     * @param listProdV the listProdV to set
+     */
+    public void setListProdV(List<Producto> listProdV) {
+        this.listProdV = listProdV;
+    }
+    
 }

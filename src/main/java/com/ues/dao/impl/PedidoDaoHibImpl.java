@@ -166,4 +166,11 @@ public class PedidoDaoHibImpl extends CustomHibernateDaoSupport implements Pedid
     public void borrarPedido(Pedido pedido) throws DAOException {
         getHibernateTemplate().delete(pedido);
     }
+    
+    @Override
+    public List<Producto> listaProducto() throws DAOException {
+        List<Producto> lista = getHibernateTemplate().find("from Producto rq  order by rq.idProducto");
+
+        return lista;
+    }
 }

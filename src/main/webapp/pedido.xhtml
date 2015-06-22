@@ -161,6 +161,68 @@
                     <h:panelGrid  columns="2"
                                   cellpadding="2">
 
+                        <br/>
+                        <br/>
+                        <br/>
+                        <h:panelGrid  columns="8"
+                                      cellpadding="2" bgcolor="black" border="3" title="Producto">
+
+
+                            <p:outputLabel for="producto" value="Producto" />
+                            <p:selectOneMenu id="producto" value="#{requisicionBean.prodIdV}">
+                                <f:selectItems  value="#{requisicionBean.listaUsu}" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Cantidad" />
+                            <p:inputText value="#{requisicionBean.valorEx}"/>
+                            <p:commandButton update=":formInsertar"  actionListener="#{requisicionBean.agreegarProducto}" value="Agregar Producto" styleClass="ui-priority-primary" >
+                            </p:commandButton>
+                        </h:panelGrid>
+
+                        <br/>
+                        <br/>
+                        <br/>
+                        <h:form id="formTable2">
+                            <p:dataTable id="tbl2" var="rec" value="#{requisicionBean.listaProd}"
+                                         paginator="true" 
+                                         rows="5"  
+                                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"  
+                                         rowsPerPageTemplate="5,10,15" 
+                                         lazy="true"
+                                         resizableColumns="true"  
+                                         selectionMode="single"
+                                         selection="#{requisicionBean.producto}"
+                                         rowKey="#{requisicionBean.reqIdV}" 
+                                         paginatorPosition="bottom">
+
+
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Producto" />
+                                    </f:facet>
+                                    <h:outputText value="#{rec.nombre4}" />
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Cantidad"/>
+                                    </f:facet>
+                                    <h:outputText value="#{rec.existencias}" />
+                                </p:column>
+
+
+
+
+
+                                <p:column headerText="">
+                                    <p:commandButton value="" icon="ui-icon-trash"   style="width:40px;height:40px" onclick="PF('dlgeliminar').show();" >
+                                        <f:setPropertyActionListener target="#{requisicionBean.requisicion}" value="#{rec}"/>
+                                    </p:commandButton>
+                                </p:column>
+
+                            </p:dataTable>
+                        </h:form>
+
                     </h:panelGrid>
                     <p:growl id="growl2" life="5000" />
                     <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{pedidoBean.addPedido}" value="Ingresar Pedido" styleClass="ui-priority-primary" onsuccess="PF('dlginsertar').hide();" >
