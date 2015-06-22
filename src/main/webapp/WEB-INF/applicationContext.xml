@@ -161,4 +161,9 @@ commit;
         <property name="sessionFactory" ref="mySessionFactory"/>
     </bean>
     
+    
+    <bean id="devolucionDao" class="com.ues.dao.impl.DevolucionDaoHibImpl">
+        <property name="sessionFactory" ref="mySessionFactory"/>
+    </bean>
+    
 </beans>

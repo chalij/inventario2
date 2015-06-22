@@ -324,4 +324,17 @@
         </managed-property>
     </managed-bean>
     
+    
+    <managed-bean>
+        <managed-bean-name>devolucionBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.DevolucionBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>devolucionDao</property-name>
+            <property-class>com.ues.dao.DevolucionDao</property-class>
+            <value>#{devolucionDao}</value>
+        </managed-property>
+    </managed-bean>
+    
 </faces-config>

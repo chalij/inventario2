@@ -63,16 +63,18 @@ public class Chali {
      insert into cliente(id_persona,id_tipo_cliente) values(101,1);
      commit;
     
-    -------------------Empleado------------------------------
+     -------------------Empleado------------------------------
     
      insert into empleado(id_persona,rol) values(101,'chaneque');
      commit;
     
-    -------------------Requisicion------------------------------
+     -------------------Requisicion------------------------------
     
      insert into requisicion(id_cliente,id_empleado,fecha_req) values(1,1,sysdate);
      commit;
-    
+     ------------------Devolucion----------------------------------
+     insert into devolucion(id_requisicion,id_proveedor,id_cliente,id_orden,id_tipo_devolucion,cantidad) values(12,null,null,null,1,0);
+     commit; 
     
      */
 }

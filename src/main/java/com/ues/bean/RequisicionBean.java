@@ -140,11 +140,14 @@ public class RequisicionBean {
     public void eliminar() {
 
         try {
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+            int idp=(Integer)session.getAttribute("persona");
+            Empleado eps=requisicionDao.listaBuscarEmp(idp);
             Requisicion re = new Requisicion();
             Cliente cl=new Cliente();
-            cl.setIdCliente(this.clienteIdV);
+            cl.setIdCliente(requisicion.getCliente().getIdCliente());
             Empleado em=new Empleado();
-            em.setIdEmpleado(empleadoIdV);
+            em.setIdEmpleado(eps.getIdEmpleado());
             // re.setIdRecursos(recursos.getIdRecursos());
             re.setIdRequisicion(requisicion.getIdRequisicion());
             re.setCliente(cl);
