@@ -22,7 +22,7 @@
     <property name="nombre" type="string">
       <column length="50" name="NOMBRE" not-null="true"/>
     </property>
-    <property name="cantidad" type="big_decimal">
+    <property name="cantidad" type="int">
       <column name="CANTIDAD" not-null="true" precision="22" scale="0"/>
     </property>
   </class>

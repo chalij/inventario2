@@ -125,7 +125,7 @@
                     <f:facet name="footer">
                         <div class="footer-section">
 
-                            <p:commandButton update=":formInsertar" onsuccess="PF('dlginsertar').show()"  icon="ui-icon-plus"  style="width:40px;height:40px"   />
+                            <p:commandButton update=":formInsertar" actionListener="#{requisicionBean.limpiar}" onsuccess="PF('dlginsertar').show()"  icon="ui-icon-plus"  style="width:40px;height:40px"   />
 
                         </div>
                     </f:facet>
@@ -148,6 +148,50 @@
                         <p:selectOneMenu id="tipoMenu" value="#{requisicionBean.clienteIdV}">
                             <f:selectItems  value="#{requisicionBean.listaUsu2}" />
                         </p:selectOneMenu>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <h:form id="formTable2">
+                            <p:dataTable id="tbl2" var="rec" value="#{requisicionBean.listaProd}"
+                                         paginator="true" 
+                                         rows="5"  
+                                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"  
+                                         rowsPerPageTemplate="5,10,15" 
+                                         lazy="true"
+                                         resizableColumns="true"  
+                                         selectionMode="single"
+                                         selection="#{requisicionBean.producto}"
+                                         rowKey="#{requisicionBean.reqIdV}" 
+                                         paginatorPosition="bottom">
+
+
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Producto" />
+                                    </f:facet>
+                                    <h:outputText value="#{rec.nombre4}" />
+                                </p:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Cantidad"/>
+                                    </f:facet>
+                                    <h:outputText value="#{rec.existencias}" />
+                                </p:column>
+
+
+
+
+
+                                <p:column headerText="">
+                                    <p:commandButton value="" icon="ui-icon-trash"   style="width:40px;height:40px" onclick="PF('dlgeliminar').show();" >
+                                        <f:setPropertyActionListener target="#{requisicionBean.requisicion}" value="#{rec}"/>
+                                    </p:commandButton>
+                                </p:column>
+
+                            </p:dataTable>
+                        </h:form>
                     </h:panelGrid>
                     <p:growl id="growl3" life="5000" />
                     <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{requisicionBean.updateRecursos}" value="Modificar Recursos" styleClass="ui-priority-primary"  onsuccess="PF('dlgmodificar').hide();"/>
@@ -170,11 +214,15 @@
                         <br/>
                         <h:panelGrid  columns="8"
                                       cellpadding="2" bgcolor="black" border="3" title="Producto">
-                            <p:outputLabel value="Producto" />
-                            <p:inputText value="#{proveedorBean.persona.apellido}"/>
+
+
+                            <p:outputLabel for="producto" value="Producto" />
+                            <p:selectOneMenu id="producto" value="#{requisicionBean.prodIdV}">
+                                <f:selectItems  value="#{requisicionBean.listaUsu}" />
+                            </p:selectOneMenu>
                             <p:outputLabel value="Cantidad" />
-                            <p:inputText value="#{proveedorBean.persona.apellido}"/>
-                            <p:commandButton   actionListener="#{requisicionBean.addRecursos}" value="Agregar Producto" styleClass="ui-priority-primary" >
+                            <p:inputText value="#{requisicionBean.valorEx}"/>
+                            <p:commandButton update=":formInsertar"  actionListener="#{requisicionBean.agreegarProducto}" value="Agregar Producto" styleClass="ui-priority-primary" >
                             </p:commandButton>
                         </h:panelGrid>
 
@@ -182,7 +230,7 @@
                         <br/>
                         <br/>
                         <h:form id="formTable2">
-                            <p:dataTable id="tbl" var="rec" value="#{requisicionBean.miLista}"
+                            <p:dataTable id="tbl2" var="rec" value="#{requisicionBean.listaProd}"
                                          paginator="true" 
                                          rows="5"  
                                          paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"  
@@ -190,7 +238,7 @@
                                          lazy="true"
                                          resizableColumns="true"  
                                          selectionMode="single"
-                                         selection="#{requisicionBean.requisicion}"
+                                         selection="#{requisicionBean.producto}"
                                          rowKey="#{requisicionBean.reqIdV}" 
                                          paginatorPosition="bottom">
 
@@ -198,32 +246,21 @@
 
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Id Requision" />
+                                        <h:outputText value="Producto" />
                                     </f:facet>
-                                    <h:outputText value="#{rec.idRequisicion}" />
+                                    <h:outputText value="#{rec.nombre4}" />
                                 </p:column>
 
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Cliente"/>
+                                        <h:outputText value="Cantidad"/>
                                     </f:facet>
-                                    <h:outputText value="#{rec.cliente.persona.nombre} #{rec.cliente.persona.apellido}" />
-                                </p:column>
-
-                                <p:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Empleado"/>
-                                    </f:facet>
-                                    <h:outputText value="#{rec.empleado.persona.nombre} #{rec.empleado.persona.apellido}" />
+                                    <h:outputText value="#{rec.existencias}" />
                                 </p:column>
 
 
 
-                                <p:column headerText="">
-                                    <p:commandButton value=""  update=":formModificar" icon="ui-icon-pencil"   style="width:40px;height:40px"  onsuccess="PF('dlgmodificar').show();" >
-                                        <f:setPropertyActionListener target="#{requisicionBean.requisicion}" value="#{rec}"/>
-                                    </p:commandButton>
-                                </p:column>
+
 
                                 <p:column headerText="">
                                     <p:commandButton value="" icon="ui-icon-trash"   style="width:40px;height:40px" onclick="PF('dlgeliminar').show();" >
@@ -231,29 +268,10 @@
                                     </p:commandButton>
                                 </p:column>
 
-                                <f:facet name="footer">
-                                    <div class="footer-section">
-
-                                        <p:commandButton update=":formInsertar" onsuccess="PF('dlgmodificar2').show()"  icon="ui-icon-plus"  style="width:40px;height:40px"   />
-
-                                    </div>
-                                </f:facet>
                             </p:dataTable>
                         </h:form>
 
 
-                        <p:dialog header="Modificar" widgetVar="dlgmodificar2" modal="true" resizable="false">
-                            <h:form id="formModificar2">
-                                <h:panelGrid id="modificar" columns="2" cellpadding="2">
-                                    <p:outputLabel for="tipoMenu" value="Cliente" />
-                                    <p:selectOneMenu id="tipoMenu" value="#{requisicionBean.clienteIdV}">
-                                        <f:selectItems  value="#{requisicionBean.listaUsu2}" />
-                                    </p:selectOneMenu>
-                                </h:panelGrid>
-                                <p:growl id="growl3" life="5000" />
-                                <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{requisicionBean.updateRecursos}" value="Modificar Recursos" styleClass="ui-priority-primary"  onsuccess="PF('dlgmodificar').hide();"/>
-                            </h:form>
-                        </p:dialog>
                     </h:panelGrid>
                     <p:growl id="growl2" life="5000" />
                     <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{requisicionBean.addRecursos}" value="Ingresar Recursos" styleClass="ui-priority-primary" onsuccess="PF('dlginsertar').hide();" >

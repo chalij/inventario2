@@ -19,7 +19,7 @@ public class Producto  implements java.io.Serializable {
      private BigDecimal costo;
      private String codigoProducto;
      private String descripcion;
-     private BigDecimal existencias;
+     private int existencias;
      private Set<DetalleProducto> detalleProductos = new HashSet<DetalleProducto>(0);
      private Set<DetallePedido> detallePedidos = new HashSet<DetallePedido>(0);
      private Set<Lote> lotes = new HashSet<Lote>(0);
@@ -28,7 +28,7 @@ public class Producto  implements java.io.Serializable {
     }
 
 	
-    public Producto(int idProducto, TipoProducto tipoProducto, Proveedor proveedor, String nombre4, BigDecimal costo, String codigoProducto, BigDecimal existencias) {
+    public Producto(int idProducto, TipoProducto tipoProducto, Proveedor proveedor, String nombre4, BigDecimal costo, String codigoProducto, int existencias) {
         this.idProducto = idProducto;
         this.tipoProducto = tipoProducto;
         this.proveedor = proveedor;
@@ -37,7 +37,7 @@ public class Producto  implements java.io.Serializable {
         this.codigoProducto = codigoProducto;
         this.existencias = existencias;
     }
-    public Producto(int idProducto, TipoProducto tipoProducto, Proveedor proveedor, String nombre4, BigDecimal costo, String codigoProducto, String descripcion, BigDecimal existencias, Set<DetalleProducto> detalleProductos, Set<DetallePedido> detallePedidos, Set<Lote> lotes) {
+    public Producto(int idProducto, TipoProducto tipoProducto, Proveedor proveedor, String nombre4, BigDecimal costo, String codigoProducto, String descripcion, int existencias, Set<DetalleProducto> detalleProductos, Set<DetallePedido> detallePedidos, Set<Lote> lotes) {
        this.idProducto = idProducto;
        this.tipoProducto = tipoProducto;
        this.proveedor = proveedor;
@@ -100,11 +100,11 @@ public class Producto  implements java.io.Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    public BigDecimal getExistencias() {
+    public int getExistencias() {
         return this.existencias;
     }
     
-    public void setExistencias(BigDecimal existencias) {
+    public void setExistencias(int existencias) {
         this.existencias = existencias;
     }
     public Set<DetalleProducto> getDetalleProductos() {

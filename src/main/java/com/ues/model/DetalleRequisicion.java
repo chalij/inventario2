@@ -14,19 +14,19 @@ public class DetalleRequisicion  implements java.io.Serializable {
 
      private int idDeastalleRequisicion;
      private Requisicion requisicion;
-     private BigDecimal cantidad;
+     private int cantidad;
      private Set<DetalleProducto> detalleProductos = new HashSet<DetalleProducto>(0);
 
     public DetalleRequisicion() {
     }
 
 	
-    public DetalleRequisicion(int idDeastalleRequisicion, Requisicion requisicion, BigDecimal cantidad) {
+    public DetalleRequisicion(int idDeastalleRequisicion, Requisicion requisicion, int cantidad) {
         this.idDeastalleRequisicion = idDeastalleRequisicion;
         this.requisicion = requisicion;
         this.cantidad = cantidad;
     }
-    public DetalleRequisicion(int idDeastalleRequisicion, Requisicion requisicion, BigDecimal cantidad, Set<DetalleProducto> detalleProductos) {
+    public DetalleRequisicion(int idDeastalleRequisicion, Requisicion requisicion, int cantidad, Set<DetalleProducto> detalleProductos) {
        this.idDeastalleRequisicion = idDeastalleRequisicion;
        this.requisicion = requisicion;
        this.cantidad = cantidad;
@@ -47,11 +47,11 @@ public class DetalleRequisicion  implements java.io.Serializable {
     public void setRequisicion(Requisicion requisicion) {
         this.requisicion = requisicion;
     }
-    public BigDecimal getCantidad() {
+    public int getCantidad() {
         return this.cantidad;
     }
     
-    public void setCantidad(BigDecimal cantidad) {
+    public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
     public Set<DetalleProducto> getDetalleProductos() {

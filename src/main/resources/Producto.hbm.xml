@@ -25,7 +25,7 @@
     <property name="descripcion" type="string">
       <column length="150" name="DESCRIPCION"/>
     </property>
-    <property name="existencias" type="big_decimal">
+    <property name="existencias" type="int">
       <column name="EXISTENCIAS" not-null="true" precision="22" scale="0"/>
     </property>
     <set fetch="select" inverse="true" lazy="true" name="detalleProductos" table="DETALLE_PRODUCTO">

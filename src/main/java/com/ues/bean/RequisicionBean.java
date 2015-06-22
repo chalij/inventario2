@@ -7,14 +7,15 @@ import com.ues.dao.UsuariosDao;
 import com.ues.dao.impl.UsuariosDaoHibImpl;
 import com.ues.exception.DAOException;
 import com.ues.model.Cliente;
+import com.ues.model.DetalleRequisicion;
 import com.ues.model.Empleado;
 import com.ues.model.Menu;
+import com.ues.model.Producto;
 import com.ues.model.Recursos;
 import com.ues.model.Requisicion;
 import com.ues.model.TipoMenu;
 import com.ues.model.TipoUsuario;
 import com.ues.model.Usuario;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,25 +34,29 @@ import javax.servlet.http.HttpSession;
  */
 public class RequisicionBean {
 
-  //  private Recursos recursos = new Recursos();
-    private Requisicion requisicion=new Requisicion();
-   // private Menu menu = new Menu();
-    private Cliente cliente=new Cliente();
-    private Empleado empleado=new Empleado();
+    //  private Recursos recursos = new Recursos();
+    private Requisicion requisicion = new Requisicion();
+    private List<Producto> listaProd = new ArrayList<Producto>();
+    private int prodIdV;
+    private int valorEx;
+    // private Menu menu = new Menu();
+    private Cliente cliente = new Cliente();
+    private Empleado empleado = new Empleado();
     private List<Requisicion> miLista;
     private int reqIdV;
-    
-    
+    private Producto producto = new Producto();
+
     private int clienteIdV;
     private int empleadoIdV;
-   // private int tipoUsuarioT;
+    // private int tipoUsuarioT;
     //private int tipoMenuT;
     // private int idUsuarioV;
     private int idRecursoV;
     private List<Cliente> listClienteV;
     private List<Empleado> listEpleadoV;
+    private List<Producto> listProdV;
     //private UsuariosDao usuariosDao;
-   // private RecursosDao recursosDao;
+    // private RecursosDao recursosDao;
     private RequisicionDao requisicionDao;
     private MenusDao menusDao;
     private List<SelectItem> listaUsu = new ArrayList<SelectItem>();
@@ -59,10 +64,10 @@ public class RequisicionBean {
 
     public RequisicionBean() {
         //recursos = new Recursos();
-        requisicion=new Requisicion();
-        cliente=new Cliente();
-        empleado=new Empleado();
-       // menu = new Menu();
+        requisicion = new Requisicion();
+        cliente = new Cliente();
+        empleado = new Empleado();
+        // menu = new Menu();
     }
 
     public List<Requisicion> getMiLista() {
@@ -73,9 +78,9 @@ public class RequisicionBean {
             e.printStackTrace();
             miLista = new ArrayList<Requisicion>();
         }
-        requisicion=new Requisicion();
-        cliente=new Cliente();
-        empleado=new Empleado();;
+        requisicion = new Requisicion();
+        cliente = new Cliente();
+        empleado = new Empleado();;
         return miLista;
     }
 
@@ -89,19 +94,19 @@ public class RequisicionBean {
             System.out.println("----------Nombre del usuario---------------");
             System.out.println(session.getAttribute("persona"));
             Requisicion re = new Requisicion();
-            Cliente cl=new Cliente();
+            Cliente cl = new Cliente();
             cl.setIdCliente(this.clienteIdV);
-            Empleado em=new Empleado();
-            int idp=(Integer)session.getAttribute("persona");
+            Empleado em = new Empleado();
+            int idp = (Integer) session.getAttribute("persona");
             System.out.println(idp);
             System.out.println("----------Persona---------------");
-            Empleado eps=requisicionDao.listaBuscarEmp(idp);
+            Empleado eps = requisicionDao.listaBuscarEmp(idp);
             em.setIdEmpleado(eps.getIdEmpleado());
-            
+
             re.setCliente(cl);
             re.setEmpleado(em);
             re.setFechaReq(new Date());
-            requisicionDao.crearRequisicion(re);
+            requisicionDao.crearRequisicion(re, this.listaProd);
             requisicion = new Requisicion();
             addMessage("Insertado!!");
         } catch (Exception e) {
@@ -111,16 +116,21 @@ public class RequisicionBean {
 
     }
 
+    public void limpiar() {
+
+        listaProd = new ArrayList<Producto>();
+    }
+
     public void updateRecursos() {
-       
+
         try {
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-            int idp=(Integer)session.getAttribute("persona");
-            Empleado eps=requisicionDao.listaBuscarEmp(idp);
+            int idp = (Integer) session.getAttribute("persona");
+            Empleado eps = requisicionDao.listaBuscarEmp(idp);
             Requisicion re = new Requisicion();
-            Cliente cl=new Cliente();
+            Cliente cl = new Cliente();
             cl.setIdCliente(this.clienteIdV);
-            Empleado em=new Empleado();
+            Empleado em = new Empleado();
             em.setIdEmpleado(eps.getIdEmpleado());
             // re.setIdRecursos(recursos.getIdRecursos());
             re.setIdRequisicion(requisicion.getIdRequisicion());
@@ -141,12 +151,12 @@ public class RequisicionBean {
 
         try {
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-            int idp=(Integer)session.getAttribute("persona");
-            Empleado eps=requisicionDao.listaBuscarEmp(idp);
+            int idp = (Integer) session.getAttribute("persona");
+            Empleado eps = requisicionDao.listaBuscarEmp(idp);
             Requisicion re = new Requisicion();
-            Cliente cl=new Cliente();
+            Cliente cl = new Cliente();
             cl.setIdCliente(requisicion.getCliente().getIdCliente());
-            Empleado em=new Empleado();
+            Empleado em = new Empleado();
             em.setIdEmpleado(eps.getIdEmpleado());
             // re.setIdRecursos(recursos.getIdRecursos());
             re.setIdRequisicion(requisicion.getIdRequisicion());
@@ -167,21 +177,19 @@ public class RequisicionBean {
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
 
-   
-
     /**
      * @return the listaUsu
      */
     public List<SelectItem> getListaUsu() {
 
-       try {
-            this.listEpleadoV = requisicionDao.listaEmpleado();
+        try {
+            this.listProdV = requisicionDao.listaProducto();
             listaUsu.clear();
-            SelectItemGroup g2 = new SelectItemGroup("Empleado");
-            SelectItem[] asi = new SelectItem[listEpleadoV.size()];
-            for (int i = 0; i < listEpleadoV.size(); i++) {
-                Empleado usAux = (Empleado) listEpleadoV.get(i);
-                asi[i] = new SelectItem(usAux.getIdEmpleado(), usAux.getPersona().getNombre()+" "+ usAux.getPersona().getApellido());
+            SelectItemGroup g2 = new SelectItemGroup("Producto");
+            SelectItem[] asi = new SelectItem[listProdV.size()];
+            for (int i = 0; i < listProdV.size(); i++) {
+                Producto usAux = (Producto) listProdV.get(i);
+                asi[i] = new SelectItem(usAux.getIdProducto(), usAux.getNombre4());
             }
             g2.setSelectItems(asi);
             listaUsu.add(g2);
@@ -199,8 +207,6 @@ public class RequisicionBean {
         this.listaUsu = listaUsu;
     }
 
-    
-
     /**
      * @return the idRecursoV
      */
@@ -214,8 +220,6 @@ public class RequisicionBean {
     public void setIdRecursoV(int idRecursoV) {
         this.idRecursoV = idRecursoV;
     }
-
-   
 
     /**
      * @return the menusDao
@@ -242,7 +246,7 @@ public class RequisicionBean {
             SelectItem[] asi = new SelectItem[listClienteV.size()];
             for (int i = 0; i < listClienteV.size(); i++) {
                 Cliente usAux = (Cliente) listClienteV.get(i);
-                asi[i] = new SelectItem(usAux.getIdCliente(), usAux.getPersona().getNombre()+" "+usAux.getPersona().getApellido());
+                asi[i] = new SelectItem(usAux.getIdCliente(), usAux.getPersona().getNombre() + " " + usAux.getPersona().getApellido());
             }
             g2.setSelectItems(asi);
             listaUsu2.add(g2);
@@ -260,14 +264,6 @@ public class RequisicionBean {
         this.listaUsu2 = listaUsu2;
     }
 
-    
-
-    
-
-    
-    
-    
-
     /**
      * @return the requisicion
      */
@@ -279,6 +275,12 @@ public class RequisicionBean {
      * @param requisicion the requisicion to set
      */
     public void setRequisicion(Requisicion requisicion) {
+        try {
+            List<DetalleRequisicion> dp = requisicionDao.listaDetalleRequisicion(requisicion.getIdRequisicion());
+        } catch (Exception e) {
+
+        }
+
         this.requisicion = requisicion;
     }
 
@@ -392,6 +394,85 @@ public class RequisicionBean {
      */
     public void setEmpleadoIdV(int empleadoIdV) {
         this.empleadoIdV = empleadoIdV;
+    }
+
+    /**
+     * @return the listaProd
+     */
+    public List<Producto> getListaProd() {
+        return listaProd;
+    }
+
+    public void agreegarProducto() {
+        //listaProd=new ArrayList<Producto>();
+        Producto pd = new Producto();
+        pd.setNombre4(this.prodIdV + "");
+        pd.setIdProducto(prodIdV);
+        pd.setExistencias(this.valorEx);
+        listaProd.add(pd);
+    }
+
+    /**
+     * @param listaProd the listaProd to set
+     */
+    public void setListaProd(List<Producto> listaProd) {
+        this.listaProd = listaProd;
+    }
+
+    /**
+     * @return the producto
+     */
+    public Producto getProducto() {
+        return producto;
+    }
+
+    /**
+     * @param producto the producto to set
+     */
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
+
+    /**
+     * @return the prodIdV
+     */
+    public int getProdIdV() {
+        return prodIdV;
+    }
+
+    /**
+     * @param prodIdV the prodIdV to set
+     */
+    public void setProdIdV(int prodIdV) {
+        this.prodIdV = prodIdV;
+    }
+
+    /**
+     * @return the valorEx
+     */
+    public int getValorEx() {
+        return valorEx;
+    }
+
+    /**
+     * @param valorEx the valorEx to set
+     */
+    public void setValorEx(int valorEx) {
+        this.valorEx = valorEx;
+    }
+
+    /**
+     * @return the listProdV
+     */
+    public List<Producto> getListProdV() {
+        return listProdV;
+    }
+
+    /**
+     * @param listProdV the listProdV to set
+     */
+    public void setListProdV(List<Producto> listProdV) {
+        this.listProdV = listProdV;
     }
 
 }

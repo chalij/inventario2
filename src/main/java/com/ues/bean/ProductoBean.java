@@ -113,7 +113,7 @@ public class ProductoBean {
             pro.setCosto(producto.getCosto());
             pro.setDescripcion(producto.getDescripcion());
             pro.setCodigoProducto(producto.getCodigoProducto());
-            pro.setExistencias(BigDecimal.ZERO);
+            pro.setExistencias(0);
             productoDao.crearProducto(pro);
             producto = new Producto();
             addMessage("Insertado!!");
@@ -139,7 +139,7 @@ public class ProductoBean {
             pro.setCosto(producto.getCosto());
             pro.setDescripcion(producto.getDescripcion());
             pro.setCodigoProducto(producto.getCodigoProducto());
-            pro.setExistencias(BigDecimal.ZERO);
+            pro.setExistencias(0);
             productoDao.modificarProducto(pro);
             producto = new Producto();
             addMessage("Insertado!!");
@@ -164,7 +164,7 @@ public class ProductoBean {
             pro.setCosto(producto.getCosto());
             pro.setDescripcion(producto.getDescripcion());
             pro.setCodigoProducto(producto.getCodigoProducto());
-            pro.setExistencias(BigDecimal.ZERO);
+            pro.setExistencias(0);
             productoDao.borrarProducto(pro);
             producto = new Producto();
             addMessage("Insertado!!");

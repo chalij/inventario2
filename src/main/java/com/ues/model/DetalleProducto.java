@@ -16,19 +16,19 @@ public class DetalleProducto  implements java.io.Serializable {
      private DetalleDeOrdenCompra detalleDeOrdenCompra;
      private DetalleDevolucion detalleDevolucion;
      private String nombre;
-     private BigDecimal cantidad;
+     private int cantidad;
 
     public DetalleProducto() {
     }
 
 	
-    public DetalleProducto(int idDetalleProducto, Producto producto, String nombre, BigDecimal cantidad) {
+    public DetalleProducto(int idDetalleProducto, Producto producto, String nombre, int cantidad) {
         this.idDetalleProducto = idDetalleProducto;
         this.producto = producto;
         this.nombre = nombre;
         this.cantidad = cantidad;
     }
-    public DetalleProducto(int idDetalleProducto, DetalleRequisicion detalleRequisicion, Producto producto, DetalleDeOrdenCompra detalleDeOrdenCompra, DetalleDevolucion detalleDevolucion, String nombre, BigDecimal cantidad) {
+    public DetalleProducto(int idDetalleProducto, DetalleRequisicion detalleRequisicion, Producto producto, DetalleDeOrdenCompra detalleDeOrdenCompra, DetalleDevolucion detalleDevolucion, String nombre, int cantidad) {
        this.idDetalleProducto = idDetalleProducto;
        this.detalleRequisicion = detalleRequisicion;
        this.producto = producto;
@@ -80,11 +80,11 @@ public class DetalleProducto  implements java.io.Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public BigDecimal getCantidad() {
+    public int getCantidad() {
         return this.cantidad;
     }
     
-    public void setCantidad(BigDecimal cantidad) {
+    public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
 
