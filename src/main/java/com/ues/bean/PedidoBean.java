@@ -36,10 +36,50 @@ import javax.servlet.http.HttpSession;
  */
 public class PedidoBean {
 
-    private Pedido pedido=new Pedido();
+    private Pedido pedido = new Pedido();
     private int pedidoIdV;
     private List<Pedido> listaPedido;
     private PedidoDao pedidoDao;
+
+    public void addPedido() {
+        try {
+            
+            Pedido pd=new Pedido();
+            pd.setFechaPedido(new Date());
+            
+            HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+            Empleado emp= pedidoDao.buscarEmpleado((Integer)session.getAttribute("persona"));
+            pd.setEmpleado(emp);
+            pedidoDao.crearPedido(pd, null);
+            pedido=new Pedido();
+            addMessage("Insertado !!");
+        } catch (Exception e) {
+            addMessage("Error Id:!!" + e.getMessage());
+            e.printStackTrace();
+        }
+
+    }
+    
+    
+    
+    public void eliminar() {
+
+        try {
+            pedidoDao.borrarPedido(pedido);
+            pedido=new Pedido();
+            addMessage("Eliminado!!");
+        } catch (Exception e) {
+            addMessage("Error!!");
+            e.printStackTrace();
+        }
+    }
+    
+    
+
+    private void addMessage(String welcome_to_Primefaces) {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, welcome_to_Primefaces, null);
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
 
     /**
      * @return the pedido
@@ -73,15 +113,12 @@ public class PedidoBean {
      * @return the listaPedido
      */
     public List<Pedido> getListaPedido() {
-        try
-        {
-            listaPedido=pedidoDao.listaPedido();
+        try {
+            listaPedido = pedidoDao.listaPedido();
+        } catch (Exception e) {
+            listaPedido = new ArrayList<Pedido>();
         }
-        catch(Exception e)
-        {
-            listaPedido=new ArrayList<Pedido>();
-        }
-        pedido=new Pedido();
+        pedido = new Pedido();
         return listaPedido;
     }
 

@@ -152,4 +152,18 @@ public class PedidoDaoHibImpl extends CustomHibernateDaoSupport implements Pedid
 
         return lista;
     }
+    
+    
+    @Override
+    public Empleado buscarEmpleado(int id) throws DAOException {
+        List<Empleado> lista = getHibernateTemplate().find("from Empleado rq inner join fetch rq.persona where rq.persona.idPersona=" + id);
+
+        return (Empleado) lista.get(0);
+    }
+    
+    
+    @Override
+    public void borrarPedido(Pedido pedido) throws DAOException {
+        getHibernateTemplate().delete(pedido);
+    }
 }

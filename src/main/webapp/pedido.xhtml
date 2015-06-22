@@ -11,13 +11,13 @@
 
         </h:head>
         <h:body  style="background-image:url('fondo.jpg')">
-            
+
             <p:panel id="basic" header="" footer="Centro de El Salvador, Norman Quijasno Presidente 2018" style="margin-bottom:20px">
                 <h1 style="color: whitesmoke;text-align: center;font-size: 3.8em">Sistema de Inventario y Compras</h1>
                 <h2 style="color: whitesmoke;text-align: center">Calza Moda S.A de C.V</h2>
                 <br />
             </p:panel>
-            
+
             <p:megaMenu style="margin-top:20px">
                 <p:submenu label="Gestion de Proveedores" icon="ui-icon-suitcase">
 
@@ -103,20 +103,70 @@
                         </f:facet>
                         <h:outputText value="#{tprod.empleado.persona.nombre} #{tprod.empleado.persona.apellido}" />
                     </p:column>
-                    
+
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Fecha" />
                         </f:facet>
                         <h:outputText value="#{tprod.fechaPedido}" />
                     </p:column>
-                    
 
+
+                    <p:column headerText="">
+                        <p:commandButton value=""  update=":formModificar" icon="ui-icon-pencil"   style="width:40px;height:40px"  onsuccess="PF('dlgmodificar').show();" >
+                            <f:setPropertyActionListener target="#{pedidoBean.pedido}" value="#{tprod}"/>
+                        </p:commandButton>
+                    </p:column>
+
+                    <p:column headerText="">
+                        <p:commandButton value="" icon="ui-icon-trash"   style="width:40px;height:40px" onclick="PF('dlgeliminar').show();" >
+                            <f:setPropertyActionListener target="#{pedidoBean.pedido}" value="#{tprod}"/>
+                        </p:commandButton>
+                    </p:column>
+
+                    <f:facet name="footer">
+                        <div class="footer-section">
+
+                            <p:commandButton update=":formInsertar" onsuccess="PF('dlginsertar').show()"  icon="ui-icon-plus"  style="width:40px;height:40px"   />
+
+                        </div>
+                    </f:facet>
 
                 </p:dataTable>
             </h:form>
 
 
+
+            <p:dialog id="dlg2" header="Eliminar Pedido" showEffect="explode" hideEffect="explode" widgetVar="dlgeliminar" modal="true" resizable="false" minWidth="200">
+                <h:form id="formEliminar">
+                    <p:outputLabel value="¿Desea eliminar al Pedido?" />
+                    <p:commandButton actionListener="#{pedidoBean.eliminar}" value="Si" update=":formTable" onclick="PF('dlgeliminar').hide();"/>
+                    <p:commandButton  value="No" onclick="PF('dlg2').hide();"/>
+                </h:form>
+            </p:dialog>
+
+            <p:dialog header="Modificar" widgetVar="dlgmodificar" modal="true" resizable="false">
+                <h:form id="formModificar">
+                    <h:panelGrid id="modificar" columns="2" cellpadding="2">
+                    </h:panelGrid>
+                    <p:growl id="growl3" life="5000" />
+                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{pedidoBean}" value="Modificar Pedido" styleClass="ui-priority-primary"  onsuccess="PF('dlgmodificar').hide();"/>
+                </h:form>
+            </p:dialog>
+
+
+
+            <p:dialog header="Insertar" widgetVar="dlginsertar" modal="true" resizable="false">
+                <h:form id="formInsertar">
+                    <h:panelGrid  columns="2"
+                                  cellpadding="2">
+
+                    </h:panelGrid>
+                    <p:growl id="growl2" life="5000" />
+                    <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{pedidoBean.addPedido}" value="Ingresar Pedido" styleClass="ui-priority-primary" onsuccess="PF('dlginsertar').hide();" >
+                    </p:commandButton>
+                </h:form>
+            </p:dialog>
 
         </h:body>
     </f:view>

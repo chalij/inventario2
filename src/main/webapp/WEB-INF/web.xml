@@ -22,6 +22,16 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
+    
+    <filter>
+        <description>Requires user to log in as a member</description>
+        <filter-name>restrict</filter-name>
+        <filter-class>com.ues.filter.RestrictPageFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>restrict</filter-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </filter-mapping>
    
     <session-config>
         <session-timeout>
