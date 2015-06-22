@@ -166,4 +166,9 @@ commit;
         <property name="sessionFactory" ref="mySessionFactory"/>
     </bean>
     
+    
+    <bean id="pedidoDao" class="com.ues.dao.impl.PedidoDaoHibImpl">
+        <property name="sessionFactory" ref="mySessionFactory"/>
+    </bean>
+    
 </beans>

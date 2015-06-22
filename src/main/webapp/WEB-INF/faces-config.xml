@@ -337,4 +337,17 @@
         </managed-property>
     </managed-bean>
     
+    
+    <managed-bean>
+        <managed-bean-name>pedidoBean</managed-bean-name>
+        <managed-bean-class>com.ues.bean.PedidoBean</managed-bean-class>
+    
+        <managed-bean-scope>session</managed-bean-scope>
+        <managed-property>
+            <property-name>pedidoDao</property-name>
+            <property-class>com.ues.dao.PedidoDao</property-class>
+            <value>#{pedidoDao}</value>
+        </managed-property>
+    </managed-bean>
+    
 </faces-config>
