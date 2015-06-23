@@ -111,12 +111,6 @@
 
 
                     <p:column headerText="">
-                        <p:commandButton value=""  update=":formModificar" icon="ui-icon-pencil"   style="width:40px;height:40px"  onsuccess="PF('dlgmodificar').show();" >
-                            <f:setPropertyActionListener target="#{requisicionBean.requisicion}" value="#{rec}"/>
-                        </p:commandButton>
-                    </p:column>
-
-                    <p:column headerText="">
                         <p:commandButton value="" icon="ui-icon-trash"   style="width:40px;height:40px" onclick="PF('dlgeliminar').show();" >
                             <f:setPropertyActionListener target="#{requisicionBean.requisicion}" value="#{rec}"/>
                         </p:commandButton>
@@ -262,11 +256,6 @@
 
 
 
-                                <p:column headerText="">
-                                    <p:commandButton value="" icon="ui-icon-trash"   style="width:40px;height:40px" onclick="PF('dlgeliminar').show();" >
-                                        <f:setPropertyActionListener target="#{requisicionBean.requisicion}" value="#{rec}"/>
-                                    </p:commandButton>
-                                </p:column>
 
                             </p:dataTable>
                         </h:form>
