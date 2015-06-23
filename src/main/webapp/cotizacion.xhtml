@@ -11,8 +11,66 @@
 
         </h:head>
         <h:body>
+            <p:panel id="basic" header="" footer="" style="margin-bottom:20px">
+                <h1 style="color: whitesmoke;text-align: center;font-size: 3.8em">Sistema de Inventario y Compras</h1>
+                <h2 style="color: whitesmoke;text-align: center">Calza Moda S.A de C.V.</h2>
+                <br />
+            </p:panel>
+
+            <p:megaMenu style="margin-top:20px">
+                <p:submenu label="Gestion de Proveedores" icon="ui-icon-suitcase">
+
+                    <p:column>
+                        <p:menu model="#{menuBean.model}" />
+                    </p:column>
+
+                </p:submenu>
+
+                <p:submenu label="Gestion de Clientes" icon="ui-icon-cart">
+
+                    <p:column>
+                        <p:menu model="#{menuBean.clientes}" />
+                    </p:column>
+                </p:submenu>
+
+                <p:submenu label="Gestion de Usuarios" icon="ui-icon-person">
+                    <p:column>
+                        <p:menu model="#{menuBean.usuarios}" />
+                    </p:column>
+                </p:submenu>
+
+                <p:submenu label="Toma de Pedidos" icon="ui-icon-note">
+                    <p:column>
+                        <p:menu model="#{menuBean.pedidos}" />
+                    </p:column>
+
+                </p:submenu>
+
+                <p:submenu label="Manejo de Devoluciones" icon="ui-icon-arrowreturnthick-1-e">
+                    <p:column>
+                        <p:menu model="#{menuBean.devoluciones}" />
+                    </p:column>
+
+                </p:submenu>
+
+                <p:submenu label="Control de Inventarios" icon="ui-icon-folder-collapsed">
+                    <p:column>
+                        <p:menu model="#{menuBean.inventarios}" />
+                    </p:column>
+
+                </p:submenu>
+
+
+                <p:submenu label="Ordenes de Compra" icon="ui-icon-folder-collapsed">
+                    <p:column>
+                        <p:menu model="#{menuBean.ordenes}" />
+                    </p:column>
+
+                </p:submenu>
+
+                <p:menuitem value="Salir" url="index.xhtml" icon="ui-icon-close" />
+            </p:megaMenu>
             <br/>
-            <h1>Cotizacion</h1>
 
 
             <h:form id="formTable">
