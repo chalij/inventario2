@@ -7,6 +7,7 @@ import com.ues.model.CustomHibernateDaoSupport;
 import com.ues.dao.UsuariosDao;
 import com.ues.exception.DAOException;
 import com.ues.model.Cliente;
+import com.ues.model.Cotizacion;
 import com.ues.model.DetallePedido;
 import com.ues.model.DetalleProducto;
 import com.ues.model.DetalleRequisicion;
@@ -14,6 +15,7 @@ import com.ues.model.Empleado;
 import com.ues.model.Menu;
 import com.ues.model.Pedido;
 import com.ues.model.Producto;
+import com.ues.model.Proveedor;
 import com.ues.model.Recursos;
 import com.ues.model.Requisicion;
 import com.ues.model.TipoUsuario;
@@ -154,6 +156,20 @@ public class PedidoDaoHibImpl extends CustomHibernateDaoSupport implements Pedid
 
         }
     }
+    
+    
+    
+    @Override
+    public void crearOrden(Pedido pedido,int prov) throws DAOException {
+        Cotizacion cot=new Cotizacion();
+        cot.setPedido(pedido);
+        cot.setEstadoCot(0);
+        Proveedor prove=new Proveedor();
+        prove.setIdProveedor(prov);
+        cot.setProveedor(prove);
+        getHibernateTemplate().save(cot);
+    }
+    
 
     @Override
     public List<Pedido> listaPedido() throws DAOException {
@@ -174,8 +190,14 @@ public class PedidoDaoHibImpl extends CustomHibernateDaoSupport implements Pedid
     public void borrarPedido(Pedido pedido) throws DAOException {
 
         List<DetallePedido> lista = listaDetallePedido(pedido.getIdPedido());
+        
+        
+        Cotizacion cot=listaCotizacion(pedido.getIdPedido());
+        getHibernateTemplate().delete(cot);
         for (int i = 0; i < lista.size(); i++) {
             DetallePedido dp = lista.get(i);
+            
+            
             getHibernateTemplate().delete(dp);
         }
         getHibernateTemplate().delete(pedido);
@@ -201,5 +223,14 @@ public class PedidoDaoHibImpl extends CustomHibernateDaoSupport implements Pedid
         List<DetallePedido> lista = getHibernateTemplate().find("from DetallePedido rq  inner join fetch rq.pedido where rq.pedido.idPedido=" + id);
 
         return lista;
+    }
+    
+    
+    @Override
+    public Cotizacion listaCotizacion(int id) throws DAOException {
+        System.out.println(id);
+        List<Cotizacion> lista = getHibernateTemplate().find("from Cotizacion rq  inner join fetch rq.pedido where rq.pedido.idPedido=" + id);
+
+        return lista.get(0);
     }
 }

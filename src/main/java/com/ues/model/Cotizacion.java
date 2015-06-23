@@ -15,20 +15,20 @@ public class Cotizacion  implements java.io.Serializable {
      private int idCotizacion;
      private Proveedor proveedor;
      private Pedido pedido;
-     private BigDecimal estadoCot;
+     private int estadoCot;
      private Set<OrdenDeCompra> ordenDeCompras = new HashSet<OrdenDeCompra>(0);
 
     public Cotizacion() {
     }
 
 	
-    public Cotizacion(int idCotizacion, Proveedor proveedor, Pedido pedido, BigDecimal estadoCot) {
+    public Cotizacion(int idCotizacion, Proveedor proveedor, Pedido pedido, int estadoCot) {
         this.idCotizacion = idCotizacion;
         this.proveedor = proveedor;
         this.pedido = pedido;
         this.estadoCot = estadoCot;
     }
-    public Cotizacion(int idCotizacion, Proveedor proveedor, Pedido pedido, BigDecimal estadoCot, Set<OrdenDeCompra> ordenDeCompras) {
+    public Cotizacion(int idCotizacion, Proveedor proveedor, Pedido pedido, int estadoCot, Set<OrdenDeCompra> ordenDeCompras) {
        this.idCotizacion = idCotizacion;
        this.proveedor = proveedor;
        this.pedido = pedido;
@@ -57,11 +57,11 @@ public class Cotizacion  implements java.io.Serializable {
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
     }
-    public BigDecimal getEstadoCot() {
+    public int getEstadoCot() {
         return this.estadoCot;
     }
     
-    public void setEstadoCot(BigDecimal estadoCot) {
+    public void setEstadoCot(int estadoCot) {
         this.estadoCot = estadoCot;
     }
     public Set<OrdenDeCompra> getOrdenDeCompras() {

@@ -13,7 +13,7 @@
     <many-to-one class="com.ues.model.Pedido" fetch="select" name="pedido">
       <column name="ID_PEDIDO" not-null="true" precision="6" scale="0"/>
     </many-to-one>
-    <property name="estadoCot" type="big_decimal">
+    <property name="estadoCot" type="int">
       <column name="ESTADO_COT" not-null="true" precision="22" scale="0"/>
     </property>
     <set fetch="select" inverse="true" lazy="true" name="ordenDeCompras" table="ORDEN_DE_COMPRA">

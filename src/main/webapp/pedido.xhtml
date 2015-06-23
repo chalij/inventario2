@@ -112,6 +112,11 @@
                     </p:column>
 
 
+                    <p:column headerText="Crear Orden">
+                        <p:commandButton value="" icon="ui-icon-cart"   style="width:40px;height:40px" onclick="PF('dlgmodificar').show();" >
+                            <f:setPropertyActionListener target="#{pedidoBean.pedido}" value="#{tprod}"/>
+                        </p:commandButton>
+                    </p:column>
 
                     <p:column headerText="">
                         <p:commandButton value="" icon="ui-icon-trash"   style="width:40px;height:40px" onclick="PF('dlgeliminar').show();" >
@@ -140,12 +145,15 @@
                 </h:form>
             </p:dialog>
 
-            <p:dialog header="Modificar" widgetVar="dlgmodificar" modal="true" resizable="false">
+            <p:dialog header="Crear Orden" widgetVar="dlgmodificar" modal="true" resizable="false">
                 <h:form id="formModificar">
-                    <h:panelGrid id="modificar" columns="2" cellpadding="2">
-                    </h:panelGrid>
-                    <p:growl id="growl3" life="5000" />
-                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{pedidoBean}" value="Modificar Pedido" styleClass="ui-priority-primary"  onsuccess="PF('dlgmodificar').hide();"/>
+                    
+                    
+                    <p:outputLabel value="¿Desea Crear Orden?" />
+                    <p:commandButton actionListener="#{pedidoBean.crearOrden}" value="Si" update=":formTable" onclick="PF('dlgmodificar').hide();"/>
+                    <p:commandButton  value="No" onclick="PF('dlgmodificar').hide();"/>
+                    
+                    
                 </h:form>
             </p:dialog>
 

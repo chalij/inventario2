@@ -43,22 +43,23 @@ public class PedidoBean {
     private int prodIdV;
     private int valorEx;
     private List<SelectItem> listaUsu = new ArrayList<SelectItem>();
+    private List<SelectItem> listaUsu2 = new ArrayList<SelectItem>();
     private List<Producto> listaProd = new ArrayList<Producto>();
     private List<Producto> listProdV;
-    private Producto producto=new Producto();
+    private Producto producto = new Producto();
 
     public void addPedido() {
         try {
-            
-            Pedido pd=new Pedido();
+
+            Pedido pd = new Pedido();
             pd.setFechaPedido(new Date());
-            
+
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-            Empleado emp= pedidoDao.buscarEmpleado((Integer)session.getAttribute("persona"));
+            Empleado emp = pedidoDao.buscarEmpleado((Integer) session.getAttribute("persona"));
             pd.setEmpleado(emp);
             System.out.println(listaProd.size());
             pedidoDao.crearPedido(pd, listaProd);
-            pedido=new Pedido();
+            pedido = new Pedido();
             addMessage("Insertado !!");
         } catch (Exception e) {
             addMessage("Error Id:!!" + e.getMessage());
@@ -66,22 +67,18 @@ public class PedidoBean {
         }
 
     }
-    
-    
-    
+
     public void eliminar() {
 
         try {
             pedidoDao.borrarPedido(pedido);
-            pedido=new Pedido();
+            pedido = new Pedido();
             addMessage("Eliminado!!");
         } catch (Exception e) {
             addMessage("Error!!");
             e.printStackTrace();
         }
     }
-    
-    
 
     private void addMessage(String welcome_to_Primefaces) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, welcome_to_Primefaces, null);
@@ -178,7 +175,6 @@ public class PedidoBean {
         this.valorEx = valorEx;
     }
 
-    
     public List<SelectItem> getListaUsu() {
 
         try {
@@ -214,8 +210,18 @@ public class PedidoBean {
         pd.setExistencias(this.valorEx);
         listaProd.add(pd);
     }
-    
-    
+
+    public void crearOrden() {
+        try {
+            pedidoDao.crearOrden(pedido,1);
+            pedido = new Pedido();
+            addMessage("Insertado !!");
+        } catch (Exception e) {
+            addMessage("Error Id:!!" + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     public void limpiar() {
 
         listaProd = new ArrayList<Producto>();
@@ -262,5 +268,5 @@ public class PedidoBean {
     public void setProducto(Producto producto) {
         this.producto = producto;
     }
-    
+
 }
