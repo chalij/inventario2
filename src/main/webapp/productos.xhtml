@@ -108,6 +108,14 @@
                         </f:facet>
                         <h:outputText value="#{tprod.descripcion}" />
                     </p:column>
+                    
+                    
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Existencias" />
+                        </f:facet>
+                        <h:outputText value="#{tprod.existencias}" />
+                    </p:column>
 
                     <p:column headerText="">
                         <p:commandButton value=""  update=":formModificar" icon="ui-icon-pencil"   style="width:40px;height:40px"  onsuccess="PF('dlgmodificar').show();" >
