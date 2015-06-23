@@ -45,6 +45,7 @@ public class PedidoBean {
     private List<SelectItem> listaUsu = new ArrayList<SelectItem>();
     private List<Producto> listaProd = new ArrayList<Producto>();
     private List<Producto> listProdV;
+    private Producto producto=new Producto();
 
     public void addPedido() {
         try {
@@ -55,7 +56,8 @@ public class PedidoBean {
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
             Empleado emp= pedidoDao.buscarEmpleado((Integer)session.getAttribute("persona"));
             pd.setEmpleado(emp);
-            pedidoDao.crearPedido(pd, null);
+            System.out.println(listaProd.size());
+            pedidoDao.crearPedido(pd, listaProd);
             pedido=new Pedido();
             addMessage("Insertado !!");
         } catch (Exception e) {
@@ -210,7 +212,13 @@ public class PedidoBean {
         pd.setNombre4(this.prodIdV + "");
         pd.setIdProducto(prodIdV);
         pd.setExistencias(this.valorEx);
-        getListaProd().add(pd);
+        listaProd.add(pd);
+    }
+    
+    
+    public void limpiar() {
+
+        listaProd = new ArrayList<Producto>();
     }
 
     /**
@@ -239,6 +247,20 @@ public class PedidoBean {
      */
     public void setListProdV(List<Producto> listProdV) {
         this.listProdV = listProdV;
+    }
+
+    /**
+     * @return the producto
+     */
+    public Producto getProducto() {
+        return producto;
+    }
+
+    /**
+     * @param producto the producto to set
+     */
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
     
 }

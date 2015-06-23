@@ -127,7 +127,7 @@
                     <f:facet name="footer">
                         <div class="footer-section">
 
-                            <p:commandButton update=":formInsertar" onsuccess="PF('dlginsertar').show()"  icon="ui-icon-plus"  style="width:40px;height:40px"   />
+                            <p:commandButton update=":formInsertar"  actionListener="#{pedidoBean.limpiar}" onsuccess="PF('dlginsertar').show()"  icon="ui-icon-plus"  style="width:40px;height:40px"   />
 
                         </div>
                     </f:facet>
@@ -169,12 +169,12 @@
 
 
                             <p:outputLabel for="producto" value="Producto" />
-                            <p:selectOneMenu id="producto" value="#{requisicionBean.prodIdV}">
-                                <f:selectItems  value="#{requisicionBean.listaUsu}" />
+                            <p:selectOneMenu id="producto" value="#{pedidoBean.prodIdV}">
+                                <f:selectItems  value="#{pedidoBean.listaUsu}" />
                             </p:selectOneMenu>
                             <p:outputLabel value="Cantidad" />
-                            <p:inputText value="#{requisicionBean.valorEx}"/>
-                            <p:commandButton update=":formInsertar"  actionListener="#{requisicionBean.agreegarProducto}" value="Agregar Producto" styleClass="ui-priority-primary" >
+                            <p:inputText value="#{pedidoBean.valorEx}"/>
+                            <p:commandButton update=":formInsertar"  actionListener="#{pedidoBean.agreegarProducto}" value="Agregar Producto" styleClass="ui-priority-primary" >
                             </p:commandButton>
                         </h:panelGrid>
 
@@ -182,7 +182,7 @@
                         <br/>
                         <br/>
                         <h:form id="formTable2">
-                            <p:dataTable id="tbl2" var="rec" value="#{requisicionBean.listaProd}"
+                            <p:dataTable id="tbl2" var="rec" value="#{pedidoBean.listaProd}"
                                          paginator="true" 
                                          rows="5"  
                                          paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"  
@@ -190,8 +190,8 @@
                                          lazy="true"
                                          resizableColumns="true"  
                                          selectionMode="single"
-                                         selection="#{requisicionBean.producto}"
-                                         rowKey="#{requisicionBean.reqIdV}" 
+                                         selection="#{pedidoBean.producto}"
+                                         rowKey="#{pedidoBean.prodIdV}" 
                                          paginatorPosition="bottom">
 
 
@@ -216,7 +216,7 @@
 
                                 <p:column headerText="">
                                     <p:commandButton value="" icon="ui-icon-trash"   style="width:40px;height:40px" onclick="PF('dlgeliminar').show();" >
-                                        <f:setPropertyActionListener target="#{requisicionBean.requisicion}" value="#{rec}"/>
+                                        <f:setPropertyActionListener target="#{pedidoBean.requisicion}" value="#{rec}"/>
                                     </p:commandButton>
                                 </p:column>
 

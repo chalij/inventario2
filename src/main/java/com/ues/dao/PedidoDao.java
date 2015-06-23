@@ -25,6 +25,8 @@ public interface PedidoDao {
     public void borrarPedido(Pedido pedido) throws DAOException;
     
     public List<Producto> listaProducto() throws DAOException;
+    
+    public int maxID(String table, String id) throws DAOException;
 
    /* public List<Cliente> listaCliente() throws DAOException;
 
