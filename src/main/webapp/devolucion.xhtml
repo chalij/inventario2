@@ -116,7 +116,7 @@
             <p:dialog id="dlg2" header="Eliminar Requisicion" showEffect="explode" hideEffect="explode" widgetVar="dlgeliminar" modal="true" resizable="false" minWidth="200">
                 <h:form id="formEliminar">
                     <p:outputLabel value="¿Desea eliminar Requisicion?" />
-                    <p:commandButton actionListener="#{requisicionBean.eliminar}" value="Si" update=":formTable" onclick="PF('dlgeliminar').hide();"/>
+                    <p:commandButton actionListener="#{devolucionBean.eliminar}" value="Si" update=":formTable" onclick="PF('dlgeliminar').hide();"/>
                     <p:commandButton  value="No" onclick="PF('dlg2').hide();"/>
                 </h:form>
             </p:dialog>
@@ -201,12 +201,6 @@
                                         <h:outputText value="Cantidad"/>
                                     </f:facet>
                                     <h:outputText value="#{rec.existencias}" />
-                                </p:column>
-
-                                <p:column headerText="">
-                                    <p:commandButton value="" icon="ui-icon-trash"   style="width:40px;height:40px" onclick="PF('dlgeliminar2').show();" >
-                                        <f:setPropertyActionListener target="#{devolucionBean.devolucion}" value="#{rec}"/>
-                                    </p:commandButton>
                                 </p:column>
 
                             </p:dataTable>

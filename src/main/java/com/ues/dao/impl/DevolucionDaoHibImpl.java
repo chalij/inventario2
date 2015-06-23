@@ -52,7 +52,7 @@ public class DevolucionDaoHibImpl extends CustomHibernateDaoSupport implements D
             dd.setCantidad(prod.getExistencias());
             getHibernateTemplate().save(dd);
             int imdd = maxID("DetalleDevolucion", "idDetalleDevolucion");
-            DetalleProducto dprod=new DetalleProducto();
+            DetalleProducto dprod = new DetalleProducto();
             dprod.setCantidad(prod.getExistencias());
             dprod.setProducto(prod);
             dd.setIdDetalleDevolucion(imdd);
@@ -71,6 +71,16 @@ public class DevolucionDaoHibImpl extends CustomHibernateDaoSupport implements D
 
     @Override
     public void borrarDevolucion(Devolucion devolucion) throws DAOException {
+System.out.println("+++++fdsdf+++sdrf++sdf+fsd");
+        List<DetalleDevolucion> lisdet = listaDetalleDevolucion(devolucion.getIdDevolucion());
+        for (int i = 0; i < lisdet.size(); i++) {
+System.out.println("+++++fdsdf+++sdrf++sdf+fsd");
+            DetalleDevolucion dv = lisdet.get(i);
+            DetalleProducto pd = listaDetalleProducto(dv.getIdDetalleDevolucion());
+            getHibernateTemplate().delete(pd);
+            getHibernateTemplate().delete(dv);
+        }
+
         getHibernateTemplate().delete(devolucion);
     }
 
@@ -120,6 +130,22 @@ public class DevolucionDaoHibImpl extends CustomHibernateDaoSupport implements D
         List<Producto> lista = getHibernateTemplate().find("from Producto rq  order by rq.idProducto");
 
         return lista;
+    }
+
+    @Override
+    public List<DetalleDevolucion> listaDetalleDevolucion(int id) throws DAOException {
+        System.out.println(id);
+        List<DetalleDevolucion> lista = getHibernateTemplate().find("from DetalleDevolucion rq  inner join fetch rq.detalleProductos where rq.devolucion.idDevolucion=" + id);
+
+        return lista;
+    }
+    
+    
+    @Override
+    public DetalleProducto listaDetalleProducto(int id) throws DAOException {
+        List<DetalleProducto> lista = getHibernateTemplate().find("from DetalleProducto rq inner join fetch rq.detalleDevolucion where rq.detalleDevolucion.idDetalleDevolucion=" + id);
+
+        return (DetalleProducto) lista.get(0);
     }
 
 }

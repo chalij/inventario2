@@ -76,7 +76,17 @@ public class DevolucionBean {
 
     }
 
-    public void eliminar() {
+    public void eliminar() { 
+        try {
+
+            devolucionDao.borrarDevolucion(devolucion);
+
+            //  dv.se
+            addMessage("Insertado!!");
+        } catch (Exception e) {
+            addMessage("Error!!" + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     private void addMessage(String welcome_to_Primefaces) {
@@ -317,6 +327,7 @@ public class DevolucionBean {
         pd.setNombre4(this.prodIdV + "");
         pd.setIdProducto(prodIdV);
         pd.setExistencias(this.valorEx);
+        pd.setDescripcion((listaProd.size())+"");
         listaProd.add(pd);
     }
 
@@ -437,6 +448,11 @@ public class DevolucionBean {
      */
     public void setTipoDevId(int tipoDevId) {
         this.tipoDevId = tipoDevId;
+    }
+    
+    public void limpiarProd()
+    {
+        listaProd.remove(Integer.parseInt(producto.getDescripcion()));
     }
 
     /**

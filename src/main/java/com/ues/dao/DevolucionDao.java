@@ -2,6 +2,8 @@ package com.ues.dao;
 
 import com.ues.exception.DAOException;
 import com.ues.model.Cliente;
+import com.ues.model.DetalleDevolucion;
+import com.ues.model.DetalleProducto;
 import com.ues.model.Devolucion;
 import com.ues.model.Empleado;
 import com.ues.model.OrdenDeCompra;
@@ -40,5 +42,9 @@ public interface DevolucionDao {
     public List<TipoDevolucion> listaTipoDevolucion() throws DAOException;
     
     public List<Producto> listaProducto() throws DAOException;
+    
+    public List<DetalleDevolucion> listaDetalleDevolucion(int id) throws DAOException;
+    
+    public DetalleProducto listaDetalleProducto(int id) throws DAOException;
 
 }
