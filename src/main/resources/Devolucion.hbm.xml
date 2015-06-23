@@ -22,7 +22,7 @@
     <many-to-one class="com.ues.model.Cliente" fetch="select" name="cliente">
       <column name="ID_CLIENTE" precision="6" scale="0"/>
     </many-to-one>
-    <property name="cantidad" type="big_decimal">
+    <property name="cantidad" type="int">
       <column name="CANTIDAD" not-null="true" precision="22" scale="0"/>
     </property>
     <set fetch="select" inverse="true" lazy="true" name="detalleDevolucions" table="DETALLE_DEVOLUCION">

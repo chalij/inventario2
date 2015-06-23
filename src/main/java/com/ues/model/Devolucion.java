@@ -18,7 +18,7 @@ public class Devolucion  implements java.io.Serializable {
      private OrdenDeCompra ordenDeCompra;
      private Proveedor proveedor;
      private Cliente cliente;
-     private BigDecimal cantidad;
+     private int cantidad;
      private Set<DetalleDevolucion> detalleDevolucions = new HashSet<DetalleDevolucion>(0);
      private Set<Transaccion> transaccions = new HashSet<Transaccion>(0);
 
@@ -26,12 +26,12 @@ public class Devolucion  implements java.io.Serializable {
     }
 
 	
-    public Devolucion(int idDevolucion, TipoDevolucion tipoDevolucion, BigDecimal cantidad) {
+    public Devolucion(int idDevolucion, TipoDevolucion tipoDevolucion, int cantidad) {
         this.idDevolucion = idDevolucion;
         this.tipoDevolucion = tipoDevolucion;
         this.cantidad = cantidad;
     }
-    public Devolucion(int idDevolucion, TipoDevolucion tipoDevolucion, Requisicion requisicion, OrdenDeCompra ordenDeCompra, Proveedor proveedor, Cliente cliente, BigDecimal cantidad, Set<DetalleDevolucion> detalleDevolucions, Set<Transaccion> transaccions) {
+    public Devolucion(int idDevolucion, TipoDevolucion tipoDevolucion, Requisicion requisicion, OrdenDeCompra ordenDeCompra, Proveedor proveedor, Cliente cliente, int cantidad, Set<DetalleDevolucion> detalleDevolucions, Set<Transaccion> transaccions) {
        this.idDevolucion = idDevolucion;
        this.tipoDevolucion = tipoDevolucion;
        this.requisicion = requisicion;
@@ -85,11 +85,11 @@ public class Devolucion  implements java.io.Serializable {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    public BigDecimal getCantidad() {
+    public int getCantidad() {
         return this.cantidad;
     }
     
-    public void setCantidad(BigDecimal cantidad) {
+    public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
     public Set<DetalleDevolucion> getDetalleDevolucions() {

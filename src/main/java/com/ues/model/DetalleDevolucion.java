@@ -14,19 +14,19 @@ public class DetalleDevolucion  implements java.io.Serializable {
 
      private int idDetalleDevolucion;
      private Devolucion devolucion;
-     private BigDecimal cantidad;
+     private int cantidad;
      private Set<DetalleProducto> detalleProductos = new HashSet<DetalleProducto>(0);
 
     public DetalleDevolucion() {
     }
 
 	
-    public DetalleDevolucion(int idDetalleDevolucion, Devolucion devolucion, BigDecimal cantidad) {
+    public DetalleDevolucion(int idDetalleDevolucion, Devolucion devolucion, int cantidad) {
         this.idDetalleDevolucion = idDetalleDevolucion;
         this.devolucion = devolucion;
         this.cantidad = cantidad;
     }
-    public DetalleDevolucion(int idDetalleDevolucion, Devolucion devolucion, BigDecimal cantidad, Set<DetalleProducto> detalleProductos) {
+    public DetalleDevolucion(int idDetalleDevolucion, Devolucion devolucion, int cantidad, Set<DetalleProducto> detalleProductos) {
        this.idDetalleDevolucion = idDetalleDevolucion;
        this.devolucion = devolucion;
        this.cantidad = cantidad;
@@ -47,11 +47,11 @@ public class DetalleDevolucion  implements java.io.Serializable {
     public void setDevolucion(Devolucion devolucion) {
         this.devolucion = devolucion;
     }
-    public BigDecimal getCantidad() {
+    public int getCantidad() {
         return this.cantidad;
     }
     
-    public void setCantidad(BigDecimal cantidad) {
+    public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
     public Set<DetalleProducto> getDetalleProductos() {

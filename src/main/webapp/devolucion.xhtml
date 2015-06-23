@@ -97,12 +97,6 @@
 
 
                     <p:column headerText="">
-                        <p:commandButton value=""  update=":formModificar" icon="ui-icon-pencil"   style="width:40px;height:40px"  onsuccess="PF('dlgmodificar').show();" >
-                            <f:setPropertyActionListener target="#{devolucionBean.devolucion}" value="#{rec}"/>
-                        </p:commandButton>
-                    </p:column>
-
-                    <p:column headerText="">
                         <p:commandButton value="" icon="ui-icon-trash"   style="width:40px;height:40px" onclick="PF('dlgeliminar').show();" >
                             <f:setPropertyActionListener target="#{devolucionBean.devolucion}" value="#{rec}"/>
                         </p:commandButton>
@@ -111,7 +105,7 @@
                     <f:facet name="footer">
                         <div class="footer-section">
 
-                            <p:commandButton update=":formInsertar" onsuccess="PF('dlginsertar').show()"  icon="ui-icon-plus"  style="width:40px;height:40px"   />
+                            <p:commandButton update=":formInsertar"  actionListener="#{devolucionBean.limpiar}" onsuccess="PF('dlginsertar').show()"  icon="ui-icon-plus"  style="width:40px;height:40px"   />
 
                         </div>
                     </f:facet>
@@ -127,18 +121,6 @@
                 </h:form>
             </p:dialog>
 
-            <p:dialog header="Modificar" widgetVar="dlgmodificar" modal="true" resizable="false">
-                <h:form id="formModificar">
-                    <h:panelGrid id="modificar" columns="2" cellpadding="2">
-                        <p:outputLabel for="tipoMenu" value="Cliente" />
-                        <p:selectOneMenu id="tipoMenu" value="#{requisicionBean.clienteIdV}">
-                            <f:selectItems  value="#{requisicionBean.listaUsu2}" />
-                        </p:selectOneMenu>
-                    </h:panelGrid>
-                    <p:growl id="growl3" life="5000" />
-                    <p:commandButton id="ajax" update="growl3,:formTable"   actionListener="#{requisicionBean.updateRecursos}" value="Modificar Recursos" styleClass="ui-priority-primary"  onsuccess="PF('dlgmodificar').hide();"/>
-                </h:form>
-            </p:dialog>
 
 
 
@@ -146,11 +128,43 @@
                 <h:form id="formInsertar">
                     <h:panelGrid  columns="2"
                                   cellpadding="2">
+                        
+                        <p:outputLabel for="tipoMenu4" value="Tipo de Devolucion" />
+                        <p:selectOneMenu id="tipoMenu4" value="#{devolucionBean.tipoDevId}">
+                            <f:selectItems  value="#{devolucionBean.listaUsu5}" />
+                        </p:selectOneMenu>
                         <p:outputLabel for="tipoMenu" value="Cliente" />
-                        <p:selectOneMenu id="tipoMenu" value="#{requisicionBean.clienteIdV}">
-                            <f:selectItems  value="#{requisicionBean.listaUsu2}" />
+                        <p:selectOneMenu id="tipoMenu" value="#{devolucionBean.ordenIdV}">
+                            <f:selectItems  value="#{devolucionBean.listaUsu2}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel for="tipoMenu2" value="Orden" />
+                        <p:selectOneMenu id="tipoMenu2" value="#{devolucionBean.ordenIdV}">
+                            <f:selectItems  value="#{devolucionBean.listaUsu}" />
+                        </p:selectOneMenu>
+                        <p:outputLabel for="tipoMenu3" value="Requisicion" />
+                        <p:selectOneMenu id="tipoMenu3" value="#{devolucionBean.requiIdV}">
+                            <f:selectItems  value="#{devolucionBean.listaUsu3}" />
                         </p:selectOneMenu>
 
+
+                        
+
+                        <br/>
+                        <br/>
+                        <br/>
+                        <h:panelGrid  columns="8"
+                                      cellpadding="2" bgcolor="black" border="3" title="Producto">
+
+
+                            <p:outputLabel for="producto" value="Producto" />
+                            <p:selectOneMenu id="producto" value="#{devolucionBean.prodIdV}">
+                                <f:selectItems  value="#{devolucionBean.listaUsu4}" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Cantidad" />
+                            <p:inputText value="#{devolucionBean.valorEx}"/>
+                            <p:commandButton update=":formInsertar"  actionListener="#{devolucionBean.agreegarProducto}" value="Agregar Producto" styleClass="ui-priority-primary" >
+                            </p:commandButton>
+                        </h:panelGrid>
 
                         <br/>
                         <br/>
@@ -160,7 +174,7 @@
 
 
                         <h:form id="formTable">
-                            <p:dataTable id="tbl" var="rec" value="#{devolucionBean.listaDevolucion}"
+                            <p:dataTable id="tbl" var="rec" value="#{devolucionBean.listaProd}"
                                          paginator="true" 
                                          rows="5"  
                                          paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {CurrentPageReport}"  
@@ -168,25 +182,25 @@
                                          lazy="true"
                                          resizableColumns="true"  
                                          selectionMode="single"
-                                         selection="#{devolucionBean.devolucion}"
-                                         rowKey="#{devolucionBean.devIdV}" 
+                                         selection="#{devolucionBean.producto}"
+                                         rowKey="#{devolucionBean.prodIdV}" 
                                          paginatorPosition="bottom">
 
 
 
+                               
                                 <p:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Devolucion de Tipo" />
+                                        <h:outputText value="Producto" />
                                     </f:facet>
-                                    <h:outputText value="#{rec.tipoDevolucion.nombre}" />
+                                    <h:outputText value="#{rec.nombre4}" />
                                 </p:column>
 
-
-
-                                <p:column headerText="">
-                                    <p:commandButton value=""  update=":formModificar" icon="ui-icon-pencil"   style="width:40px;height:40px"  onsuccess="PF('dlgmodificar').show();" >
-                                        <f:setPropertyActionListener target="#{devolucionBean.devolucion}" value="#{rec}"/>
-                                    </p:commandButton>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Cantidad"/>
+                                    </f:facet>
+                                    <h:outputText value="#{rec.existencias}" />
                                 </p:column>
 
                                 <p:column headerText="">
@@ -195,21 +209,14 @@
                                     </p:commandButton>
                                 </p:column>
 
-                                <f:facet name="footer">
-                                    <div class="footer-section">
-
-                                        <p:commandButton update=":formInsertar" onsuccess="PF('dlginsertar').show()"  icon="ui-icon-plus"  style="width:40px;height:40px"   />
-
-                                    </div>
-                                </f:facet>
                             </p:dataTable>
                         </h:form>
 
 
-                        <p:dialog id="dlg2" header="Eliminar Requisicion" showEffect="explode" hideEffect="explode" widgetVar="dlgeliminar2" modal="true" resizable="false" minWidth="200">
+                        <p:dialog id="dlg2" header="Eliminar Devolucion" showEffect="explode" hideEffect="explode" widgetVar="dlgeliminar2" modal="true" resizable="false" minWidth="200">
                             <h:form id="formEliminar">
-                                <p:outputLabel value="¿Desea eliminar Requisicion?" />
-                                <p:commandButton actionListener="#{requisicionBean.eliminar}" value="Si" update=":formTable" onclick="PF('dlgeliminar2').hide();"/>
+                                <p:outputLabel value="¿Desea eliminar Devolucion?" />
+                                <p:commandButton actionListener="#{devolucionBean.eliminar}" value="Si" update=":formTable" onclick="PF('dlgeliminar2').hide();"/>
                                 <p:commandButton  value="No" onclick="PF('dlg2').hide();"/>
                             </h:form>
                         </p:dialog>
@@ -218,7 +225,7 @@
 
                     </h:panelGrid>
                     <p:growl id="growl2" life="5000" />
-                    <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{requisicionBean.addRecursos}" value="Ingresar Recursos" styleClass="ui-priority-primary" onsuccess="PF('dlginsertar').hide();" >
+                    <p:commandButton id="ajax" update="growl2,:formTable"   actionListener="#{devolucionBean.addDevolucion}" value="Ingresar Recursos" styleClass="ui-priority-primary" onsuccess="PF('dlginsertar').hide();" >
                     </p:commandButton>
                 </h:form>
             </p:dialog>

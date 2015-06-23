@@ -7,10 +7,13 @@ import com.ues.model.CustomHibernateDaoSupport;
 import com.ues.dao.UsuariosDao;
 import com.ues.exception.DAOException;
 import com.ues.model.Cliente;
+import com.ues.model.DetalleDevolucion;
+import com.ues.model.DetalleProducto;
 import com.ues.model.Devolucion;
 import com.ues.model.Empleado;
 import com.ues.model.Menu;
 import com.ues.model.OrdenDeCompra;
+import com.ues.model.Producto;
 import com.ues.model.Proveedor;
 import com.ues.model.Recursos;
 import com.ues.model.Requisicion;
@@ -29,27 +32,36 @@ import org.hibernate.Session;
  */
 public class DevolucionDaoHibImpl extends CustomHibernateDaoSupport implements DevolucionDao {
 
-
-
-
-
-
     @Override
-    public int maxID(String table) throws DAOException {
-        List list = getHibernateTemplate().find("select max(p.id"+table+") from "+table+" p");
+    public int maxID(String table, String id) throws DAOException {
+        List list = getHibernateTemplate().find("select max(p." + id + ") from " + table + " p");
         System.out.println(list.get(0));
         return (Integer) list.get(0);
     }
 
-
     @Override
-    public void crearDevolucion(Devolucion devolucion) throws DAOException {
+    public void crearDevolucion(Devolucion devolucion, List<Producto> listProd, int td) throws DAOException {
         getHibernateTemplate().save(devolucion);
+        int imd = maxID("Devolucion", "idDevolucion");
+        Devolucion dv = new Devolucion();
+        dv.setIdDevolucion(imd);
+        for (int i = 0; i < listProd.size(); i++) {
+            Producto prod = listProd.get(i);
+            DetalleDevolucion dd = new DetalleDevolucion();
+            dd.setDevolucion(dv);
+            dd.setCantidad(prod.getExistencias());
+            getHibernateTemplate().save(dd);
+            int imdd = maxID("DetalleDevolucion", "idDetalleDevolucion");
+            DetalleProducto dprod=new DetalleProducto();
+            dprod.setCantidad(prod.getExistencias());
+            dprod.setProducto(prod);
+            dd.setIdDetalleDevolucion(imdd);
+            dprod.setNombre(prod.getNombre4());
+            dprod.setDetalleDevolucion(dd);
+            getHibernateTemplate().save(dprod);
+        }
     }
 
-    
-
-    
     @Override
     public List<Devolucion> listaDevolucion() throws DAOException {
         List<Devolucion> lista = getHibernateTemplate().find("from Devolucion rq  inner join fetch  rq.tipoDevolucion order by rq.idDevolucion");
@@ -74,8 +86,6 @@ public class DevolucionDaoHibImpl extends CustomHibernateDaoSupport implements D
 
         return lista;
     }
-    
-    
 
     @Override
     public List<Cliente> listaCliente() throws DAOException {
@@ -83,7 +93,7 @@ public class DevolucionDaoHibImpl extends CustomHibernateDaoSupport implements D
 
         return lista;
     }
-    
+
     @Override
     public List<Proveedor> listaProveedor() throws DAOException {
         List<Proveedor> lista = getHibernateTemplate().find("from Proveedor rq order by rq.idProveedor");
@@ -104,6 +114,12 @@ public class DevolucionDaoHibImpl extends CustomHibernateDaoSupport implements D
 
         return lista;
     }
-    
-    
+
+    @Override
+    public List<Producto> listaProducto() throws DAOException {
+        List<Producto> lista = getHibernateTemplate().find("from Producto rq  order by rq.idProducto");
+
+        return lista;
+    }
+
 }
