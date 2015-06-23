@@ -172,6 +172,12 @@ public class PedidoDaoHibImpl extends CustomHibernateDaoSupport implements Pedid
 
     @Override
     public void borrarPedido(Pedido pedido) throws DAOException {
+
+        List<DetallePedido> lista = listaDetallePedido(pedido.getIdPedido());
+        for (int i = 0; i < lista.size(); i++) {
+            DetallePedido dp = lista.get(i);
+            getHibernateTemplate().delete(dp);
+        }
         getHibernateTemplate().delete(pedido);
     }
 
@@ -187,5 +193,13 @@ public class PedidoDaoHibImpl extends CustomHibernateDaoSupport implements Pedid
         List list = getHibernateTemplate().find("select max(p." + id + ") from " + table + " p");
         System.out.println(list.get(0));
         return (Integer) list.get(0);
+    }
+
+    @Override
+    public List<DetallePedido> listaDetallePedido(int id) throws DAOException {
+        System.out.println(id);
+        List<DetallePedido> lista = getHibernateTemplate().find("from DetallePedido rq  inner join fetch rq.pedido where rq.pedido.idPedido=" + id);
+
+        return lista;
     }
 }

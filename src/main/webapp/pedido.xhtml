@@ -12,7 +12,7 @@
         </h:head>
         <h:body  style="background-image:url('fondo.jpg')">
 
-            <p:panel id="basic" header="" footer="Centro de El Salvador, Norman Quijasno Presidente 2018" style="margin-bottom:20px">
+            <p:panel id="basic" header="" footer="" style="margin-bottom:20px">
                 <h1 style="color: whitesmoke;text-align: center;font-size: 3.8em">Sistema de Inventario y Compras</h1>
                 <h2 style="color: whitesmoke;text-align: center">Calza Moda S.A de C.V</h2>
                 <br />
@@ -112,11 +112,6 @@
                     </p:column>
 
 
-                    <p:column headerText="">
-                        <p:commandButton value=""  update=":formModificar" icon="ui-icon-pencil"   style="width:40px;height:40px"  onsuccess="PF('dlgmodificar').show();" >
-                            <f:setPropertyActionListener target="#{pedidoBean.pedido}" value="#{tprod}"/>
-                        </p:commandButton>
-                    </p:column>
 
                     <p:column headerText="">
                         <p:commandButton value="" icon="ui-icon-trash"   style="width:40px;height:40px" onclick="PF('dlgeliminar').show();" >
@@ -214,11 +209,6 @@
 
 
 
-                                <p:column headerText="">
-                                    <p:commandButton value="" icon="ui-icon-trash"   style="width:40px;height:40px" onclick="PF('dlgeliminar').show();" >
-                                        <f:setPropertyActionListener target="#{pedidoBean.requisicion}" value="#{rec}"/>
-                                    </p:commandButton>
-                                </p:column>
 
                             </p:dataTable>
                         </h:form>

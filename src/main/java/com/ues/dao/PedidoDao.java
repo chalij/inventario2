@@ -2,6 +2,7 @@ package com.ues.dao;
 
 import com.ues.exception.DAOException;
 import com.ues.model.Cliente;
+import com.ues.model.DetallePedido;
 import com.ues.model.DetalleProducto;
 import com.ues.model.DetalleRequisicion;
 import com.ues.model.Empleado;
@@ -27,6 +28,8 @@ public interface PedidoDao {
     public List<Producto> listaProducto() throws DAOException;
     
     public int maxID(String table, String id) throws DAOException;
+    
+    public List<DetallePedido> listaDetallePedido(int id) throws DAOException;
 
    /* public List<Cliente> listaCliente() throws DAOException;
 
